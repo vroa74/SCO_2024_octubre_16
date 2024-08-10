@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, ExtCtrls, ComCtrls, JvExExtCtrls, JvImage, StdCtrls, DateUtils,
-  sf_flash;
+  Dialogs, Menus, ExtCtrls, ComCtrls, JvExExtCtrls, JvImage, StdCtrls, DateUtils;
 
 type
   TFmain = class(TForm)
@@ -32,7 +31,6 @@ type
     Archivo2: TMenuItem;
     SCOArchivar1: TMenuItem;
     SeguimientoaTrmitedeRespuesta1: TMenuItem;
-    sfFlashPlayer1: TsfFlashPlayer;
     G1: TMenuItem;
     A1: TMenuItem;
     AGENDAGRUPO1: TMenuItem;
@@ -400,8 +398,6 @@ begin
 end;
 
 procedure TFmain.FormCreate(Sender: TObject);
-var
-   num : Integer;
 begin
   randomize;
   OFICIOS1.Visible := FALSE;
@@ -411,16 +407,6 @@ begin
   ruta := ExtractFilePath(Application.ExeName);//  JvImage1.Picture.LoadFromFile(ruta+'sco.jpg');
   fmain.StatusBar1.Panels[2].Text := fmain.PutDate;
   fmain.StatusBar1.Panels[3].Text := fmain.PutTime;
-  num := random(3);
-  if num = 0 then
-      sfFlashPlayer1.Movie := ruta+'congreso1.swf';
-  if num = 1 then
-      sfFlashPlayer1.Movie := ruta+'congreso1.swf';
-  if num = 2 then
-      sfFlashPlayer1.Movie := ruta+'congreso1.swf';
-  if num = 3 then
-      sfFlashPlayer1.Movie := ruta+'congreso1.swf';
-  sfFlashPlayer1.Play;   //  c1.Caption := IntToStr(num);
 end;
 
 procedure TFmain.G1Click(Sender: TObject);

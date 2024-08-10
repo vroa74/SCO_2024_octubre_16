@@ -4,14 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, JvExExtCtrls, JvImage, StdCtrls, sf_flash;
+  Dialogs, ExtCtrls, JvExExtCtrls, JvImage, StdCtrls;
 
 type
   TFabout = class(TForm)
     Panel1: TPanel;
     Label1: TLabel;
     Button1: TButton;
-    sfFlashPlayer1: TsfFlashPlayer;
     function GetComputerName : String;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -59,8 +58,8 @@ procedure TFabout.FormCreate(Sender: TObject);
 begin
     Application.ProcessMessages;
 // Label1.Caption := IntToStr(id)+'  ' +IntToStr(Fabout.id) ;
-  fabout.sfFlashPlayer1.Movie := fmain.ruta + 'About.swf';
-  fabout.sfFlashPlayer1.Play;
+//  fabout.sfFlashPlayer1.Movie := fmain.ruta + 'About.swf';
+ // fabout.sfFlashPlayer1.Play;
  end;
 
 

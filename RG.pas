@@ -12,9 +12,9 @@ uses
   Dialogs, Grids, DBGrids, ExtCtrls, StdCtrls, ComCtrls, JvExExtCtrls,
   JvExtComponent, JvRollOut, ppCtrls, ppDB, ppBands, ppPrnabl, ppClass, ppCache,
   ppParameter, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, jpeg, ppStrtch,
-  ppMemo, Buttons, DBCtrls, JvComponentBase, JvgExportComponents, mxNativeExcel,
-  mxExport, JvDBGridExport, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
-  IWControl, IWCompObject, IWCompFlash, Dataset2Excel;
+  ppMemo, Buttons, DBCtrls, JvComponentBase, JvgExportComponents,
+   JvDBGridExport, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
+  IWControl, IWCompObject, IWCompFlash, Data.DB, ppDesignLayer;
 
 type
   TFrg = class(TForm)
@@ -88,7 +88,6 @@ type
     Label4: TLabel;
     Label5: TLabel;
     SaveDialog1: TSaveDialog;
-    Dataset2Excel1: TDataset2Excel;
     JvRollOut6: TJvRollOut;
     CheckBox2: TCheckBox;
     Edit2: TEdit;
@@ -166,8 +165,8 @@ begin
   query(false);
   If SaveDialog1.Execute then begin
      BitBtn1.Enabled := false;
-     Dataset2Excel1.SaveDatasetAs(SaveDialog1.FileName);
-     Dataset2Excel1.Workbook := nil;
+     //Dataset2Excel1.SaveDatasetAs(SaveDialog1.FileName);
+     //Dataset2Excel1.Workbook := nil;
      BitBtn1.Enabled := true;
   end;
 end;

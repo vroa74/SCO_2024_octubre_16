@@ -5,7 +5,7 @@ interface
 uses
   SysUtils, Classes, DB, MemDS, DBAccess, MyAccess, ppProd, ppClass, ppReport,
   ppComm, ppRelatv, ppDB, ppDBPipe, ppCtrls, ppPrnabl, ppBands, ppCache,
-  mxExport, MyBackup;
+   MyBackup;
 
 type
   TDM = class(TDataModule)

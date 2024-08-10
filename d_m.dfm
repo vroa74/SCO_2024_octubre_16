@@ -4,11 +4,11 @@ object DM: TDM
   Width = 571
   object MyConnection1: TMyConnection
     Database = 'sco'
-    Password = 'vroa1974'
     Server = '192.168.1.68'
     LoginPrompt = False
     Left = 64
     Top = 16
+    EncryptedPassword = '89FF8DFF90FF9EFFCEFFC6FFC8FFCBFF'
   end
   object QCO: TMyQuery
     Connection = MyConnection1
@@ -47,6 +47,7 @@ object DM: TDM
       '    (co.archivo = "0")'
       'ORDER BY'
       '  co.id')
+    Options.FieldOrigins = foNone
     Left = 16
     Top = 104
   end
@@ -67,6 +68,7 @@ object DM: TDM
       '  age.modifico'
       'FROM'
       ' age')
+    Options.FieldOrigins = foNone
     Left = 56
     Top = 104
   end
@@ -107,6 +109,7 @@ object DM: TDM
       '    (co.archivo = "1")'
       'ORDER BY'
       '  co.id')
+    Options.FieldOrigins = foNone
     Left = 104
     Top = 104
   end
@@ -167,6 +170,7 @@ object DM: TDM
       '*'
       'FROM'
       ' cat_gru')
+    Options.FieldOrigins = foNone
     Left = 160
     Top = 104
   end
@@ -190,6 +194,7 @@ object DM: TDM
       ' AND (GRUPO.id_user= 3)'
       ' WHERE GRUPO.id_grupo IS NULL'
       ' ORDER BY CAT_GRU.`id_grupo` ASC')
+    Options.FieldOrigins = foNone
     Left = 280
     Top = 104
   end
@@ -201,6 +206,7 @@ object DM: TDM
       '  grupo.id_grupo'
       'FROM'
       ' grupo')
+    Options.FieldOrigins = foNone
     Left = 224
     Top = 104
   end
@@ -245,6 +251,7 @@ object DM: TDM
       '    (co.archivo = "0")'
       'ORDER BY'
       '  co.id')
+    Options.FieldOrigins = foNone
     Left = 384
     Top = 120
   end

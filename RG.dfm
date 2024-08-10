@@ -61,8 +61,8 @@ object Frg: TFrg
         Top = 51
         Width = 106
         Height = 21
-        Date = 41284.312301608800000000
-        Time = 41284.312301608800000000
+        Date = 41284.000000000000000000
+        Time = 0.312301608799316500
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -77,8 +77,8 @@ object Frg: TFrg
         Top = 87
         Width = 106
         Height = 21
-        Date = 41284.312301608800000000
-        Time = 41284.312301608800000000
+        Date = 41284.000000000000000000
+        Time = 0.312301608799316500
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -127,8 +127,6 @@ object Frg: TFrg
         Top = 23
         Width = 42
         Height = 42
-        TabOrder = 0
-        OnClick = BitBtn4Click
         Glyph.Data = {
           360C0000424D360C000000000000360000002800000020000000200000000100
           180000000000000C0000120B0000120B00000000000000000000F7FCFBFBFFFF
@@ -228,6 +226,8 @@ object Frg: TFrg
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFBFBFFFFFFFFFFFFFEFEFEFCFC
           FCFFFFFFFFFFFFFCFCFCFDFDFDFFFFFFFFFFFFFBFBFBFEFEFEFFFFFFFFFFFFFB
           FBFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        TabOrder = 0
+        OnClick = BitBtn4Click
       end
     end
     object JvRollOut3: TJvRollOut
@@ -350,7 +350,6 @@ object Frg: TFrg
         Top = 41
         Width = 140
         Height = 21
-        ItemHeight = 13
         TabOrder = 1
         OnChange = ComboBox1Change
         Items.Strings = (
@@ -408,7 +407,6 @@ object Frg: TFrg
         Top = 38
         Width = 145
         Height = 21
-        ItemHeight = 13
         TabOrder = 0
         OnChange = ComboBox2Change
         Items.Strings = (
@@ -421,7 +419,6 @@ object Frg: TFrg
         Top = 78
         Width = 145
         Height = 21
-        ItemHeight = 13
         TabOrder = 1
         OnChange = ComboBox3Change
         Items.Strings = (
@@ -435,7 +432,6 @@ object Frg: TFrg
         Top = 120
         Width = 145
         Height = 21
-        ItemHeight = 13
         TabOrder = 2
         OnChange = ComboBox4Change
         Items.Strings = (
@@ -512,8 +508,6 @@ object Frg: TFrg
       Top = 116
       Width = 42
       Height = 42
-      TabOrder = 6
-      OnClick = BitBtn2Click
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
         180000000000000C0000120B0000120B00000000000000000000F7FCFBFBFFFF
@@ -613,14 +607,14 @@ object Frg: TFrg
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFBFBFFFFFFFFFFFFFEFEFEFCFC
         FCFFFFFFFFFFFFFCFCFCFDFDFDFFFFFFFFFFFFFBFBFBFEFEFEFFFFFFFFFFFFFB
         FBFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      TabOrder = 6
+      OnClick = BitBtn2Click
     end
     object BitBtn3: TBitBtn
       Left = 712
       Top = 116
       Width = 42
       Height = 42
-      TabOrder = 7
-      OnClick = BitBtn3Click
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
         180000000000000C000000000000000000000000000000000000FFFFFFFFFFFF
@@ -720,14 +714,14 @@ object Frg: TFrg
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      TabOrder = 7
+      OnClick = BitBtn3Click
     end
     object BitBtn1: TBitBtn
       Left = 753
       Top = 116
       Width = 42
       Height = 42
-      TabOrder = 8
-      OnClick = BitBtn1Click
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
         180000000000000C000000000000000000000000000000000000FFFFFFFFFFFF
@@ -827,14 +821,14 @@ object Frg: TFrg
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFCFCFCFEFEFEFFFFFFFFFF
         FFFFFFFFFEFEFEF9F9F9F9F9F9FFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFCFCFCFE
         FEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      TabOrder = 8
+      OnClick = BitBtn1Click
     end
     object BitBtn5: TBitBtn
       Left = 794
       Top = 116
       Width = 42
       Height = 42
-      TabOrder = 9
-      OnClick = BitBtn5Click
       Glyph.Data = {
         360C0000424D360C00000000000036000000280000001F000000200000000100
         180000000000000C0000120B0000120B00000000000000000000FEFEFEFEFEFE
@@ -934,6 +928,8 @@ object Frg: TFrg
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFDFDFDFFFFFFFFFFFFF5F7
         F7DDDEDECACACCC2C3C4C8C9C5DADADAF3F3F4FFFFFFFFFFFFFEFEFCFCFCFBFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
+      TabOrder = 9
+      OnClick = BitBtn5Click
     end
     object Memo1: TMemo
       Left = 841
@@ -1007,9 +1003,11 @@ object Frg: TFrg
     DataPipeline = ppDBPipeline1
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
     PrinterSetup.PaperName = 'Carta'
     PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
     PrinterSetup.mmMarginRight = 6350
@@ -1018,35 +1016,72 @@ object Frg: TFrg
     PrinterSetup.mmPaperWidth = 279401
     PrinterSetup.PaperSize = 1
     Template.FileName = 'E:\Congreso\sco_CF\reporte_especial.rtm'
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
+    LanguageID = 'Default'
+    OpenFile = False
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = True
     OutlineSettings.Visible = True
-    TextSearchSettings.DefaultString = '<HallarTexto>'
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 464
     Top = 128
-    Version = '10.08'
+    Version = '19.04'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand2: TppHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 33867
       mmPrintPosition = 0
       object ppLabel17: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'PODER LEGISLATIVO DEL ESTADO DE CAMPECHE'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5821
@@ -1054,19 +1089,21 @@ object Frg: TFrg
         mmTop = 2117
         mmWidth = 266171
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel18: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'JUNTA DE GOBIERNO Y ADMINISTRACION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5821
@@ -1074,19 +1111,21 @@ object Frg: TFrg
         mmTop = 8996
         mmWidth = 266965
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel19: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'OFICIAL'#205'A DE PARTES'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5027
@@ -1094,19 +1133,21 @@ object Frg: TFrg
         mmTop = 16933
         mmWidth = 266436
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel20: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Lista de Reporte General'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4487
@@ -1114,54 +1155,52 @@ object Frg: TFrg
         mmTop = 23548
         mmWidth = 43519
         BandType = 0
+        LayerName = Foreground
       end
       object ppLine3: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 29369
         mmWidth = 266965
         BandType = 0
+        LayerName = Foreground
       end
       object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 31485
         mmWidth = 266965
         BandType = 0
+        LayerName = Foreground
       end
       object ppLine2: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 265
         mmLeft = 0
         mmTop = 33602
         mmWidth = 266965
         BandType = 0
+        LayerName = Foreground
       end
       object ppImage2: TppImage
+        DesignLayer = ppDesignLayer1
         UserName = 'Image1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
         MaintainAspectRatio = False
         Stretch = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Picture.Data = {
           0A544A504547496D616765C9DD0300FFD8FFE000104A46494600010201004800
           480000FFE124DC4578696600004D4D002A000000080007011200030000000100
@@ -9087,19 +9126,22 @@ object Frg: TFrg
         mmTop = 0
         mmWidth = 25665
         BandType = 0
+        LayerName = Foreground
       end
     end
     object ppDetailBand2: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 27781
       mmPrintPosition = 0
       object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Folio'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9114,33 +9156,35 @@ object Frg: TFrg
         mmTop = 0
         mmWidth = 11642
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Fecha de Cap.'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 22490
         mmTop = 0
         mmWidth = 21696
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText2: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Fecha de captura'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9155,33 +9199,35 @@ object Frg: TFrg
         mmTop = 0
         mmWidth = 18785
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel3: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'F. Rec.'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 66940
         mmTop = 0
         mmWidth = 11113
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Fecha de recepci'#243'n'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9196,33 +9242,35 @@ object Frg: TFrg
         mmTop = 0
         mmWidth = 18256
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'N. correspondencia'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 100542
         mmTop = 0
         mmWidth = 29369
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText4: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Nivel de correspondencia'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9237,33 +9285,35 @@ object Frg: TFrg
         mmTop = 0
         mmWidth = 16404
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel5: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Tipo de Cor.'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 2117
         mmTop = 4233
         mmWidth = 18785
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText5: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Tipo de correspondencia'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9278,33 +9328,35 @@ object Frg: TFrg
         mmTop = 4233
         mmWidth = 38894
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel6: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label10'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Cla. doc.'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 150284
         mmTop = 0
         mmWidth = 13494
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText6: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Clasificaci'#243'n de correspondencia'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9319,33 +9371,35 @@ object Frg: TFrg
         mmTop = 0
         mmWidth = 44715
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel9: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label13'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Rem Nombre'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 2117
         mmTop = 8996
         mmWidth = 20638
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText9: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText9'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Nombre del remitente'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9360,33 +9414,35 @@ object Frg: TFrg
         mmTop = 8996
         mmWidth = 59796
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel10: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label14'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Rem Cargo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 85725
         mmTop = 8996
         mmWidth = 17198
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText10: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText10'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'cargo del remitente'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9401,33 +9457,35 @@ object Frg: TFrg
         mmTop = 8996
         mmWidth = 42333
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel11: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label15'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Rem Dep u Org'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 149754
         mmTop = 8996
         mmWidth = 23813
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText11: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Depto. U org. Del remitente'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9442,33 +9500,35 @@ object Frg: TFrg
         mmTop = 8996
         mmWidth = 50800
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel12: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label16'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Tur Nombre'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 2381
         mmTop = 13229
         mmWidth = 17727
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText12: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText12'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Nombre turnado'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9483,33 +9543,35 @@ object Frg: TFrg
         mmTop = 13229
         mmWidth = 76200
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel13: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label17'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Tur Cargo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 101071
         mmTop = 13229
         mmWidth = 16404
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText13: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText13'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Cargo turnado'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9524,33 +9586,35 @@ object Frg: TFrg
         mmTop = 13229
         mmWidth = 33867
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel14: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label18'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Tur Dep u Org'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 157163
         mmTop = 13229
         mmWidth = 21167
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText14: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText14'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'Depto. U organ. Del turnado'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9565,33 +9629,34 @@ object Frg: TFrg
         mmTop = 13229
         mmWidth = 25400
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'No.'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 2117
         mmTop = 0
         mmWidth = 4498
         BandType = 4
+        LayerName = Foreground
       end
       object ppLine4: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Position = lpBottom
         Weight = 0.750000000000000000
         mmHeight = 265
@@ -9599,33 +9664,35 @@ object Frg: TFrg
         mmTop = 27516
         mmWidth = 267494
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel15: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label19'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Estatus'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 228071
         mmTop = 265
         mmWidth = 14817
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText15: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText15'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'concluido'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9640,33 +9707,35 @@ object Frg: TFrg
         mmTop = 265
         mmWidth = 17463
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel16: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label20'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Entramite'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 228071
         mmTop = 4498
         mmWidth = 15081
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText16: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText16'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tramite'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9681,33 +9750,35 @@ object Frg: TFrg
         mmTop = 4498
         mmWidth = 17463
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel21: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label21'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Archivado'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 228071
         mmTop = 8996
         mmWidth = 15875
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText17: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText17'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'archivo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -9722,33 +9793,34 @@ object Frg: TFrg
         mmTop = 8996
         mmWidth = 17463
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel7: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label11'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Asunto'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 3175
         mmTop = 17727
         mmWidth = 20108
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBMemo1: TppDBMemo
+        DesignLayer = ppDesignLayer1
         UserName = 'DBMemo1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'Descripcion de Oficio'
         DataPipeline = ppDBPipeline1
@@ -9757,6 +9829,7 @@ object Frg: TFrg
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 10054
@@ -9764,16 +9837,27 @@ object Frg: TFrg
         mmTop = 17198
         mmWidth = 237067
         BandType = 4
+        LayerName = Foreground
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
     end
     object ppFooterBand2: TppFooterBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 0
       mmPrintPosition = 0
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
     end
     object ppParameterList1: TppParameterList
     end
@@ -9782,41 +9866,6 @@ object Frg: TFrg
     DefaultExt = '*.XLS'
     Filter = '*.XLS|*.XLS'
     Left = 368
-    Top = 128
-  end
-  object Dataset2Excel1: TDataset2Excel
-    Dataset = DM.QCO
-    HeaderFont.Charset = DEFAULT_CHARSET
-    HeaderFont.Color = clNone
-    HeaderFont.Height = -13
-    HeaderFont.Name = 'Arial'
-    HeaderFont.Style = [fsBold]
-    DetailFont.Charset = DEFAULT_CHARSET
-    DetailFont.Color = clNone
-    DetailFont.Height = -13
-    DetailFont.Name = 'Arial'
-    DetailFont.Style = []
-    GroupFont.Charset = DEFAULT_CHARSET
-    GroupFont.Color = clNone
-    GroupFont.Height = -16
-    GroupFont.Name = 'Arial'
-    GroupFont.Style = [fsBold]
-    HeaderColor = clNone
-    DetailColor = clNone
-    GroupColor = clNone
-    StartRow = 0
-    StartCol = 0
-    HeaderBorderStyle = BorderStyleNone
-    DetailBorderStyle = BorderStyleNone
-    GroupBorderStyle = BorderStyleNone
-    HeaderBorderColor = clNone
-    DetailBorderColor = clNone
-    GroupBorderColor = clNone
-    RowsPerSheet = 65535
-    SetColumnsWidth = True
-    ExportHeader = True
-    HeaderSource = hsDisplayLabel
-    Left = 400
     Top = 128
   end
 end
