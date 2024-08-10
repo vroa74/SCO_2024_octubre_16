@@ -1,0 +1,742 @@
+TABLE
+0,1
+"TMXDATASETEXPORT"
+VECTORS
+0,12
+""
+TUPLES
+0,27
+""
+DATA
+0,0
+""
+-1,0
+BOT
+1,0
+Folio
+1,0
+"Fecha de captura"
+1,0
+"Fecha de recepción"
+1,0
+"Nivel de correspondencia"
+1,0
+"Tipo de correspondencia"
+1,0
+"Clasificación de correspondencia"
+1,0
+"Fecha de oficio"
+1,0
+"Numero de Oficio"
+1,0
+"Numero de hojas"
+1,0
+"Nombre del remitente"
+1,0
+"cargo del remitente"
+1,0
+"Depto. U org. Del remitente"
+1,0
+"Dirección del Remitente"
+1,0
+"Descripcion de Oficio"
+1,0
+"Nombre turnado"
+1,0
+"Cargo turnado"
+1,0
+"Depto. U organ. Del turnado"
+1,0
+Modifico
+1,0
+Tramite
+1,0
+"Fecha Inicio tramite"
+1,0
+"Quien inicio el tramite"
+1,0
+concluido
+1,0
+"fecha de conclusión"
+1,0
+"Quien lo concluyo"
+1,0
+Archivo
+1,0
+"Fecha de archivo"
+1,0
+"Quien Archivo"
+-1,0
+BOT
+1,0
+12
+1,0
+10/01/2013
+1,0
+10/01/2013
+1,0
+Urgente
+1,0
+"correspondencia especial"
+1,0
+Exhortos
+1,0
+10/01/2013
+1,0
+
+1,0
+1
+1,0
+"ING PEDRO ZETINA DZIB"
+1,0
+"ANALISTA ESPECIALIZADO"
+1,0
+CONGRESO
+1,0
+"calle 8 sn"
+1,0
+"no tengo idea"
+1,0
+"LIC LUCIA CHAVARRIA BALMES"
+1,0
+"ANALISTA ESPECIALIZADO"
+1,0
+"COMUNICACION SOCIAL"
+1,0
+root
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+False
+1,0
+16/01/2013
+1,0
+root
+-1,0
+BOT
+1,0
+13
+1,0
+19/01/2013
+1,0
+11/01/2013
+1,0
+Ordinaria
+1,0
+"correspondencia especial"
+1,0
+"Reformas de Ley o Reglamentos"
+1,0
+11/01/2013
+1,0
+11111111111111111111
+1,0
+
+1,0
+
+1,0
+
+1,0
+
+1,0
+"calle 8 sn"
+1,0
+"descripcion. de el campo"
+1,0
+
+1,0
+
+1,0
+
+1,0
+root
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+False
+1,0
+16/01/2013
+1,0
+root
+-1,0
+BOT
+1,0
+14
+1,0
+19/01/2013
+1,0
+11/01/2013
+1,0
+Ordinaria
+1,0
+"correspondencia especial"
+1,0
+"Reformas de Ley o Reglamentos"
+1,0
+11/01/2013
+1,0
+11111111111111111111
+1,0
+111
+1,0
+"BR PEDRO PEPEIRA LIMON"
+1,0
+ANALISTA
+1,0
+"CONTRALIRIA INTERNA"
+1,0
+"calle 8 sn"
+1,0
+"aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   aaaaa   "
+1,0
+"LI MARIO DZUL LIMON"
+1,0
+ANALISTA
+1,0
+"AUDITORIA SUPERIOR"
+1,0
+root
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+False
+1,0
+16/01/2013
+1,0
+root
+-1,0
+BOT
+1,0
+15
+1,0
+11/01/2013
+1,0
+11/01/2013
+1,0
+Urgente
+1,0
+"Correspondencia normal"
+1,0
+"Libros, revistas, folletos, et"
+1,0
+11/01/2013
+1,0
+
+1,0
+
+1,0
+"ING ARMANDO ZETINA DURAN"
+1,0
+DIRECTOR
+1,0
+"CONTRALIRIA INTERNA"
+1,0
+"calle 8 sn"
+1,0
+"descripcion. de el campo"
+1,0
+"LC MARIO PIÑA ZETINA"
+1,0
+DIRECTOR
+1,0
+ADMINISTRACION
+1,0
+root
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+False
+1,0
+16/01/2013
+1,0
+root
+-1,0
+BOT
+1,0
+16
+1,0
+11/01/2013
+1,0
+11/01/2013
+1,0
+Ordinaria
+1,0
+"correspondencia especial"
+1,0
+"Reformas de Ley o Reglamentos"
+1,0
+11/01/2013
+1,0
+
+1,0
+
+1,0
+"L.D. LULIO ZETINA PIÑA"
+1,0
+SECRETARIO
+1,0
+"GESTION SOCIAL"
+1,0
+"calle 8 sn"
+1,0
+"descripcion. de el campo"
+1,0
+"LIC ESMERALDA ORTIZ CHI"
+1,0
+ANALISTA
+1,0
+"GRUPOS PARLAMENTADIO"
+1,0
+root
+1,0
+True
+1,0
+11/01/2013
+1,0
+"** NULL **"
+1,0
+False
+1,0
+21/01/2013
+1,0
+root
+1,0
+False
+1,0
+16/01/2013
+1,0
+root
+-1,0
+BOT
+1,0
+17
+1,0
+11/01/2013
+1,0
+11/01/2013
+1,0
+Ordinaria
+1,0
+Peticiones
+1,0
+"Solicitudes de información"
+1,0
+11/01/2013
+1,0
+
+1,0
+
+1,0
+"L.D. PEDRO BALMES ESCLANTE"
+1,0
+SUBDIRECTOR
+1,0
+"SERETARIA DE GOBIERNO"
+1,0
+"calle 8 sn"
+1,0
+"descripcion. de el campo"
+1,0
+"ING LULIO MORENO ABREU"
+1,0
+ANALISTA
+1,0
+FINANZAS
+1,0
+root
+1,0
+True
+1,0
+14/01/2013
+1,0
+root
+1,0
+False
+1,0
+21/01/2013
+1,0
+root
+1,0
+False
+1,0
+16/01/2013
+1,0
+root
+-1,0
+BOT
+1,0
+18
+1,0
+10/01/2013
+1,0
+13/01/2013
+1,0
+Urgente
+1,0
+"Correspondencia normal"
+1,0
+Informes
+1,0
+11/01/2013
+1,0
+12/34/12/con
+1,0
+2
+1,0
+"ING ARMANDO ZETINA DURAN"
+1,0
+DIRECTOR
+1,0
+"CONTRALIRIA INTERNA"
+1,0
+"calle 8 sn"
+1,0
+"prueba de validacion de estatus"
+1,0
+"LC MARIO PIÑA ZETINA"
+1,0
+DIRECTOR
+1,0
+ADMINISTRACION
+1,0
+root
+1,0
+True
+1,0
+16/01/2013
+1,0
+root
+1,0
+False
+1,0
+21/01/2013
+1,0
+root
+1,0
+False
+1,0
+16/01/2013
+1,0
+root
+-1,0
+BOT
+1,0
+19
+1,0
+14/01/2013
+1,0
+14/01/2013
+1,0
+Urgente
+1,0
+"Correspondencia normal"
+1,0
+Invitaciones
+1,0
+14/01/2013
+1,0
+
+1,0
+
+1,0
+"LTS ARMANDO CHAN CAN"
+1,0
+COORDINADOR
+1,0
+"COMUNICACION SOCIAL"
+1,0
+
+1,0
+"descripcion. de el campo descripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campo"
+1,0
+"L.D. MARIO CAN DZIB"
+1,0
+"ANALISTA ESPECIALIZADO"
+1,0
+CONGRESO
+1,0
+root
+1,0
+True
+1,0
+22/01/2013
+1,0
+root
+1,0
+True
+1,0
+22/01/2013
+1,0
+root
+1,0
+False
+1,0
+16/01/2013
+1,0
+root
+-1,0
+BOT
+1,0
+20
+1,0
+22/01/2013
+1,0
+22/01/2013
+1,0
+Urgente
+1,0
+"Correspondencia normal"
+1,0
+Agradecimientos
+1,0
+22/01/2013
+1,0
+
+1,0
+
+1,0
+"VICTOR ROMAN ORTIZ ABREU"
+1,0
+
+1,0
+
+1,0
+"calle altillos"
+1,0
+"descripcion. de el campo"
+1,0
+"ING RAFAEL MORENO ZETINA"
+1,0
+SECRETARIO
+1,0
+FINANZAS
+1,0
+root
+1,0
+True
+1,0
+22/01/2013
+1,0
+root
+1,0
+False
+1,0
+
+1,0
+"** NULL **"
+1,0
+False
+1,0
+
+1,0
+"** NULL **"
+-1,0
+BOT
+1,0
+21
+1,0
+22/01/2013
+1,0
+22/01/2013
+1,0
+Ordinaria
+1,0
+"Correspondencia normal"
+1,0
+Felicitaciones
+1,0
+22/01/2013
+1,0
+
+1,0
+
+1,0
+"VICTOR ROMAN ORTIZ ABREU"
+1,0
+
+1,0
+
+1,0
+"calle altillos"
+1,0
+"sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  sfdasdfasdf  descripcion. de el campo  "
+1,0
+"LIC PEDRO CHAVARRIA DURAN"
+1,0
+COORDINADOR
+1,0
+"COMUNICACION SOCIAL"
+1,0
+root
+1,0
+True
+1,0
+22/01/2013
+1,0
+root
+1,0
+True
+1,0
+25/01/2013
+1,0
+root
+1,0
+False
+1,0
+
+1,0
+"** NULL **"
+-1,0
+BOT
+1,0
+22
+1,0
+22/01/2013
+1,0
+22/01/2013
+1,0
+Urgente
+1,0
+"correspondencia especial"
+1,0
+"Juicios de amparos"
+1,0
+22/01/2013
+1,0
+
+1,0
+
+1,0
+"ING MIGUEL ZETINA BALMES"
+1,0
+"ANALISTA ESPECIALIZADO"
+1,0
+"COMUNICACION SOCIAL"
+1,0
+
+1,0
+dwefqwfewqef
+1,0
+"LTS PEDRO DZIB BALAM"
+1,0
+ANALISTA
+1,0
+"SERETARIA DE GOBIERNO"
+1,0
+root
+1,0
+False
+1,0
+30/12/1899
+1,0
+"** NULL **"
+1,0
+False
+1,0
+
+1,0
+"** NULL **"
+1,0
+False
+1,0
+
+1,0
+"** NULL **"
+-1,0
+BOT
+1,0
+23
+1,0
+22/01/2013
+1,0
+22/01/2013
+1,0
+Ordinaria
+1,0
+"correspondencia especial"
+1,0
+"Iniciativas Ley o Reglamentos"
+1,0
+22/01/2013
+1,0
+
+1,0
+
+1,0
+"ING MIGUEL ZETINA BALMES"
+1,0
+"ANALISTA ESPECIALIZADO"
+1,0
+"COMUNICACION SOCIAL"
+1,0
+
+1,0
+"descripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campodescripcion. de el campo"
+1,0
+"LC MARIO PIÑA ZETINA"
+1,0
+DIRECTOR
+1,0
+ADMINISTRACION
+1,0
+root
+1,0
+True
+1,0
+25/01/2013
+1,0
+root
+1,0
+True
+1,0
+25/01/2013
+1,0
+root
+1,0
+False
+1,0
+
+1,0
+"** NULL **"
+-1,0
+EOD

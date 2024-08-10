@@ -1,0 +1,73 @@
+object Fcat_gru: TFcat_gru
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'SCO Catalogos Grupos'
+  ClientHeight = 337
+  ClientWidth = 415
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 0
+    Width = 415
+    Height = 288
+    Align = alClient
+    DataSource = DM.DQCAT_GRU
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 288
+    Width = 415
+    Height = 49
+    Align = alBottom
+    Caption = 'Panel1'
+    TabOrder = 1
+    object DBAdvGlowNavigator1: TDBAdvGlowNavigator
+      Left = 1
+      Top = 1
+      Width = 413
+      Height = 47
+      DataSource = DM.DQCAT_GRU
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbEdit, nbPost, nbCancel, nbRefresh]
+      Align = alClient
+      Appearance.ColorChecked = 16111818
+      Appearance.ColorCheckedTo = 16367008
+      Appearance.ColorDisabled = 15921906
+      Appearance.ColorDisabledTo = 15921906
+      Appearance.ColorDown = 16111818
+      Appearance.ColorDownTo = 16367008
+      Appearance.ColorHot = 16117985
+      Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirrorHot = 16107693
+      Appearance.ColorMirrorHotTo = 16775412
+      Appearance.ColorMirrorDown = 16102556
+      Appearance.ColorMirrorDownTo = 16768988
+      Appearance.ColorMirrorChecked = 16102556
+      Appearance.ColorMirrorCheckedTo = 16768988
+      Appearance.ColorMirrorDisabled = 11974326
+      Appearance.ColorMirrorDisabledTo = 15921906
+      DeleteDisabled = False
+      InsertDisabled = False
+      GlyphCustomSize = 0
+      Orientation = noHorizontal
+      TabOrder = 0
+      Version = '1.1.3.0'
+    end
+  end
+end

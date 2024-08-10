@@ -1,0 +1,42 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 524
+  ClientWidth = 748
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 434
+    Width = 748
+    Height = 90
+    Align = alBottom
+    Color = clMoneyGreen
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitTop = 544
+    ExplicitWidth = 800
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 0
+    Width = 748
+    Height = 434
+    Align = alClient
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+end
