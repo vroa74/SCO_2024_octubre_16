@@ -402,6 +402,10 @@ implementation
        fmain.StatusBar1.Panels[3].Text := fmain.PutTime;
        fmain.StatusBar1.Panels[3].Text := inttostr(cambio);
        fmain.StatusBar1.Panels[4].Text := inttostr(contx);
+       if fmain.grupos1.Visible = true then
+          fmain.grupos1.Visible := false;
+
+
          if usuario <> ''  then
             fmain.StatusBar1.Panels[1].Text := 'Usuario :  ' +fmain.usuario;
 

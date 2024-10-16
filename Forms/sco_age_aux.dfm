@@ -19,7 +19,7 @@ object fsco_age_aux: Tfsco_age_aux
     Left = 0
     Top = 0
     Width = 625
-    Height = 313
+    Height = 288
     Align = alClient
     DataSource = DM.DQAGE
     TabOrder = 0
@@ -117,8 +117,6 @@ object fsco_age_aux: Tfsco_age_aux
       Top = 33
       Width = 25
       Height = 25
-      TabOrder = 5
-      OnClick = BitBtn1Click
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
         20000000000000040000C40E0000C40E00000000000000000000000000FF0000
@@ -154,6 +152,20 @@ object fsco_age_aux: Tfsco_age_aux
         BDFFF8ECB8FFEDDC9DFF912400FF000000FF000000FF000000FF000000FF0000
         00FF000000FF000000FF000000FF000000FF000000FFBB5500FFE8B416FFAF5F
         00FF000000FF000000FF000000FF000000FF000000FF000000FF}
+      TabOrder = 5
+      OnClick = BitBtn1Click
     end
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 0
+    Top = 288
+    Width = 625
+    Height = 25
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbRefresh]
+    Align = alBottom
+    TabOrder = 2
+    ExplicitLeft = 237
+    ExplicitTop = 282
+    ExplicitWidth = 240
   end
 end

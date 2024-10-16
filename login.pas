@@ -1,7 +1,5 @@
 unit login;
-
 interface
-
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, IniFiles, Vcl.ExtCtrls, JvExExtCtrls, JvImage;
@@ -142,8 +140,8 @@ implementation
               begin
                  DM.MyConnection1.Connected:= true;
                  fmain.Oficios1.Visible := true;
-                 fmain.Archivo2.Visible := true;
-                 fmain.grupos1.Visible := true;
+                 //fmain.Archivo2.Visible := true;
+                 //fmain.grupos1.Visible := true;
                  dm.Tage.Open;
                  dm.tco.Open;
                  dm.TGrupo.Open;
@@ -319,6 +317,7 @@ implementation
        BitBtn1.Hint := 'Presione para conectarse';
        BitBtn2.Hint := 'Presione para cancelar o Salir';
        JvImage1.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+ 'legislatura.png');
+
     end;
 
 end.

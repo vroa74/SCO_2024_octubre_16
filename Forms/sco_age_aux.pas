@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, ExtCtrls, StdCtrls, Buttons;
+  Dialogs, Grids, DBGrids, ExtCtrls, StdCtrls, Buttons, Data.DB, Vcl.DBCtrls;
 
 type
   Tfsco_age_aux = class(TForm)
@@ -21,6 +21,7 @@ type
     Edit5: TEdit;
     Label5: TLabel;
     BitBtn1: TBitBtn;
+    DBNavigator1: TDBNavigator;
     procedure Query;
     procedure FormCreate(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);

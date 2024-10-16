@@ -249,7 +249,7 @@ end;
 procedure Tfscoage_alta.FormCreate(Sender: TObject);
 begin
 //ComboBox1.Items.LoadFromFile(fmain.ruta+'titulo.ini' );
- JvImage1.Picture.LoadFromFile(fmain.ruta+'LOGO-CONGRESO_1.jpg');
+ JvImage1.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+ 'legislatura.png');
  clear;
  ins := false;
 end;
