@@ -1,0 +1,14 @@
+SELECT 
+  age.titulo,
+  age.nombre,
+  age.apaterno,
+  age.amaterno,
+  age.cargo,
+  age.deporg,
+  age.telefono,
+  age.email,
+  age.dir,
+  age.id_age,  
+  age.modifico
+FROM
+ age

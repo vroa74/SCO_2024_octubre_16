@@ -1,0 +1,32 @@
+SELECT
+  co.id,
+  co.fcap,
+  co.frec,
+  co.ncor,
+  co.tcor,
+  co.ccor,
+  co.fofi,
+  co.nofi,
+  co.nhoj,
+  co.rem_nombre,
+  co.rem_cargo,
+  co.rem_deporg,
+  co.rem_dir,
+  co.des,
+  co.seguimiento,
+  co.tur_nom,
+  co.tur_cargo,
+  co.tur_deporg,
+  co.tramite,
+  co.FIAT,
+  co.Q_TRA,
+  co.estatus,
+  co.FCAT,
+  co.Q_EST,
+  co.archivo,
+  co.FAAT,
+  co.Q_ARC
+FROM
+co
+WHERE
+    (co.archivo = "0")

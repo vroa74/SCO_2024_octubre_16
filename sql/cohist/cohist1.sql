@@ -1,0 +1,33 @@
+SELECT
+  co_hist.id,
+  co_hist.fcap,
+  co_hist.frec,
+  co_hist.ncor,
+  co_hist.tcor,
+  co_hist.ccor,
+  co_hist.fofi,
+  co_hist.nofi,
+  co_hist.nhoj,
+  co_hist.rem_nombre,
+  co_hist.rem_cargo,
+  co_hist.rem_deporg,
+  co_hist.rem_dir,
+  co_hist.des,
+  co_hist.seguimiento,
+  co_hist.tur_nom,
+  co_hist.tur_cargo,
+  co_hist.tur_deporg,
+  co_hist.tramite,
+  co_hist.FIAT,
+  co_hist.Q_TRA,
+  co_hist.estatus,
+  co_hist.FCAT,
+  co_hist.Q_EST,
+  co_hist.archivo,
+  co_hist.FAAT,
+  co_hist.modifico,
+  co_hist.Q_ARC
+FROM
+co_hist
+WHERE
+    (co_hist.archivo = "0")

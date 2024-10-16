@@ -13,8 +13,6 @@ type
     QCO: TMyQuery;
     QAGE: TMyQuery;
     QCOH: TMyQuery;
-    TCO: TMyTable;
-    Tage: TMyTable;
     TGrupo: TMyTable;
     DQCO: TMyDataSource;
     DQAGE: TMyDataSource;
@@ -33,6 +31,21 @@ type
     MyBackup1: TMyBackup;
     QImpresion: TMyQuery;
     DQImpresion: TMyDataSource;
+    TCO: TMyQuery;
+    Tage: TMyQuery;
+    TBitacora: TMyQuery;
+    DTBitacora: TMyDataSource;
+    QRCA: TMyQuery;
+    DQRCA: TMyDataSource;
+    Qco_his: TMyQuery;
+    Dco_his: TMyDataSource;
+    ncor: TMyQuery;
+    Dncor: TMyDataSource;
+    tcor: TMyQuery;
+    dtcor: TMyDataSource;
+    ccor: TMyQuery;
+    dccor: TMyDataSource;
+    MyTable1: TMyTable;
   private
     { Private declarations }
   public

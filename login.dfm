@@ -3,8 +3,8 @@ object FLogin: TFLogin
   Top = -1
   BorderIcons = [biSystemMenu]
   Caption = 'Login'
-  ClientHeight = 232
-  ClientWidth = 265
+  ClientHeight = 245
+  ClientWidth = 622
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -50,6 +50,13 @@ object FLogin: TFLogin
     Width = 32
     Height = 13
     Caption = 'Puerto'
+  end
+  object JvImage1: TJvImage
+    Left = 224
+    Top = 8
+    Width = 392
+    Height = 197
+    Stretch = True
   end
   object Edit1: TEdit
     Left = 83
@@ -103,10 +110,10 @@ object FLogin: TFLogin
     OnMouseLeave = Edit5MouseLeave
   end
   object ListBox1: TListBox
-    Left = 216
-    Top = 8
-    Width = 33
-    Height = 105
+    Left = 21
+    Top = 9
+    Width = 25
+    Height = 17
     ItemHeight = 13
     TabOrder = 5
     Visible = False
@@ -116,10 +123,6 @@ object FLogin: TFLogin
     Top = 176
     Width = 42
     Height = 42
-    TabOrder = 6
-    OnClick = BitBtn1Click
-    OnMouseEnter = BitBtn1MouseEnter
-    OnMouseLeave = BitBtn1MouseLeave
     Glyph.Data = {
       360C0000424D360C000000000000360000002800000020000000200000000100
       180000000000000C000000000000000000000000000000000000FFFFFFB3AFAD
@@ -219,16 +222,16 @@ object FLogin: TFLogin
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFEFEFEFFFFFFFCFCFCFEFEFEFFFFFFFE
       FEFEFFFFFFC3C3C3858585ABABABFAFAFAFFFFFFFFFFFFFFFFFF}
+    TabOrder = 6
+    OnClick = BitBtn1Click
+    OnMouseEnter = BitBtn1MouseEnter
+    OnMouseLeave = BitBtn1MouseLeave
   end
   object BitBtn2: TBitBtn
     Left = 72
     Top = 176
     Width = 42
     Height = 42
-    TabOrder = 7
-    OnClick = BitBtn2Click
-    OnMouseEnter = BitBtn2MouseEnter
-    OnMouseLeave = BitBtn2MouseLeave
     Glyph.Data = {
       360C0000424D360C00000000000036000000280000001F000000200000000100
       180000000000000C0000120B0000120B00000000000000000000FEFEFEFEFEFE
@@ -328,5 +331,19 @@ object FLogin: TFLogin
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFDFDFDFFFFFFFFFFFFF5F7
       F7DDDEDECACACCC2C3C4C8C9C5DADADAF3F3F4FFFFFFFFFFFFFEFEFCFCFCFBFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
+    TabOrder = 7
+    OnClick = BitBtn2Click
+    OnMouseEnter = BitBtn2MouseEnter
+    OnMouseLeave = BitBtn2MouseLeave
+  end
+  object Button1: TButton
+    Left = 120
+    Top = 176
+    Width = 65
+    Height = 42
+    Caption = 'Button1'
+    TabOrder = 8
+    Visible = False
+    OnClick = Button1Click
   end
 end

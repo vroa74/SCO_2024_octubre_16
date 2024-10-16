@@ -2,8 +2,8 @@ object Fmain: TFmain
   Left = -1
   Top = -1
   Caption = 'Sistema de Correspondencia del Congreso del Estado de Campeche'
-  ClientHeight = 498
-  ClientWidth = 828
+  ClientHeight = 619
+  ClientWidth = 1052
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object Fmain: TFmain
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 479
-    Width = 828
+    Top = 600
+    Width = 1052
     Height = 19
     Panels = <
       item
@@ -68,20 +68,32 @@ object Fmain: TFmain
     TabOrder = 3
     Visible = False
   end
+  object bg: TDBImage
+    Left = 0
+    Top = 0
+    Width = 1052
+    Height = 600
+    Align = alClient
+    Stretch = True
+    TabOrder = 4
+  end
   object Timer1: TTimer
-    Interval = 100000
     OnTimer = Timer1Timer
-    Left = 608
-    Top = 56
+    Left = 648
+    Top = 16
   end
   object MainMenu1: TMainMenu
-    Left = 560
-    Top = 48
+    Left = 592
+    Top = 16
     object Loguin1: TMenuItem
       Caption = 'Login'
       object Loguin2: TMenuItem
         Caption = 'Login'
         OnClick = Loguin2Click
+      end
+      object c1: TMenuItem
+        Caption = 'config'
+        OnClick = c1Click
       end
       object Salir1: TMenuItem
         Caption = 'Salir'
@@ -94,14 +106,29 @@ object Fmain: TFmain
         Caption = 'Alta'
         OnClick = Alta1Click
       end
+      object N1: TMenuItem
+        Caption = '-'
+      end
       object A1: TMenuItem
         Caption = 'Alta por Grupo'
+        Enabled = False
+        Visible = False
         OnClick = A1Click
       end
       object Busqueda1: TMenuItem
         Caption = 'Editar'
         Visible = False
         OnClick = Busqueda1Click
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object C2: TMenuItem
+        Caption = 'Catalogos'
+        OnClick = C2Click
+      end
+      object N2: TMenuItem
+        Caption = '-'
       end
       object Reportes1: TMenuItem
         Caption = 'Impresi'#243'n de volantes'
@@ -116,6 +143,13 @@ object Fmain: TFmain
         Caption = 'Seguimiento a Tr'#225'mite de Respuesta'
         Visible = False
         OnClick = Reportes2Click
+      end
+      object N4: TMenuItem
+        Caption = '-'
+      end
+      object Reportesgenerales1: TMenuItem
+        Caption = 'Reportes generales historicos'
+        OnClick = Reportesgenerales1Click
       end
     end
     object Archivo2: TMenuItem
@@ -143,10 +177,6 @@ object Fmain: TFmain
     end
     object grupos1: TMenuItem
       Caption = 'Grupos'
-      object G1: TMenuItem
-        Caption = 'Grupos'
-        OnClick = G1Click
-      end
       object AGENDAGRUPO1: TMenuItem
         Caption = 'AGENDA -> GRUPO'
         OnClick = AGENDAGRUPO1Click

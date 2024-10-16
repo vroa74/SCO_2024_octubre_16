@@ -1,14 +1,14 @@
 object DM: TDM
   OldCreateOrder = False
-  Height = 230
-  Width = 571
+  Height = 358
+  Width = 606
   object MyConnection1: TMyConnection
     Database = 'sco'
-    Server = '192.168.1.68'
+    Username = 'root'
+    Server = 'localhost'
     LoginPrompt = False
     Left = 64
     Top = 16
-    EncryptedPassword = '89FF8DFF90FF9EFFCEFFC6FFC8FFCBFF'
   end
   object QCO: TMyQuery
     Connection = MyConnection1
@@ -40,6 +40,7 @@ object DM: TDM
       'co.Q_EST AS "Quien lo concluyo",'
       'co.archivo AS "Archivo",'
       'co.FAAT AS "Fecha de archivo",'
+      'co.modifico,'
       'co.Q_ARC AS "Quien Archivo"'
       'FROM'
       'co'
@@ -49,7 +50,7 @@ object DM: TDM
       '  co.id')
     Options.FieldOrigins = foNone
     Left = 16
-    Top = 104
+    Top = 224
   end
   object QAGE: TMyQuery
     Connection = MyConnection1
@@ -70,7 +71,7 @@ object DM: TDM
       ' age')
     Options.FieldOrigins = foNone
     Left = 56
-    Top = 104
+    Top = 224
   end
   object QCOH: TMyQuery
     Connection = MyConnection1
@@ -111,56 +112,44 @@ object DM: TDM
       '  co.id')
     Options.FieldOrigins = foNone
     Left = 104
-    Top = 104
-  end
-  object TCO: TMyTable
-    TableName = 'co'
-    OrderFields = 'id'
-    Connection = MyConnection1
-    Filtered = True
-    Filter = 'archivo = 0'
-    Left = 376
-  end
-  object Tage: TMyTable
-    TableName = 'age'
-    OrderFields = 'id_age'
-    Connection = MyConnection1
-    Left = 416
+    Top = 224
   end
   object TGrupo: TMyTable
     TableName = 'grupo'
     OrderFields = 'id_grupo'
     Connection = MyConnection1
-    Left = 464
+    Options.FieldOrigins = foNone
+    Left = 480
+    Top = 8
   end
   object DQCO: TMyDataSource
     DataSet = QCO
     Left = 16
-    Top = 168
+    Top = 288
   end
   object DQAGE: TMyDataSource
     DataSet = QAGE
     Left = 56
-    Top = 168
+    Top = 288
   end
   object DQCOH: TMyDataSource
     DataSet = QCOH
     Left = 104
-    Top = 168
+    Top = 288
   end
   object DTco: TMyDataSource
     DataSet = TCO
-    Left = 376
+    Left = 368
     Top = 64
   end
   object DTage: TMyDataSource
     DataSet = Tage
-    Left = 416
+    Left = 424
     Top = 64
   end
   object DTGrupo: TMyDataSource
     DataSet = TGrupo
-    Left = 464
+    Left = 480
     Top = 64
   end
   object QCAT_GRU: TMyQuery
@@ -172,12 +161,12 @@ object DM: TDM
       ' cat_gru')
     Options.FieldOrigins = foNone
     Left = 160
-    Top = 104
+    Top = 224
   end
   object DQCAT_GRU: TMyDataSource
     DataSet = QCAT_GRU
     Left = 160
-    Top = 168
+    Top = 288
   end
   object QAUX: TMyQuery
     Connection = MyConnection1
@@ -196,7 +185,7 @@ object DM: TDM
       ' ORDER BY CAT_GRU.`id_grupo` ASC')
     Options.FieldOrigins = foNone
     Left = 280
-    Top = 104
+    Top = 224
   end
   object QGRUPO: TMyQuery
     Connection = MyConnection1
@@ -208,27 +197,29 @@ object DM: TDM
       ' grupo')
     Options.FieldOrigins = foNone
     Left = 224
-    Top = 104
+    Top = 224
   end
   object DQGRUPO: TMyDataSource
     DataSet = QGRUPO
     Left = 224
-    Top = 168
+    Top = 288
   end
   object DQAUX: TMyDataSource
     DataSet = QAUX
     Left = 280
-    Top = 168
+    Top = 288
   end
   object TCAT_GRU: TMyTable
     TableName = 'cat_gru'
     OrderFields = 'id_grupo'
     Connection = MyConnection1
-    Left = 520
+    Options.FieldOrigins = foNone
+    Left = 544
+    Top = 8
   end
   object DTCAT_GRU: TMyDataSource
     DataSet = QCAT_GRU
-    Left = 520
+    Left = 544
     Top = 64
   end
   object MyBackup1: TMyBackup
@@ -237,8 +228,8 @@ object DM: TDM
     FieldsTerminatedBy = '\t'
     EscapedBy = '\\'
     LinesTerminatedBy = '\n'
-    Left = 152
-    Top = 24
+    Left = 144
+    Top = 16
   end
   object QImpresion: TMyQuery
     Connection = MyConnection1
@@ -252,12 +243,138 @@ object DM: TDM
       'ORDER BY'
       '  co.id')
     Options.FieldOrigins = foNone
-    Left = 384
-    Top = 120
+    Left = 336
+    Top = 224
   end
   object DQImpresion: TMyDataSource
     DataSet = QImpresion
-    Left = 384
-    Top = 168
+    Left = 336
+    Top = 288
+  end
+  object TCO: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'SELECT *'
+      'FROM'
+      '  `co`'
+      'ORDER BY'
+      '  `co`.`id` '
+      ''
+      '')
+    Options.FieldOrigins = foNone
+    Left = 368
+    Top = 8
+  end
+  object Tage: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'SELECT *'
+      'FROM'
+      '  `age`'
+      '')
+    Options.FieldOrigins = foNone
+    Left = 424
+    Top = 8
+  end
+  object TBitacora: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'SELECT '
+      '  `bitacora`.`id_bitacora`,'
+      '  `bitacora`.`user`,'
+      '  `bitacora`.`creado`,'
+      '  `bitacora`.`alta`,'
+      '  `bitacora`.`edicion`,'
+      '  `bitacora`.`status`'
+      'FROM'
+      '  `bitacora`'
+      'LIMIT 1000')
+    Options.FieldOrigins = foNone
+    Left = 312
+    Top = 8
+  end
+  object DTBitacora: TMyDataSource
+    DataSet = TBitacora
+    Left = 312
+    Top = 64
+  end
+  object QRCA: TMyQuery
+    Connection = MyConnection1
+    Left = 248
+    Top = 8
+  end
+  object DQRCA: TMyDataSource
+    DataSet = QRCA
+    Left = 248
+    Top = 64
+  end
+  object Qco_his: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'SELECT *'
+      'FROM'
+      '  `co_hist`'
+      'ORDER BY'
+      '  co_hist.id')
+    Options.FieldOrigins = foNone
+    Left = 16
+    Top = 112
+  end
+  object Dco_his: TMyDataSource
+    DataSet = Qco_his
+    Left = 16
+    Top = 176
+  end
+  object ncor: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'SELECT *'
+      'FROM'
+      '  `ncor`')
+    Options.FieldOrigins = foNone
+    Left = 440
+    Top = 232
+  end
+  object Dncor: TMyDataSource
+    DataSet = ncor
+    Left = 440
+    Top = 288
+  end
+  object tcor: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'SELECT *'
+      'FROM'
+      '  `tcor`')
+    Options.FieldOrigins = foNone
+    Left = 496
+    Top = 232
+  end
+  object dtcor: TMyDataSource
+    DataSet = tcor
+    Left = 496
+    Top = 288
+  end
+  object ccor: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'SELECT *'
+      'FROM'
+      '  `ccor`')
+    Options.FieldOrigins = foNone
+    MasterFields = 'id'
+    DetailFields = 'tcor'
+    Left = 560
+    Top = 232
+  end
+  object dccor: TMyDataSource
+    DataSet = ccor
+    Left = 560
+    Top = 288
+  end
+  object MyTable1: TMyTable
+    Connection = MyConnection1
+    Left = 120
+    Top = 128
   end
 end

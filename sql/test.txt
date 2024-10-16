@@ -1,0 +1,37 @@
+     dm.Qco_his.Insert;
+    // Asignar valores a los parámetros de la consulta de inserción
+      dm.QCO_His.FieldByName('id').AsInteger , := , dm.QCO.FieldByName('folio').AsInteger;
+      dm.QCO_His.FieldByName('fcap').AsDateTime , := , dm.QCO.FieldByName('Fecha de captura').AsDateTime;
+      dm.QCO_His.FieldByName('frec').AsDateTime , := , dm.QCO.FieldByName('Fecha de recepción').AsDateTime;
+      dm.QCO_His.FieldByName('ncor').AsString , := , dm.QCO.FieldByName('Nivel de correspondencia').AsString;
+      dm.QCO_His.FieldByName('tcor').AsString , := , dm.QCO.FieldByName('Tipo de correspondencia').AsString;
+      dm.QCO_His.FieldByName('ccor').AsString , := , dm.QCO.FieldByName('Tipo de correspondencia').AsString;
+      dm.QCO_His.FieldByName('fofi').AsDateTime , := , dm.QCO.FieldByName('Fecha de oficio').AsDateTime;
+      dm.QCO_His.FieldByName('nofi').AsString , := , dm.QCO.FieldByName('Numero de Oficio').AsString;
+      dm.QCO_His.FieldByName('nhoj').AsInteger , := , dm.QCO.FieldByName('Numero de hojas').AsInteger;
+      dm.QCO_His.FieldByName('rem_nombre').AsString , := , dm.QCO.FieldByName('Nombre del remitente').AsString;
+      dm.QCO_His.FieldByName('rem_cargo').AsString , := , dm.QCO.FieldByName('cargo del remitente').AsString;
+      dm.QCO_His.FieldByName('rem_deporg').AsString , := , dm.QCO.FieldByName('Depto. U org. Del remitente').AsString;
+      dm.QCO_His.FieldByName('rem_dir').AsString , := , dm.QCO.FieldByName('Dirección del Remitente').AsString;
+      dm.QCO_His.FieldByName('des').AsString , := , dm.QCO.FieldByName('Descripcion de Oficio').AsString;
+      dm.QCO_His.FieldByName('seguimiento').AsString , := , dm.QCO.FieldByName('Seguimiento').AsString;
+      dm.QCO_His.FieldByName('tur_nom').AsString , := , dm.QCO.FieldByName('Nombre turnado').AsString;
+      dm.QCO_His.FieldByName('tur_cargo').AsString , := , dm.QCO.FieldByName('Cargo turnado').AsString;
+      dm.QCO_His.FieldByName('tur_deporg').AsString , := , dm.QCO.FieldByName('Depto. U organ. Del turnado').AsString;
+      dm.QCO_His.FieldByName('modifico').AsString , := , dm.QCO.FieldByName('modifico').AsString;
+      dm.QCO_His.FieldByName('tramite').AsBoolean , := , dm.QCO.FieldByName('Tramite').AsBoolean;
+      dm.QCO_His.FieldByName('FIAT').AsDateTime , := , dm.QCO.FieldByName('Fecha Inicio tramite').AsDateTime;
+      dm.QCO_His.FieldByName('Q_TRA').AsString , := , dm.QCO.FieldByName('Quien inicio el tramite').AsString;
+      dm.QCO_His.FieldByName('estatus').AsBoolean , := , dm.QCO.FieldByName('concluido').AsBoolean;
+      dm.QCO_His.FieldByName('FCAT').AsDateTime , := , dm.QCO.FieldByName('fecha de conclusión').AsDateTime;
+      dm.QCO_His.FieldByName('Q_EST').AsString , := , dm.QCO.FieldByName('Quien lo concluyo').AsString;
+      dm.QCO_His.FieldByName('archivo').AsBoolean , := , dm.QCO.FieldByName('Archivo').AsBoolean;
+      dm.QCO_His.FieldByName('FAAT').AsDateTime , := , dm.QCO.FieldByName('Fecha de archivo').AsDateTime;
+      dm.QCO_His.FieldByName('Q_ARC').AsString , := , dm.QCO.FieldByName('Quien Archivo').AsString;
+
+    dm.QCO_His.Post;
+    // Borrar el registro de QCO
+    dm.QCO.Delete;
+    // Avanzar al siguiente registro
+    Application.ProcessMessages;
+
