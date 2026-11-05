@@ -46,6 +46,8 @@ object Fcat_gru: TFcat_gru
       DataSource = DM.DQCAT_GRU
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbEdit, nbPost, nbCancel, nbRefresh]
       Align = alClient
+      Appearance.Color = clWhite
+      Appearance.ColorTo = clWhite
       Appearance.ColorChecked = 16111818
       Appearance.ColorCheckedTo = 16367008
       Appearance.ColorDisabled = 15921906
@@ -54,6 +56,8 @@ object Fcat_gru: TFcat_gru
       Appearance.ColorDownTo = 16367008
       Appearance.ColorHot = 16117985
       Appearance.ColorHotTo = 16372402
+      Appearance.ColorMirror = clSilver
+      Appearance.ColorMirrorTo = clWhite
       Appearance.ColorMirrorHot = 16107693
       Appearance.ColorMirrorHotTo = 16775412
       Appearance.ColorMirrorDown = 16102556
@@ -67,7 +71,7 @@ object Fcat_gru: TFcat_gru
       GlyphCustomSize = 0
       Orientation = noHorizontal
       TabOrder = 0
-      Version = '1.1.5.0'
+      Version = '1.3.0.1'
     end
   end
 end

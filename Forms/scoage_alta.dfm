@@ -652,7 +652,7 @@ object fscoage_alta: Tfscoage_alta
     CloudDriveSettings.OneDriveSettings.DirectorySupport = True
     Left = 504
     Top = 264
-    Version = '22.0'
+    Version = '22.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand1: TppHeaderBand

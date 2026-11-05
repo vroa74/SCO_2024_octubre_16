@@ -24,7 +24,6 @@ object F_aux_imp: TF_aux_imp
     Caption = 'Volante  Normal'
     TabOrder = 1
     OnClick = Button1Click
-    ExplicitLeft = -200
   end
   object Button2: TButton
     Left = 0
@@ -383,7 +382,7 @@ object F_aux_imp: TF_aux_imp
     CloudDriveSettings.OneDriveSettings.DirectorySupport = True
     Left = 264
     Top = 96
-    Version = '22.0'
+    Version = '22.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand2: TppHeaderBand
@@ -9308,7 +9307,7 @@ object F_aux_imp: TF_aux_imp
     CloudDriveSettings.OneDriveSettings.OAuth2.RedirectPort = 0
     CloudDriveSettings.OneDriveSettings.DirectorySupport = True
     Left = 8
-    Version = '22.0'
+    Version = '22.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand3: TppHeaderBand
@@ -18240,7 +18239,7 @@ object F_aux_imp: TF_aux_imp
     CloudDriveSettings.OneDriveSettings.OAuth2.RedirectPort = 0
     CloudDriveSettings.OneDriveSettings.DirectorySupport = True
     Left = 264
-    Version = '22.0'
+    Version = '22.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand1: TppHeaderBand

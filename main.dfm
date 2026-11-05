@@ -1,7 +1,7 @@
 object Fmain: TFmain
   Left = -1
   Top = -1
-  Caption = 'Sistema de Correspondencia del Congreso del Estado de Campeche'
+  Caption = 'Sistema de Gesti'#243'n y Tr'#225'nsito Documental'
   ClientHeight = 619
   ClientWidth = 1052
   Color = clBtnFace
@@ -113,12 +113,6 @@ object Fmain: TFmain
         Caption = 'Alta por Grupo'
         Enabled = False
         Visible = False
-        OnClick = A1Click
-      end
-      object Busqueda1: TMenuItem
-        Caption = 'Editar'
-        Visible = False
-        OnClick = Busqueda1Click
       end
       object N3: TMenuItem
         Caption = '-'
@@ -130,11 +124,6 @@ object Fmain: TFmain
       object N2: TMenuItem
         Caption = '-'
       end
-      object Reportes1: TMenuItem
-        Caption = 'Impresi'#243'n de volantes'
-        Visible = False
-        OnClick = Reportes1Click
-      end
       object consultas1: TMenuItem
         Caption = 'Reportes generales'
         OnClick = consultas1Click
@@ -142,7 +131,6 @@ object Fmain: TFmain
       object Reportes2: TMenuItem
         Caption = 'Seguimiento a Tr'#225'mite de Respuesta'
         Visible = False
-        OnClick = Reportes2Click
       end
       object N4: TMenuItem
         Caption = '-'
@@ -150,17 +138,6 @@ object Fmain: TFmain
       object Reportesgenerales1: TMenuItem
         Caption = 'Reportes generales historicos'
         OnClick = Reportesgenerales1Click
-      end
-    end
-    object Archivo2: TMenuItem
-      Caption = 'Archivo'
-      object SCOArchivar1: TMenuItem
-        Caption = 'SCO - Archivar'
-        OnClick = SCOArchivar1Click
-      end
-      object SeguimientoaTrmitedeRespuesta1: TMenuItem
-        Caption = 'SCO - Seguimiento Archivo'
-        OnClick = SeguimientoaTrmitedeRespuesta1Click
       end
     end
     object Catalogos1: TMenuItem
@@ -175,17 +152,6 @@ object Fmain: TFmain
         OnClick = Busqueda2Click
       end
     end
-    object grupos1: TMenuItem
-      Caption = 'Grupos'
-      object AGENDAGRUPO1: TMenuItem
-        Caption = 'AGENDA -> GRUPO'
-        OnClick = AGENDAGRUPO1Click
-      end
-      object GRUPOPERSONA1: TMenuItem
-        Caption = 'GRUPO -> PERSONA'
-        OnClick = GRUPOPERSONA1Click
-      end
-    end
     object Acerca1: TMenuItem
       Caption = 'Acerca'
       object de1: TMenuItem
@@ -193,5 +159,9 @@ object Fmain: TFmain
         OnClick = de1Click
       end
     end
+  end
+  object SHA3Hash1: TSHA3Hash
+    Left = 616
+    Top = 248
   end
 end

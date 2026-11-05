@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, ppParameter, ppBands, ppMemo, ppStrtch, ppCtrls,
   jpeg, ppPrnabl, ppClass, ppCache, ppProd, ppReport, ppDB, ppComm, ppRelatv,
-  ppDBPipe, ppDesignLayer;
+  ppDBPipe, ppDesignLayer, Data.DB, System.IOUtils;
 
 type
   TF_aux_imp = class(TForm)
@@ -165,66 +165,99 @@ type
     ppLabel61: TppLabel;
     ppLabel62: TppLabel;
     ppLabel63: TppLabel;
+
     procedure Button1Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
-    { Private declarations }
+    function ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
+    procedure ImprimirYActualizarTramite(Reporte: TppReport; LogoImage: TppImage; LabelTitle, LabelCopy: TppLabel);
   public
-    { Public declarations }
   end;
 
 var
   F_aux_imp: TF_aux_imp;
 
 implementation
-uses login, d_m, scoage_alta, scoage_edi, scoage_bus, scoalta, scoedi, scobus, scoconsultas, about, rg,  Archivo, SArchivo, main;
 
+uses login, d_m, scoage_alta, scoalta, about, rg, main;
 
 {$R *.dfm}
 
+{------------------------------------------------------------------------------}
+{ Función privada para validar la existencia del archivo de imagen institucional}
+{------------------------------------------------------------------------------}
+function TF_aux_imp.ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
+begin
+  Result := TPath.Combine(fmain.ruta, RutaRelativa);
+  if not FileExists(Result) then
+  begin
+    raise EFOpenError.CreateFmt(
+      'Error crítico: El archivo de imagen requerido no existe.'#13#10 +
+      'Archivo: %s'#13#10 +
+      'Ruta esperada: %s',
+      [ExtractFileName(Result), Result]
+    );
+  end;
+end;
+
+{------------------------------------------------------------------------------}
+{ Método unificado para la lógica de impresión y actualización de trámite      }
+{------------------------------------------------------------------------------}
+procedure TF_aux_imp.ImprimirYActualizarTramite(Reporte: TppReport; LogoImage: TppImage; LabelTitle, LabelCopy: TppLabel);
+var
+  RutaLogo: string;
+begin
+  try
+    RutaLogo := ValidarYObtenerRutaArchivo(fmain.mmedia + 'ple.png');
+    LogoImage.Picture.LoadFromFile(RutaLogo);
+  except
+    on E: Exception do
+    begin
+      // Si el logo no se encuentra, se continúa la impresión sin interrumpir al usuario
+    end;
+  end;
+
+  LabelTitle.Caption := fmain.Ttitle;
+  LabelCopy.Caption := fmain.CopyRight;
+  Reporte.Print;
+
+  if Assigned(dm) and Assigned(dm.QImpresion) and dm.MyConnection1.Connected then
+  begin
+    try
+      dm.QImpresion.Edit;
+      dm.QImpresion.FieldByName('tramite').AsBoolean := True;
+      dm.QImpresion.FieldByName('FIAT').AsDateTime := StrToDate(fmain.PutDate);
+      dm.QImpresion.FieldByName('Q_tra').AsString := dm.MyConnection1.Username;
+      dm.QImpresion.Post;
+    except
+      on E: Exception do
+      begin
+        if dm.QImpresion.State in [dsEdit, dsInsert] then
+          dm.QImpresion.Cancel;
+      end;
+    end;
+  end;
+
+  Close;
+end;
+
+{------------------------------------------------------------------------------}
+{ Eventos de Botones                                                           }
+{------------------------------------------------------------------------------}
 procedure TF_aux_imp.Button1Click(Sender: TObject);
 begin
-       ppImage1.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+'ple.png' );
-       pplabel60.Caption := Fmain.Ttitle;
-       pplabel61.Caption := fmain.CopyRight;
-       Rnormal.Print;
-       dm.QImpresion.Edit;
-       dm.QImpresion.FieldByName('tramite').AsBoolean := true;
-       dm.QImpresion.FieldByName('FIAT').AsDateTime := StrToDate(fmain.PutDate);
-       dm.QImpresion.FieldByName('Q_tra').AsString := dm.MyConnection1.Username;
-       dm.QImpresion.Post;
-       close;
+  ImprimirYActualizarTramite(Rnormal, ppImage1, pplabel60, pplabel61);
 end;
 
 procedure TF_aux_imp.Button2Click(Sender: TObject);
 begin
-       ppImage3.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+'ple.png' );
-       pplabel2.Caption := Fmain.Ttitle;
-       pplabel59.Caption := fmain.CopyRight;
-       Rpetsol.Print;
-       dm.QImpresion.Edit;
-       dm.QImpresion.FieldByName('tramite').AsBoolean := true;
-       dm.QImpresion.FieldByName('FIAT').AsDateTime := StrToDate(fmain.PutDate);
-       dm.QImpresion.FieldByName('Q_tra').AsString := dm.MyConnection1.Username;
-       dm.QImpresion.Post;
-       close;
-
+  ImprimirYActualizarTramite(Rpetsol, ppImage3, pplabel2, pplabel59);
 end;
 
 procedure TF_aux_imp.Button3Click(Sender: TObject);
 begin
-       ppImage2.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+'ple.png' );
-       pplabel63.Caption := Fmain.Ttitle;
-       pplabel62.Caption := fmain.CopyRight;
-
-       Respecial.Print;
-       dm.QImpresion.Edit;
-       dm.QImpresion.FieldByName('tramite').AsBoolean := true;
-       dm.QImpresion.FieldByName('FIAT').AsDateTime := StrToDate(fmain.PutDate);
-       dm.QImpresion.FieldByName('Q_tra').AsString := dm.MyConnection1.Username;
-       dm.QImpresion.Post;
-       close;
+  ImprimirYActualizarTramite(Respecial, ppImage2, pplabel63, pplabel62);
 end;
 
 end.

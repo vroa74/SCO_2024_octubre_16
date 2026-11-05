@@ -346,4 +346,21 @@ object FLogin: TFLogin
     Visible = False
     OnClick = Button1Click
   end
+  object MakeHash: TEdit
+    Left = 224
+    Top = 216
+    Width = 305
+    Height = 21
+    TabOrder = 9
+    Visible = False
+  end
+  object ExeHash: TButton
+    Left = 535
+    Top = 212
+    Width = 81
+    Height = 25
+    Caption = 'Enviar Codigo'
+    TabOrder = 10
+    Visible = False
+  end
 end

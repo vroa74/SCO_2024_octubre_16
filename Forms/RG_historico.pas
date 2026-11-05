@@ -24,7 +24,6 @@ type
     Label1: TLabel;
     DateTimePicker1: TDateTimePicker;
     DateTimePicker2: TDateTimePicker;
-    JvRollOut2: TJvRollOut;
     JvRollOut3: TJvRollOut;
     RadioButton4: TRadioButton;
     RadioButton5: TRadioButton;
@@ -94,7 +93,6 @@ type
     Edit2: TEdit;
     Edit3: TEdit;
     Label2: TLabel;
-    BitBtn4: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
     BitBtn1: TBitBtn;
@@ -134,7 +132,6 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure Edit3Change(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
-    procedure BitBtn4Click(Sender: TObject);
     procedure BitBtn5Click(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);
     procedure Edit4Change(Sender: TObject);
@@ -156,7 +153,7 @@ var
 
 implementation
 
-              uses main, d_m, login, sco_imp_gru, rg_1;
+              uses main, d_m, login,  rg_1;
 
 {$R *.dfm}
 
@@ -238,18 +235,6 @@ begin
       end;
      BitBtn1.Enabled := true;
   end;
-end;
-
-procedure TFRG_historico.BitBtn4Click(Sender: TObject);
-var f:tfsco_imp_gru;
-begin // impresion de volantes
-     f := tfsco_imp_gru.Create(Application);
-    try
-      f.ShowModal;
-    finally
-       f.Free;
-    end;
-    query(true);
 end;
 
 procedure TFRG_historico.BitBtn5Click(Sender: TObject);

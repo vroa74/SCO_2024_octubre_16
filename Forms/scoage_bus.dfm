@@ -128,10 +128,6 @@ object Fscoage_bus: TFscoage_bus
       Top = 91
       Width = 42
       Height = 42
-      TabOrder = 6
-      OnClick = BitBtn1Click
-      OnMouseEnter = BitBtn1MouseEnter
-      OnMouseLeave = BitBtn2MouseLeave
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
         180000000000000C000000000000000000000000000000000000FFFFFFFFFFFF
@@ -231,16 +227,16 @@ object Fscoage_bus: TFscoage_bus
         FFFFFFFEFEFEFDFDFDFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFEFEFEFAFA
         FAECECECD9D9D9CBCBCAC7C6C5CAC9C8D2D2D1E5E5E5FBFBFBFFFFFFFFFFFFFE
         FEFEFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      TabOrder = 6
+      OnClick = BitBtn1Click
+      OnMouseEnter = BitBtn1MouseEnter
+      OnMouseLeave = BitBtn2MouseLeave
     end
     object BitBtn2: TBitBtn
       Left = 8
       Top = 91
       Width = 42
       Height = 42
-      TabOrder = 7
-      OnClick = BitBtn2Click
-      OnMouseEnter = BitBtn2MouseEnter
-      OnMouseLeave = BitBtn2MouseLeave
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
         180000000000000C000000000000000000000000000000000000FFFFFFFFFFFF
@@ -340,16 +336,16 @@ object Fscoage_bus: TFscoage_bus
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFBFBFBFBFBFBFDFD
         FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      TabOrder = 7
+      OnClick = BitBtn2Click
+      OnMouseEnter = BitBtn2MouseEnter
+      OnMouseLeave = BitBtn2MouseLeave
     end
     object BitBtn3: TBitBtn
       Left = 56
       Top = 91
       Width = 42
       Height = 42
-      TabOrder = 8
-      OnClick = BitBtn3Click
-      OnMouseEnter = BitBtn3MouseEnter
-      OnMouseLeave = BitBtn2MouseLeave
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
         180000000000000C000000000000000000000000000000000000FFFFFFFFFFFF
@@ -449,16 +445,16 @@ object Fscoage_bus: TFscoage_bus
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      TabOrder = 8
+      OnClick = BitBtn3Click
+      OnMouseEnter = BitBtn3MouseEnter
+      OnMouseLeave = BitBtn2MouseLeave
     end
     object BitBtn5: TBitBtn
       Left = 151
       Top = 91
       Width = 42
       Height = 42
-      TabOrder = 9
-      OnClick = BitBtn5Click
-      OnMouseEnter = BitBtn5MouseEnter
-      OnMouseLeave = BitBtn2MouseLeave
       Glyph.Data = {
         360C0000424D360C00000000000036000000280000001F000000200000000100
         180000000000000C0000120B0000120B00000000000000000000FEFEFEFEFEFE
@@ -558,6 +554,10 @@ object Fscoage_bus: TFscoage_bus
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFDFDFDFFFFFFFFFFFFF5F7
         F7DDDEDECACACCC2C3C4C8C9C5DADADAF3F3F4FFFFFFFFFFFFFEFEFCFCFCFBFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
+      TabOrder = 9
+      OnClick = BitBtn5Click
+      OnMouseEnter = BitBtn5MouseEnter
+      OnMouseLeave = BitBtn2MouseLeave
     end
   end
   object ppDBPipeline1: TppDBPipeline
@@ -571,8 +571,10 @@ object Fscoage_bus: TFscoage_bus
     DataPipeline = ppDBPipeline1
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'Carta'
     PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
     PrinterSetup.mmMarginRight = 6350
@@ -581,35 +583,96 @@ object Fscoage_bus: TFscoage_bus
     PrinterSetup.mmPaperWidth = 215900
     PrinterSetup.PaperSize = 1
     Template.FileName = 'C:\Temp\SCO_11_06_2013\sco_CF\reporte_age_grupo.rtm'
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
+    EmailSettings.ConnectionSettings.MailService = 'SMTP'
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.RedirectURI = 'http://localhost'
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.RedirectPort = 0
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.RedirectURI = 'http://localhost'
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.RedirectPort = 0
+    EmailSettings.ConnectionSettings.EnableMultiPlugin = False
+    LanguageID = 'Default'
+    OpenFile = False
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = True
     OutlineSettings.Visible = True
-    TextSearchSettings.DefaultString = '<HallarTexto>'
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.DigitalSignatureSettings.SignPDF = False
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    RTFSettings.AppName = 'ReportBuilder'
+    RTFSettings.Author = 'ReportBuilder'
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    RTFSettings.Title = 'Report'
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    CloudDriveSettings.DropBoxSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.DropBoxSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.DropBoxSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.DropBoxSettings.DirectorySupport = True
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.GoogleDriveSettings.DirectorySupport = False
+    CloudDriveSettings.OneDriveSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.OneDriveSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.OneDriveSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.OneDriveSettings.DirectorySupport = True
     Left = 480
     Top = 96
-    Version = '10.08'
+    Version = '22.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand1: TppHeaderBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 37306
       mmPrintPosition = 0
       object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'PODER LEGISLATIVO DEL ESTADO DE CAMPECHE'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5821
@@ -617,19 +680,21 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 2117
         mmWidth = 218282
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'JUNTA DE GOBIERNO Y ADMINISTRACION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5821
@@ -637,19 +702,21 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 9790
         mmWidth = 206111
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Agenda'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4487
@@ -657,28 +724,28 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 23813
         mmWidth = 13420
         BandType = 0
+        LayerName = Foreground
       end
       object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 28840
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground
       end
       object ppImage1: TppImage
+        DesignLayer = ppDesignLayer1
         UserName = 'Image1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
         MaintainAspectRatio = False
         Stretch = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Picture.Data = {
           0A544A504547496D616765C9DD0300FFD8FFE000104A46494600010201004800
           480000FFE124DC4578696600004D4D002A000000080007011200030000000100
@@ -8604,13 +8671,13 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 1058
         mmWidth = 21696
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel5: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 
           'Folio                          Nombre                      Apell' +
           'ido  Paterno     Apellido Materno         Cargo                 ' +
@@ -8620,84 +8687,93 @@ object Fscoage_bus: TFscoage_bus
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3440
         mmLeft = 0
         mmTop = 29898
         mmWidth = 161661
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel6: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Telefono'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3440
         mmLeft = 7408
         mmTop = 33866
         mmWidth = 15610
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel7: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Direcci'#243'n'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3440
         mmLeft = 66675
         mmTop = 33866
         mmWidth = 15346
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel8: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'E-mail'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3440
         mmLeft = 111390
         mmTop = 33866
         mmWidth = 11113
         BandType = 0
+        LayerName = Foreground
       end
     end
     object ppDetailBand1: TppDetailBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 23548
       mmPrintPosition = 0
       object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'id_age'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8712,13 +8788,13 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 4763
         mmWidth = 11642
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText2: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'titulo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8733,13 +8809,13 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 4763
         mmWidth = 11377
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'nombre'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8754,13 +8830,13 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 4763
         mmWidth = 27781
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText4: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'apaterno'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8775,13 +8851,13 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 4763
         mmWidth = 25135
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText5: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'amaterno'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8796,13 +8872,13 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 4763
         mmWidth = 27781
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText6: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'cargo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8817,13 +8893,13 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 4763
         mmWidth = 33602
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText7: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'deporg'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8838,13 +8914,12 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 4763
         mmWidth = 34131
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBMemo1: TppDBMemo
+        DesignLayer = ppDesignLayer1
         UserName = 'DBMemo1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'dir'
         DataPipeline = ppDBPipeline1
@@ -8853,6 +8928,7 @@ object Fscoage_bus: TFscoage_bus
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 13494
@@ -8860,24 +8936,26 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 10054
         mmWidth = 39688
         BandType = 4
+        LayerName = Foreground
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
       object ppDBRichText1: TppDBRichText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBRichText1'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
+        ExportRTFAsBitmap = False
         DataField = 'telefono'
         DataPipeline = ppDBPipeline1
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 12965
@@ -8885,23 +8963,26 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 10054
         mmWidth = 48948
         BandType = 4
+        LayerName = Foreground
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
+        mmLeftMargin = 794
       end
       object ppDBRichText2: TppDBRichText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBRichText2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
+        ExportRTFAsBitmap = False
         DataField = 'email'
         DataPipeline = ppDBPipeline1
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 12700
@@ -8909,15 +8990,26 @@ object Fscoage_bus: TFscoage_bus
         mmTop = 9525
         mmWidth = 48948
         BandType = 4
+        LayerName = Foreground
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
+        mmLeftMargin = 794
       end
     end
     object ppFooterBand1: TppFooterBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 0
       mmPrintPosition = 0
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
     end
     object ppParameterList1: TppParameterList
     end

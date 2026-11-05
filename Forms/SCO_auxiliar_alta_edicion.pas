@@ -25,8 +25,6 @@ type
     BitBtn3: TBitBtn;
     Eccor: TEdit;
     ccor: TJvDBComboBox;
-    Label1: TLabel;
-    Label2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure tcorChange(Sender: TObject);

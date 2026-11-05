@@ -14,13 +14,7 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
-    Image1: TImage;
     Label2: TLabel;
-    Image3: TImage;
-    Image4: TImage;
-    Image5: TImage;
-    Image2: TImage;
-    Image6: TImage;
     function GetComputerName : String;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);

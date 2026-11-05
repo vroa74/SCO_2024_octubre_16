@@ -79,8 +79,8 @@ object FSCOconsultas: TFSCOconsultas
       Top = 77
       Width = 136
       Height = 21
-      Date = 41263.411671180550000000
-      Time = 41263.411671180550000000
+      Date = 41263.000000000000000000
+      Time = 0.411671180547273300
       TabOrder = 2
       OnChange = DateTimePicker1hange
     end
@@ -132,8 +132,10 @@ object FSCOconsultas: TFSCOconsultas
     PrinterSetup.BinName = 'Default'
     PrinterSetup.Copies = 2
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'Carta'
     PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
     PrinterSetup.mmMarginRight = 6350
@@ -142,35 +144,96 @@ object FSCOconsultas: TFSCOconsultas
     PrinterSetup.mmPaperWidth = 215900
     PrinterSetup.PaperSize = 1
     Template.FileName = 'C:\Temp\CONGRESO9\CONGRESO5\sco_CF\reporte_normal_1_2013.rtm'
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
+    EmailSettings.ConnectionSettings.MailService = 'SMTP'
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.RedirectURI = 'http://localhost'
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.RedirectPort = 0
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.RedirectURI = 'http://localhost'
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.RedirectPort = 0
+    EmailSettings.ConnectionSettings.EnableMultiPlugin = False
+    LanguageID = 'Default'
+    OpenFile = False
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = True
     OutlineSettings.Visible = True
-    TextSearchSettings.DefaultString = '<HallarTexto>'
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.DigitalSignatureSettings.SignPDF = False
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    RTFSettings.AppName = 'ReportBuilder'
+    RTFSettings.Author = 'ReportBuilder'
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    RTFSettings.Title = 'Report'
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    CloudDriveSettings.DropBoxSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.DropBoxSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.DropBoxSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.DropBoxSettings.DirectorySupport = True
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.GoogleDriveSettings.DirectorySupport = False
+    CloudDriveSettings.OneDriveSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.OneDriveSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.OneDriveSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.OneDriveSettings.DirectorySupport = True
     Left = 672
     Top = 392
-    Version = '10.08'
+    Version = '22.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand1: TppHeaderBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 48683
       mmPrintPosition = 0
       object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'PODER LEGISLATIVO DEL ESTADO DE CAMPECHE'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5821
@@ -178,19 +241,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 2117
         mmWidth = 218282
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel3: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'OFICIAL'#205'A DE PARTES'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4995
@@ -198,19 +263,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 20108
         mmWidth = 45762
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Volante de recibo de correspondencia normal'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4498
@@ -218,28 +285,28 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 28046
         mmWidth = 203730
         BandType = 0
+        LayerName = Foreground
       end
       object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 40217
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground
       end
       object ppImage1: TppImage
+        DesignLayer = ppDesignLayer1
         UserName = 'Image1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
         MaintainAspectRatio = False
         Stretch = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Picture.Data = {
           0A544A504547496D616765C9DD0300FFD8FFE000104A46494600010201004800
           480000FFE124DC4578696600004D4D002A000000080007011200030000000100
@@ -8165,58 +8232,57 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 0
         mmWidth = 34660
         BandType = 0
+        LayerName = Foreground
       end
       object ppLine5: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 42333
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground
       end
       object ppLine2: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 46567
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground
       end
       object ppLine11: TppLine
+        DesignLayer = ppDesignLayer1
         UserName = 'Line11'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 44450
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground
       end
       object ppLabel35: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label35'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'SECRETARIA GENERAL Y ADMINISTRACION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5715
@@ -8224,13 +8290,16 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 11642
         mmWidth = 110331
         BandType = 0
+        LayerName = Foreground
       end
     end
     object ppDetailBand1: TppDetailBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 203730
       mmPrintPosition = 0
       object ppShape9: TppShape
+        DesignLayer = ppDesignLayer1
         UserName = 'Shape9'
         Shape = stRoundRect
         mmHeight = 44450
@@ -8238,8 +8307,10 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 74877
         mmWidth = 199232
         BandType = 4
+        LayerName = Foreground
       end
       object ppShape8: TppShape
+        DesignLayer = ppDesignLayer1
         UserName = 'Shape8'
         Shape = stRoundRect
         mmHeight = 48683
@@ -8247,8 +8318,10 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 24077
         mmWidth = 199232
         BandType = 4
+        LayerName = Foreground
       end
       object ppShape7: TppShape
+        DesignLayer = ppDesignLayer1
         UserName = 'Shape7'
         Shape = stRoundRect
         mmHeight = 19579
@@ -8256,19 +8329,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 1852
         mmWidth = 199232
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel5: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Folio de control:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4763
@@ -8276,19 +8351,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 6085
         mmWidth = 28310
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel6: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'N'#250'mero de oficio:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4763
@@ -8296,19 +8373,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 6085
         mmWidth = 31221
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel7: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label7'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Fecha del documento:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4763
@@ -8316,19 +8395,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 12435
         mmWidth = 39158
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel8: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label8'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Fecha de recepci'#243'n:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4763
@@ -8336,19 +8417,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 12700
         mmWidth = 35719
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel9: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label9'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Datos del remitente:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4763
@@ -8356,19 +8439,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 28310
         mmWidth = 37507
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel10: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label10'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Nombre: '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -8376,19 +8461,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 36777
         mmWidth = 14520
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel11: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label11'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Cargo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -8396,19 +8483,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 43127
         mmWidth = 10541
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel12: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label12'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Domicilio: '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -8416,19 +8505,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 55827
         mmWidth = 16214
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel13: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label13'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Tipo de clasificaci'#243'n del documento:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 6615
@@ -8436,19 +8527,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 79111
         mmWidth = 56684
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel14: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label14'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Turnado a: '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 6615
@@ -8456,27 +8549,31 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 86254
         mmWidth = 17992
         BandType = 4
+        LayerName = Foreground
       end
       object ppShape1: TppShape
+        DesignLayer = ppDesignLayer1
         UserName = 'Shape1'
         mmHeight = 75671
         mmLeft = 119856
         mmTop = 121444
         mmWidth = 71702
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel15: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label15'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = ' '#193'rea de sello '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -8484,21 +8581,23 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 123296
         mmWidth = 25400
         BandType = 4
+        LayerName = Foreground
       end
       object ppShape2: TppShape
+        DesignLayer = ppDesignLayer1
         UserName = 'Shape2'
         mmHeight = 55033
         mmLeft = 119856
         mmTop = 127794
         mmWidth = 71702
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText4: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_nombre'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8513,13 +8612,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 36777
         mmWidth = 179388
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText5: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_cargo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8534,13 +8633,12 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 43127
         mmWidth = 159809
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBMemo1: TppDBMemo
+        DesignLayer = ppDesignLayer1
         UserName = 'DBMemo1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'rem_dir'
         DataPipeline = ppDBPipeline1
@@ -8549,6 +8647,7 @@ object FSCOconsultas: TFSCOconsultas
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 13229
@@ -8556,17 +8655,18 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 55827
         mmWidth = 157427
         BandType = 4
+        LayerName = Foreground
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
       object ppDBText6: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tur_nom'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8581,13 +8681,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 86519
         mmWidth = 159279
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'frec'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8603,13 +8703,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 12435
         mmWidth = 28575
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText2: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'fofi'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8625,13 +8725,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 12435
         mmWidth = 26458
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'nofi'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8646,13 +8746,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 6085
         mmWidth = 37042
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText10: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'id'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8667,19 +8767,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 6085
         mmWidth = 33338
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel52: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label52'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Nombre y Firma'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -8687,32 +8789,34 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 182827
         mmWidth = 28046
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel16: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label16'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'C.c.p. Minutario'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3440
         mmLeft = 4498
         mmTop = 194469
         mmWidth = 32015
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText8: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tcor'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8727,13 +8831,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 79111
         mmWidth = 51329
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText28: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText28'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'ccor'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8748,13 +8852,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 79111
         mmWidth = 66146
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText31: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText31'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_deporg'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8769,33 +8873,35 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 49477
         mmWidth = 128059
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel56: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label56'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Dependencia u Organismo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 6085
         mmTop = 49477
         mmWidth = 42863
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBText32: TppDBText
+        DesignLayer = ppDesignLayer1
         UserName = 'DBText32'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tur_cargo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -8810,33 +8916,34 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 91811
         mmWidth = 159809
         BandType = 4
+        LayerName = Foreground
       end
       object ppLabel57: TppLabel
+        DesignLayer = ppDesignLayer1
         UserName = 'Label57'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Descripci'#243'n'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 5027
         mmTop = 96573
         mmWidth = 19050
         BandType = 4
+        LayerName = Foreground
       end
       object ppDBMemo6: TppDBMemo
+        DesignLayer = ppDesignLayer1
         UserName = 'DBMemo6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'des'
         DataPipeline = ppDBPipeline1
@@ -8845,6 +8952,7 @@ object FSCOconsultas: TFSCOconsultas
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 20638
@@ -8852,16 +8960,28 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 96838
         mmWidth = 170921
         BandType = 4
+        LayerName = Foreground
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
     end
     object ppFooterBand1: TppFooterBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 0
       mmPrintPosition = 0
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList3: TppParameterList
     end
   end
   object ppDBPipeline1: TppDBPipeline
@@ -9087,8 +9207,10 @@ object FSCOconsultas: TFSCOconsultas
     PrinterSetup.BinName = 'Default'
     PrinterSetup.Copies = 2
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'Carta'
     PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
     PrinterSetup.mmMarginRight = 6350
@@ -9097,35 +9219,96 @@ object FSCOconsultas: TFSCOconsultas
     PrinterSetup.mmPaperWidth = 215900
     PrinterSetup.PaperSize = 1
     Template.FileName = 'D:\Delphi Proyectos\sco\reporte_pet_sol.rtm'
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
+    EmailSettings.ConnectionSettings.MailService = 'SMTP'
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.RedirectURI = 'http://localhost'
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.RedirectPort = 0
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.RedirectURI = 'http://localhost'
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.RedirectPort = 0
+    EmailSettings.ConnectionSettings.EnableMultiPlugin = False
+    LanguageID = 'Default'
+    OpenFile = False
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = True
     OutlineSettings.Visible = True
-    TextSearchSettings.DefaultString = '<HallarTexto>'
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.DigitalSignatureSettings.SignPDF = False
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    RTFSettings.AppName = 'ReportBuilder'
+    RTFSettings.Author = 'ReportBuilder'
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    RTFSettings.Title = 'Report'
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    CloudDriveSettings.DropBoxSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.DropBoxSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.DropBoxSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.DropBoxSettings.DirectorySupport = True
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.GoogleDriveSettings.DirectorySupport = False
+    CloudDriveSettings.OneDriveSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.OneDriveSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.OneDriveSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.OneDriveSettings.DirectorySupport = True
     Left = 704
     Top = 392
-    Version = '10.08'
+    Version = '22.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand3: TppHeaderBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 45508
       mmPrintPosition = 0
       object ppLabel34: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'PODER LEGISLATIVO DEL ESTADO DE CAMPECHE'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5821
@@ -9133,19 +9316,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 2117
         mmWidth = 218282
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel36: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'OFICIAL'#205'A DE PARTES'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4995
@@ -9153,19 +9338,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 20108
         mmWidth = 45762
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel37: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Volante de recibo de peticiones o solicitudes de informaci'#243'n'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4487
@@ -9173,41 +9360,40 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 28046
         mmWidth = 103421
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLine6: TppLine
+        DesignLayer = ppDesignLayer2
         UserName = 'Line1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 40217
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLine7: TppLine
+        DesignLayer = ppDesignLayer2
         UserName = 'Line2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 42333
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground1
       end
       object ppImage3: TppImage
+        DesignLayer = ppDesignLayer2
         UserName = 'Image1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
         MaintainAspectRatio = False
         Stretch = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Picture.Data = {
           0A544A504547496D616765C9DD0300FFD8FFE000104A46494600010201004800
           480000FFE124DC4578696600004D4D002A000000080007011200030000000100
@@ -17133,32 +17319,33 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 0
         mmWidth = 34660
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLine8: TppLine
+        DesignLayer = ppDesignLayer2
         UserName = 'Line5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 44450
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel58: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label58'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'SECRETARIA GENERAL Y ADMINISTRACION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5715
@@ -17166,14 +17353,17 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 11642
         mmWidth = 110331
         BandType = 0
+        LayerName = Foreground1
       end
     end
     object ppDetailBand3: TppDetailBand
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 206905
       mmPrintPosition = 0
       object ppShape15: TppShape
+        DesignLayer = ppDesignLayer2
         UserName = 'Shape15'
         Shape = stRoundRect
         mmHeight = 42333
@@ -17181,8 +17371,10 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 70379
         mmWidth = 197115
         BandType = 4
+        LayerName = Foreground1
       end
       object ppShape14: TppShape
+        DesignLayer = ppDesignLayer2
         UserName = 'Shape14'
         Shape = stRoundRect
         mmHeight = 46831
@@ -17190,8 +17382,10 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 23283
         mmWidth = 197115
         BandType = 4
+        LayerName = Foreground1
       end
       object ppShape13: TppShape
+        DesignLayer = ppDesignLayer2
         UserName = 'Shape13'
         Shape = stRoundRect
         mmHeight = 17463
@@ -17199,19 +17393,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 2117
         mmWidth = 197115
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel38: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Folio de control:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -17219,19 +17415,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 6350
         mmWidth = 24934
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel39: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'N'#250'mero de oficio:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -17239,19 +17437,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 6350
         mmWidth = 27601
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel40: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label7'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Fecha del documento:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -17259,19 +17459,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 12700
         mmWidth = 34798
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel41: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label8'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Fecha de recepci'#243'n:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -17279,19 +17481,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 12700
         mmWidth = 31835
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel42: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label9'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Datos del remitente:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4657
@@ -17299,19 +17503,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 25665
         mmWidth = 37306
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel43: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label10'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Nombre: '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -17319,19 +17525,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 33867
         mmWidth = 14520
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel44: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label11'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Cargo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -17339,19 +17547,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 40217
         mmWidth = 10541
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel45: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label12'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Domicilio: '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -17359,19 +17569,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 52917
         mmWidth = 16214
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel46: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label13'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Tipo de clasificaci'#243'n del documento:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -17379,13 +17591,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 72761
         mmWidth = 56684
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText18: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_nombre'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17400,13 +17612,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 33867
         mmWidth = 171450
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText19: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_cargo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17421,13 +17633,12 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 40217
         mmWidth = 159544
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBMemo4: TppDBMemo
+        DesignLayer = ppDesignLayer2
         UserName = 'DBMemo1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'rem_dir'
         DataPipeline = ppDBPipeline1
@@ -17436,6 +17647,7 @@ object FSCOconsultas: TFSCOconsultas
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 13229
@@ -17443,17 +17655,18 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 53181
         mmWidth = 157163
         BandType = 4
+        LayerName = Foreground1
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
       object ppDBText21: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'frec'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17469,13 +17682,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 12700
         mmWidth = 28046
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText22: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'fofi'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17491,13 +17704,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 12700
         mmWidth = 25929
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText23: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'nofi'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17512,13 +17725,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 6350
         mmWidth = 36513
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText24: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText7'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'id'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17533,13 +17746,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 6350
         mmWidth = 32808
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText25: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText9'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_deporg'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17554,33 +17767,34 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 46567
         mmWidth = 132292
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel47: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label47'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Descripci'#243'n del asunto o Solicitud:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 4498
         mmTop = 77788
         mmWidth = 68527
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBMemo5: TppDBMemo
+        DesignLayer = ppDesignLayer2
         UserName = 'DBMemo5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'des'
         DataPipeline = ppDBPipeline1
@@ -17589,6 +17803,7 @@ object FSCOconsultas: TFSCOconsultas
         Font.Name = 'Arial'
         Font.Size = 9
         Font.Style = []
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 19050
@@ -17596,37 +17811,40 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 82550
         mmWidth = 189442
         BandType = 4
+        LayerName = Foreground1
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
       object ppLabel48: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label48'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = #193'rea que atender'#225':'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 4233
         mmTop = 102394
         mmWidth = 34925
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText20: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText20'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tur_nom'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17641,15 +17859,14 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 102394
         mmWidth = 128059
         BandType = 4
+        LayerName = Foreground1
       end
       object ppMemo2: TppMemo
+        DesignLayer = ppDesignLayer2
         UserName = 'Memo2'
         ForceJustifyLastLine = True
         KeepTogether = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 
           'Observaci'#243'n: Este documento requiere atenci'#243'n urgente y respuest' +
           'a a su remitente. Favor de enviar a esta Oficial'#237'a de Partes cop' +
@@ -17673,6 +17890,7 @@ object FSCOconsultas: TFSCOconsultas
             'esta Oficial'#237'a de Partes copia de la contestaci'#243'n para su contro' +
             'l y seguimiento correspondiente. H'#225'gase referencia al folio de '
           'control asignado.')
+        RemoveEmptyLines = False
         Stretch = True
         Transparent = True
         mmHeight = 15081
@@ -17680,50 +17898,57 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 191559
         mmWidth = 186532
         BandType = 4
+        LayerName = Foreground1
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
       object ppLabel49: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label49'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'C.c.p. Minutario/Expediente'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3260
         mmLeft = 4763
         mmTop = 180182
         mmWidth = 34756
         BandType = 4
+        LayerName = Foreground1
       end
       object ppShape5: TppShape
+        DesignLayer = ppDesignLayer2
         UserName = 'Shape5'
         mmHeight = 75671
         mmLeft = 120121
         mmTop = 113771
         mmWidth = 71702
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel51: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label51'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = ' '#193'rea de sello '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -17731,27 +17956,31 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 115623
         mmWidth = 25400
         BandType = 4
+        LayerName = Foreground1
       end
       object ppShape6: TppShape
+        DesignLayer = ppDesignLayer2
         UserName = 'Shape6'
         mmHeight = 55033
         mmLeft = 120121
         mmTop = 120121
         mmWidth = 71702
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel54: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label54'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Nombre y Firma'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -17759,13 +17988,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 175948
         mmWidth = 28046
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText17: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText17'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tcor'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17780,13 +18009,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 72761
         mmWidth = 51329
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText27: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText27'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'ccor'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17801,33 +18030,35 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 72761
         mmWidth = 64029
         BandType = 4
+        LayerName = Foreground1
       end
       object ppLabel50: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label50'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Dependencia u Organismo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 4233
         mmTop = 46567
         mmWidth = 48419
         BandType = 4
+        LayerName = Foreground1
       end
       object ppDBText33: TppDBText
+        DesignLayer = ppDesignLayer2
         UserName = 'DBText33'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tur_cargo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -17842,12 +18073,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 107686
         mmWidth = 132027
         BandType = 4
+        LayerName = Foreground1
       end
     end
     object ppFooterBand3: TppFooterBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 9260
       mmPrintPosition = 0
+    end
+    object ppDesignLayers2: TppDesignLayers
+      object ppDesignLayer2: TppDesignLayer
+        UserName = 'Foreground1'
+        LayerType = ltBanded
+        Index = 0
+      end
     end
     object ppParameterList2: TppParameterList
     end
@@ -17858,8 +18098,10 @@ object FSCOconsultas: TFSCOconsultas
     PrinterSetup.BinName = 'Default'
     PrinterSetup.Copies = 2
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'Carta'
     PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
     PrinterSetup.mmMarginLeft = 6350
     PrinterSetup.mmMarginRight = 6350
@@ -17868,35 +18110,96 @@ object FSCOconsultas: TFSCOconsultas
     PrinterSetup.mmPaperWidth = 215900
     PrinterSetup.PaperSize = 1
     Template.FileName = 'C:\Temp\CONGRESO9\CONGRESO5\sco_CF\reporte_especial_2013.rtm'
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
+    EmailSettings.ConnectionSettings.MailService = 'SMTP'
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.RedirectURI = 'http://localhost'
+    EmailSettings.ConnectionSettings.WebMail.GmailSettings.OAuth2.RedirectPort = 0
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.RedirectURI = 'http://localhost'
+    EmailSettings.ConnectionSettings.WebMail.Outlook365Settings.OAuth2.RedirectPort = 0
+    EmailSettings.ConnectionSettings.EnableMultiPlugin = False
+    LanguageID = 'Default'
+    OpenFile = False
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
     OutlineSettings.Enabled = True
     OutlineSettings.Visible = True
-    TextSearchSettings.DefaultString = '<HallarTexto>'
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.DigitalSignatureSettings.SignPDF = False
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    RTFSettings.AppName = 'ReportBuilder'
+    RTFSettings.Author = 'ReportBuilder'
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    RTFSettings.Title = 'Report'
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    CloudDriveSettings.DropBoxSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.DropBoxSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.DropBoxSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.DropBoxSettings.DirectorySupport = True
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.GoogleDriveSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.GoogleDriveSettings.DirectorySupport = False
+    CloudDriveSettings.OneDriveSettings.OAuth2.AuthStorage = [oasAccessToken, oasRefreshToken]
+    CloudDriveSettings.OneDriveSettings.OAuth2.RedirectURI = 'http://localhost'
+    CloudDriveSettings.OneDriveSettings.OAuth2.RedirectPort = 0
+    CloudDriveSettings.OneDriveSettings.DirectorySupport = True
     Left = 704
     Top = 360
-    Version = '10.08'
+    Version = '22.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppHeaderBand2: TppHeaderBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 44715
       mmPrintPosition = 0
       object ppLabel17: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'PODER LEGISLATIVO DEL ESTADO DE CAMPECHE'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5821
@@ -17904,19 +18207,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 2117
         mmWidth = 218282
         BandType = 0
+        LayerName = Foreground2
       end
       object ppLabel18: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'SECRETARIA GENERAL Y ADMINISTRACION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5715
@@ -17924,19 +18229,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 11642
         mmWidth = 110331
         BandType = 0
+        LayerName = Foreground2
       end
       object ppLabel19: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'OFICIAL'#205'A DE PARTES'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4995
@@ -17944,19 +18251,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 20108
         mmWidth = 45762
         BandType = 0
+        LayerName = Foreground2
       end
       object ppLabel20: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Volante de recibo de correspondencia especial'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4487
@@ -17964,41 +18273,40 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 28046
         mmWidth = 80857
         BandType = 0
+        LayerName = Foreground2
       end
       object ppLine3: TppLine
+        DesignLayer = ppDesignLayer3
         UserName = 'Line1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 40217
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground2
       end
       object ppLine4: TppLine
+        DesignLayer = ppDesignLayer3
         UserName = 'Line2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 44450
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground2
       end
       object ppImage2: TppImage
+        DesignLayer = ppDesignLayer3
         UserName = 'Image1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
         MaintainAspectRatio = False
         Stretch = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Picture.Data = {
           0A544A504547496D616765C9DD0300FFD8FFE000104A46494600010201004800
           480000FFE124DC4578696600004D4D002A000000080007011200030000000100
@@ -25924,27 +26232,29 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 0
         mmWidth = 34660
         BandType = 0
+        LayerName = Foreground2
       end
       object ppLine9: TppLine
+        DesignLayer = ppDesignLayer3
         UserName = 'Line9'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 1058
         mmLeft = 0
         mmTop = 42333
         mmWidth = 210609
         BandType = 0
+        LayerName = Foreground2
       end
     end
     object ppDetailBand2: TppDetailBand
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 210873
       mmPrintPosition = 0
       object ppShape12: TppShape
+        DesignLayer = ppDesignLayer3
         UserName = 'Shape12'
         Shape = stRoundRect
         mmHeight = 47096
@@ -25952,8 +26262,10 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 69586
         mmWidth = 197115
         BandType = 4
+        LayerName = Foreground2
       end
       object ppShape11: TppShape
+        DesignLayer = ppDesignLayer3
         UserName = 'Shape101'
         Shape = stRoundRect
         mmHeight = 47361
@@ -25961,8 +26273,10 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 19315
         mmWidth = 197115
         BandType = 4
+        LayerName = Foreground2
       end
       object ppShape10: TppShape
+        DesignLayer = ppDesignLayer3
         UserName = 'Shape10'
         Shape = stRoundRect
         mmHeight = 17198
@@ -25970,19 +26284,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 0
         mmWidth = 197115
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel21: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Folio de control:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -25990,19 +26306,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 2117
         mmWidth = 24934
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel22: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'N'#250'mero de oficio:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -26010,19 +26328,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 2117
         mmWidth = 27601
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel23: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label7'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Fecha del documento:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -26030,19 +26350,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 8467
         mmWidth = 34798
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel24: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label8'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Fecha de recepci'#243'n:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -26050,19 +26372,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 8467
         mmWidth = 31835
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel25: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label9'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Datos del remitente:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4657
@@ -26070,19 +26394,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 21167
         mmWidth = 37507
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel26: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label10'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Nombre: '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -26090,19 +26416,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 29633
         mmWidth = 14520
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel27: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label11'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Cargo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -26110,19 +26438,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 35983
         mmWidth = 10541
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel28: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label12'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Domicilio: '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -26130,19 +26460,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 48683
         mmWidth = 16214
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel29: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label13'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Tipo de clasificaci'#243'n del documento:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -26150,19 +26482,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 71967
         mmWidth = 56684
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel30: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label14'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Descripci'#243'n del asunto:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -26170,32 +26504,34 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 78317
         mmWidth = 36491
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel32: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label16'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'C.c.p. Minutario/Expediente'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4763
         mmLeft = 4233
         mmTop = 190765
         mmWidth = 34756
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText9: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText10'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'id'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26211,13 +26547,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 2117
         mmWidth = 20638
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText11: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'nofi'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26232,13 +26568,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 2117
         mmWidth = 36513
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText12: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'fofi'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26254,13 +26590,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 8467
         mmWidth = 25929
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText13: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText3'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'frec'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26276,13 +26612,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 8467
         mmWidth = 28046
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText14: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText4'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_nombre'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26297,13 +26633,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 29633
         mmWidth = 169598
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText15: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText5'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_cargo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26318,13 +26654,12 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 35983
         mmWidth = 159809
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBMemo2: TppDBMemo
+        DesignLayer = ppDesignLayer3
         UserName = 'DBMemo1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'rem_dir'
         DataPipeline = ppDBPipeline1
@@ -26333,6 +26668,7 @@ object FSCOconsultas: TFSCOconsultas
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 15346
@@ -26340,17 +26676,17 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 48683
         mmWidth = 157427
         BandType = 4
+        LayerName = Foreground2
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
       object ppDBMemo3: TppDBMemo
+        DesignLayer = ppDesignLayer3
         UserName = 'DBMemo2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'des'
         DataPipeline = ppDBPipeline1
@@ -26359,6 +26695,7 @@ object FSCOconsultas: TFSCOconsultas
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
+        RemoveEmptyLines = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 19579
@@ -26366,38 +26703,40 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 83079
         mmWidth = 185209
         BandType = 4
+        LayerName = Foreground2
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
       object ppLabel33: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label17'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = #193'rea que atender'#225':'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 4233
         mmTop = 103717
         mmWidth = 30014
         BandType = 4
+        LayerName = Foreground2
       end
       object ppMemo1: TppMemo
+        DesignLayer = ppDesignLayer3
         UserName = 'Memo1'
         ForceJustifyLastLine = True
         KeepTogether = True
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 
           'Observaci'#243'n: Este documento requiere atenci'#243'n urgente y respuest' +
           'a a su remitente. Favor de enviar a esta Oficial'#237'a de Partes cop' +
@@ -26416,6 +26755,7 @@ object FSCOconsultas: TFSCOconsultas
           
             'copia de la contestaci'#243'n para su control y seguimiento correspon' +
             'diente. H'#225'gase referencia al folio de control asignado.')
+        RemoveEmptyLines = False
         Stretch = True
         Transparent = True
         mmHeight = 9260
@@ -26423,31 +26763,36 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 196850
         mmWidth = 186796
         BandType = 4
+        LayerName = Foreground2
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
+        mmMinHeight = 0
         mmLeading = 0
       end
       object ppShape3: TppShape
+        DesignLayer = ppDesignLayer3
         UserName = 'Shape3'
         mmHeight = 75671
         mmLeft = 119856
         mmTop = 118269
         mmWidth = 71702
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel31: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label31'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = ' '#193'rea de sello '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -26455,27 +26800,31 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 120121
         mmWidth = 25400
         BandType = 4
+        LayerName = Foreground2
       end
       object ppShape4: TppShape
+        DesignLayer = ppDesignLayer3
         UserName = 'Shape4'
         mmHeight = 55033
         mmLeft = 119856
         mmTop = 124619
         mmWidth = 71702
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel53: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label53'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'Nombre y Firma'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -26483,13 +26832,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 180446
         mmWidth = 28046
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText7: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText6'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tcor'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26504,13 +26853,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 71967
         mmWidth = 51329
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText26: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText26'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'ccor'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26525,33 +26874,35 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 71967
         mmWidth = 65881
         BandType = 4
+        LayerName = Foreground2
       end
       object ppLabel55: TppLabel
+        DesignLayer = ppDesignLayer3
         UserName = 'Label55'
+        HyperlinkEnabled = False
         AutoSize = False
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        Border.mmPadding = 0
         Caption = 'Dependencia u Organismo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 6085
         mmTop = 42333
         mmWidth = 42863
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText29: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText29'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'rem_deporg'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26566,13 +26917,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 42333
         mmWidth = 133350
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText16: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText16'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tur_nom'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26587,13 +26938,13 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 103717
         mmWidth = 148961
         BandType = 4
+        LayerName = Foreground2
       end
       object ppDBText30: TppDBText
+        DesignLayer = ppDesignLayer3
         UserName = 'DBText30'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'tur_cargo'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -26608,12 +26959,21 @@ object FSCOconsultas: TFSCOconsultas
         mmTop = 109802
         mmWidth = 148696
         BandType = 4
+        LayerName = Foreground2
       end
     end
     object ppFooterBand2: TppFooterBand
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 0
       mmPrintPosition = 0
+    end
+    object ppDesignLayers3: TppDesignLayers
+      object ppDesignLayer3: TppDesignLayer
+        UserName = 'Foreground2'
+        LayerType = ltBanded
+        Index = 0
+      end
     end
     object ppParameterList1: TppParameterList
     end

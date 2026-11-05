@@ -22,7 +22,6 @@ object FConfig: TFConfig
     Height = 197
     Align = alTop
     TabOrder = 0
-    ExplicitTop = 41
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -95,9 +94,6 @@ object FConfig: TFConfig
       item
         Width = 300
       end>
-    ExplicitLeft = 288
-    ExplicitTop = 272
-    ExplicitWidth = 0
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '*.png'

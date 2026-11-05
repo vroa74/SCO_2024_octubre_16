@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Grids, DBGrids, ppCtrls, ppBands, ppPrnabl, ppClass,
   ppCache, ppParameter, ppDB, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe,
-  jpeg, ppRichTx, ppStrtch, ppMemo, Buttons, ExtCtrls;
+  jpeg, ppRichTx, ppStrtch, ppMemo, Buttons, ExtCtrls, Data.DB, ppDesignLayer;
 
 type
   TFscoage_bus = class(TForm)
@@ -83,7 +83,8 @@ var
   Fscoage_bus: TFscoage_bus;
 
 implementation
-uses main, d_m, scoage_edi;
+uses main, d_m;
+
 
 {$R *.dfm}
 {----------------------------------------------------------------------------}
@@ -220,7 +221,7 @@ end;
 
 procedure TFscoage_bus.DBGrid1DblClick(Sender: TObject);
 var
-   f : tfscoage_edi;
+
    id : integer;
 begin
 if dm.MyConnection1.Connected then

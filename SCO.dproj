@@ -10,24 +10,14 @@
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>38017</TargetedPlatforms>
+        <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Android64' and '$(Base)'=='true') or '$(Base_Android64)'!=''">
-        <Base_Android64>true</Base_Android64>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
         <Base_Win32>true</Base_Win32>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
-        <Base_Win64>true</Base_Win64>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
@@ -47,24 +37,6 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Android64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Android64)'!=''">
-        <Cfg_2_Android64>true</Cfg_2_Android64>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='iOSDevice64' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSDevice64)'!=''">
-        <Cfg_2_iOSDevice64>true</Cfg_2_iOSDevice64>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='OSX64' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX64)'!=''">
-        <Cfg_2_OSX64>true</Cfg_2_OSX64>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
         <Cfg_2_Win32>true</Cfg_2_Win32>
         <CfgParent>Cfg_2</CfgParent>
@@ -78,22 +50,12 @@
         <VerInfo_Locale>1034</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Android64)'!=''">
-        <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;com-google-android-gms.play-services-ads-base.17.2.0.dex.jar;com-google-android-gms.play-services-ads-identifier.16.0.0.dex.jar;com-google-android-gms.play-services-ads-lite.17.2.0.dex.jar;com-google-android-gms.play-services-ads.17.2.0.dex.jar;com-google-android-gms.play-services-analytics-impl.16.0.8.dex.jar;com-google-android-gms.play-services-analytics.16.0.8.dex.jar;com-google-android-gms.play-services-base.16.0.1.dex.jar;com-google-android-gms.play-services-basement.16.2.0.dex.jar;com-google-android-gms.play-services-gass.17.2.0.dex.jar;com-google-android-gms.play-services-identity.16.0.0.dex.jar;com-google-android-gms.play-services-maps.16.1.0.dex.jar;com-google-android-gms.play-services-measurement-base.16.4.0.dex.jar;com-google-android-gms.play-services-measurement-sdk-api.16.4.0.dex.jar;com-google-android-gms.play-services-stats.16.0.1.dex.jar;com-google-android-gms.play-services-tagmanager-v4-impl.16.0.8.dex.jar;com-google-android-gms.play-services-tasks.16.0.1.dex.jar;com-google-android-gms.play-services-wallet.16.0.1.dex.jar;com-google-firebase.firebase-analytics.16.4.0.dex.jar;com-google-firebase.firebase-common.16.1.0.dex.jar;com-google-firebase.firebase-iid-interop.16.0.1.dex.jar;com-google-firebase.firebase-iid.17.1.1.dex.jar;com-google-firebase.firebase-measurement-connector.17.0.1.dex.jar;com-google-firebase.firebase-messaging.17.5.0.dex.jar;fmx.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar</EnabledSysJars>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <Icon_MainIcon>SCO_Icon3.ico</Icon_MainIcon>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <Icon_MainIcon>SCO_Icon3.ico</Icon_MainIcon>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -115,23 +77,19 @@
         <Version>7.0</Version>
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Android64)'!=''">
-        <BT_BuildType>Debug</BT_BuildType>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_iOSDevice64)'!=''">
-        <BT_BuildType>Debug</BT_BuildType>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_OSX64)'!=''">
-        <BT_BuildType>Debug</BT_BuildType>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
-        <UWP_DelphiLogo44>Media\iconos\open_envelope_480__px.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>Media\iconos\open_envelope_480__px.png</UWP_DelphiLogo150>
-        <Icon_MainIcon>open_envelope_480__px.ico</Icon_MainIcon>
+        <VerInfo_Keys>CompanyName=BlackWolfMX;FileDescription=$(MSBuildProjectName);FileVersion=0.1.50.251;InternalName=;LegalCopyright=Victor Roman Ortiz Abreu;LegalTrademarks=Victor Roman Ortiz Abreu;OriginalFilename=Victor Roman Ortiz Abreu;ProductName=$(MSBuildProjectName);ProductVersion=0.1.50.251;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <UWP_DelphiLogo44>iconos\1_40_40_32.bmp</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>iconos\1_128_128_32.bmp</UWP_DelphiLogo150>
+        <Icon_MainIcon>SCO_Icon7.ico</Icon_MainIcon>
+        <VerInfo_MajorVer>0</VerInfo_MajorVer>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <VerInfo_Release>50</VerInfo_Release>
+        <VerInfo_Build>251</VerInfo_Build>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
     </PropertyGroup>
     <ProjectExtensions>
         <Borland.Personality>Delphi.Personality.12</Borland.Personality>
@@ -179,24 +137,26 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
-                <Platform value="Android64">True</Platform>
-                <Platform value="iOSDevice64">True</Platform>
-                <Platform value="Linux64">True</Platform>
-                <Platform value="OSX64">True</Platform>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="Media\iconos\open_envelope_480__px.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                <DeployFile LocalName="SCO.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SCO.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="iconos\1_40_40_32.bmp" Configuration="Debug" Class="UWP_DelphiLogo44">
                     <Platform Name="Win32">
                         <RemoteDir>Assets\</RemoteDir>
                         <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="SCO.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="iconos\1_128_128_32.bmp" Configuration="Debug" Class="UWP_DelphiLogo150">
                     <Platform Name="Win32">
-                        <RemoteName>SCO.exe</RemoteName>
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1027,6 +987,7 @@
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
             </Deployment>
+            <ModelSupport>False</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
@@ -1057,75 +1018,16 @@
         <DCCReference Include="Forms\RG.pas">
             <Form>Frg</Form>
         </DCCReference>
-        <DCCReference Include="Forms\Archivo.pas">
-            <Form>FArchivo</Form>
-        </DCCReference>
-        <DCCReference Include="Forms\SArchivo.pas">
-            <Form>FSArchivo</Form>
-        </DCCReference>
-        <DCCReference Include="Forms\SCOALTAGRUPO.pas">
-            <Form>FSCOALTAGRUPO</Form>
-        </DCCReference>
-        <DCCReference Include="Forms\sco_alta_gru.pas">
-            <Form>Fsco_alta_gru</Form>
-        </DCCReference>
-        <DCCReference Include="Forms\SCO_alta_age_grupo.pas">
-            <Form>FSCO_alta_age_grupo</Form>
-        </DCCReference>
         <DCCReference Include="Forms\sco_aux_impresion.pas">
             <Form>F_aux_imp</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\sco_bus_gru.pas">
-            <Form>Form1</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\sco_imp_gru.pas">
-            <Form>Fsco_imp_gru</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\sco_ins_gru.pas">
-            <Form>Fsco_ins_gru</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\sco_alta_gru_per.pas">
-            <Form>Fsco_alta_gru_per</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\SEGUIMIENTO.pas">
-            <Form>FSEGUIMIENTO</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Forms\rg_1.pas">
             <Form>Frg_1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Forms\scoconsultas.pas">
-            <Form>FSCOconsultas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\scoage_edi.pas">
-            <Form>Fscoage_edi</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="Forms\scoage_bus.pas">
             <Form>Fscoage_bus</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\scobus.pas">
-            <Form>Fscobus</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\scoedi.pas">
-            <Form>Fscoedi</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\SCO_AGE_AUX_BUS.pas">
-            <Form>FSCO_AGE_AUX_BUS</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Forms\sco_age_aux.pas">
-            <Form>fsco_age_aux</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Forms\sco_cat_grupo.pas">
@@ -1146,6 +1048,14 @@
         </DCCReference>
         <DCCReference Include="Forms\SCO_auxiliar_alta_edicion.pas">
             <Form>FSCO_auxiliar_alta_edicion</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Forms\sco_age_aux.pas">
+            <Form>fsco_age_aux</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Forms\scoconsultas.pas">
+            <Form>FSCOconsultas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Debug">

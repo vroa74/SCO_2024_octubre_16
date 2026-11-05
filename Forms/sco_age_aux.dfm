@@ -164,8 +164,5 @@ object fsco_age_aux: Tfsco_age_aux
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbRefresh]
     Align = alBottom
     TabOrder = 2
-    ExplicitLeft = 237
-    ExplicitTop = 282
-    ExplicitWidth = 240
   end
 end

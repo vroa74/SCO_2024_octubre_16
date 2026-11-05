@@ -23,7 +23,6 @@ type
     Label1: TLabel;
     DateTimePicker1: TDateTimePicker;
     DateTimePicker2: TDateTimePicker;
-    JvRollOut2: TJvRollOut;
     JvRollOut3: TJvRollOut;
     RadioButton4: TRadioButton;
     RadioButton5: TRadioButton;
@@ -93,7 +92,6 @@ type
     Edit2: TEdit;
     Edit3: TEdit;
     Label2: TLabel;
-    BitBtn4: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
     BitBtn1: TBitBtn;
@@ -145,7 +143,7 @@ var
   FReportearchivar: TFReportearchivar;
 
 implementation
-uses main, d_m, login, sco_imp_gru, rg_1;
+uses main, d_m, login,  rg_1;
 
 {$R *.dfm}
 
@@ -172,16 +170,16 @@ begin
 end;
 
 procedure TFReportearchivar.BitBtn4Click(Sender: TObject);
-var f:tfsco_imp_gru;
+//var f:tfsco_imp_gru;
 begin // impresion de volantes
 //     Querypriint;
-     f := tfsco_imp_gru.Create(Application);
-    try
-      f.ShowModal;
-    finally
-       f.Free;
-    end;
-    query(true);
+//     f := tfsco_imp_gru.Create(Application);
+//    try
+//      f.ShowModal;
+//    finally
+//       f.Free;
+//    end;
+//    query(true);
 end;
 
 procedure TFReportearchivar.BitBtn5Click(Sender: TObject);
@@ -841,3 +839,4 @@ end;
 
 
 end.
+

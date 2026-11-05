@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, ExtCtrls, JvExExtCtrls, JvBevel, StdCtrls, ComCtrls,
   ppBands, ppCtrls, ppPrnabl, ppClass, ppCache, ppComm, ppRelatv, ppProd,
-  ppReport, ppDBBDE, ppDB, ppDBPipe, ppStrtch, ppMemo, ppParameter, jpeg;
+  ppReport, ppDBBDE, ppDB, ppDBPipe, ppStrtch, ppMemo, ppParameter, jpeg,
+  Data.DB, ppDesignLayer;
 
 type
   TFSCOconsultas = class(TForm)

@@ -42,7 +42,6 @@ object FSCO_auxiliar_alta_edicion: TFSCO_auxiliar_alta_edicion
       item
         Width = 100
       end>
-    ExplicitTop = 505
   end
   object Panel1: TPanel
     Left = 0
@@ -51,7 +50,6 @@ object FSCO_auxiliar_alta_edicion: TFSCO_auxiliar_alta_edicion
     Height = 364
     Align = alLeft
     TabOrder = 1
-    ExplicitHeight = 505
     object JvRollOut2: TJvRollOut
       Left = 1
       Top = 177
