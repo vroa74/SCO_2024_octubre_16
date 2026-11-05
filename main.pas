@@ -131,24 +131,33 @@ end;
 
 
   procedure TFmain.Alta1Click(Sender: TObject);
-    var f : tfscoalta;
+  var
+    CursorAnterior: TCursor;
+  begin
+    if not dm.MyConnection1.Connected then
     begin
-          f := tfscoalta.Create(application);
-            if not dm.tcor.Active then
-             dm.tcor.Open;
-
-            if not dm.ncor.Active then
-                 dm.ncor.Open;
-
-            if not dm.ccor.Active then
-                 dm.ccor.Open;
-
-          try
-            f.ShowModal;
-          finally
-            f.free;
-          end;
+      ShowMessage('Inicie sesion antes de abrir los oficios.');
+      Exit;
     end;
+
+    CursorAnterior := Screen.Cursor;
+    Screen.Cursor := crHourGlass;
+    try
+      // SGTD.dpr ya crea esta ventana: no construir una segunda instancia.
+      fscoalta.PrepararApertura;
+    finally
+      Screen.Cursor := CursorAnterior;
+    end;
+
+    fscoalta.Timer1.Enabled := True;
+    fscoalta.Timer2.Enabled := True;
+    try
+      fscoalta.ShowModal;
+    finally
+      fscoalta.Timer1.Enabled := False;
+      fscoalta.Timer2.Enabled := False;
+    end;
+  end;
   //----------------------------------------------------------------------------
   //
   // Este sistema fue dasarrollado por Victor Román Ortiz Abreu.

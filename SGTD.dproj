@@ -3,7 +3,7 @@
         <ProjectGuid>{56315fa3-002f-455e-beb7-df869adf0595}</ProjectGuid>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <DCC_DependencyCheckOutputName>SCO.exe</DCC_DependencyCheckOutputName>
+        <DCC_DependencyCheckOutputName>SGTD.exe</DCC_DependencyCheckOutputName>
         <MainSource>SGTD.dpr</MainSource>
         <FrameworkType>VCL</FrameworkType>
         <ProjectVersion>18.8</ProjectVersion>
@@ -140,10 +140,9 @@
                 <Platform value="Win32">True</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="iconos\1_128_128_32.bmp" Configuration="Debug" Class="UWP_DelphiLogo150">
+                <DeployFile LocalName="Win32\Debug\SGTD.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteDir>Assets\</RemoteDir>
-                        <RemoteName>Logo150x150.png</RemoteName>
+                        <RemoteName>SGTD.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -154,9 +153,10 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\SGTD.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="iconos\1_128_128_32.bmp" Configuration="Debug" Class="UWP_DelphiLogo150">
                     <Platform Name="Win32">
-                        <RemoteName>SGTD.exe</RemoteName>
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -138,6 +138,8 @@ type
   private
     { Private declarations }
       mango:THintWindow;
+      FPreparando: Boolean;
+      FImagenCargada: string;
   public
     dir: string;
     t, e, ins, edi, I_E  :bool;
@@ -150,6 +152,7 @@ type
     editar: boolean;
     accion:char;
     { Public declarations }
+    procedure PrepararApertura;
     function ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
 
   end;
@@ -658,6 +661,8 @@ end;
 //------------------------------------------------------------------------------
 procedure Tfscoalta.tcorChange(Sender: TObject);
 begin
+  if FPreparando or (csLoading in ComponentState) then
+    Exit;
   if dm.MyConnection1.Connected then
       begin
           ntcor   :=  tcor.ItemIndex+1;
@@ -694,63 +699,116 @@ end;
 
 //------------------------------------------------------------------------------
 procedure Tfscoalta.FormCreate(Sender: TObject);
-var
-  RutaImagen: string;
 begin
   myway := 'sql\main\';
-  if dm.MyConnection1.Connected then
+  Timer1.Enabled := False;
+  Timer2.Enabled := False;
+  BitBtn1.Hint := 'Impresion de reporte';
+  BitBtn2.Hint := 'Salir de la ventana';
+  BitBtn3.Hint := 'Busqueda de registros';
+  Button5.Hint := 'Buscar al remitente del oficio...';
+  Button4.Hint := 'Buscar la persona a turnar...';
+end;
+
+procedure Tfscoalta.PrepararApertura;
+var
+  RutaImagen: string;
+  Inicio: UInt64;
+
+  procedure RegistrarTiempo(const Etapa: string);
   begin
+    OutputDebugString(PChar('SCOAlta - ' + Etapa + ': ' +
+      IntToStr(Int64(GetTickCount64 - Inicio)) + ' ms acumulados'));
+  end;
+
+  procedure CargarCombo(Datos: TDataSet; const Campo: string; Lista: TStrings);
+  var
+    Valores: TStringList;
+    CampoDatos: TField;
+  begin
+    if not Datos.Active then
+      Datos.Open;
+    Valores := TStringList.Create;
+    try
+      Datos.DisableControls;
+      try
+        CampoDatos := Datos.FieldByName(Campo);
+        Datos.First;
+        while not Datos.Eof do
+        begin
+          Valores.Add(CampoDatos.AsString);
+          Datos.Next;
+        end;
+      finally
+        Datos.EnableControls;
+      end;
+      Lista.BeginUpdate;
+      try
+        Lista.Assign(Valores);
+      finally
+        Lista.EndUpdate;
+      end;
+    finally
+      Valores.Free;
+    end;
+  end;
+
+begin
+  Inicio := GetTickCount64;
+  FPreparando := True;
+  try
     I_E := True;
     mas := True;
     ins := False;
     edi := False;
     registro := 0;
+    accion := #0;
+    editar := True;
+    BitBtn1.Enabled := True;
+    BitBtn2.Enabled := True;
+    BitBtn3.Enabled := True;
+    Label11.Enabled := True;
+    Label11.Visible := True;
+    val.Checked := editar;
 
-    dm.TCO.First;
-    myhead;
-
+    if not dm.TCO.Active then
+      dm.TCO.Open;
+    dm.TCO.DisableControls;
     try
-      RutaImagen := ValidarYObtenerRutaArchivo(fmain.mmedia + 'legislatura.png');
-      JvImage1.Picture.LoadFromFile(RutaImagen);
-    except
-      // Si la imagen falla en cargarse, no detiene el flujo principal de la ventana
-    end;
+      dm.TCO.First;
+      myhead;
+      RegistrarTiempo('primer oficio');
 
-    BitBtn1.Hint := 'Impresión de reporte';
-    BitBtn2.Hint := 'Salir de la ventana';
-    BitBtn3.Hint := 'Búsqueda de registros';
-    Button5.Hint := 'Buscar al remitente del oficio...';
-    Button4.Hint := 'Buscar la persona a turnar...';
+      // Renovar los catalogos desde los datasets abiertos, sin duplicar items.
+      CargarCombo(dm.ncor, 'ncor', ncor.Items);
+      CargarCombo(dm.tcor, 'tcor', tcor.Items);
+      CargarCombo(dm.ccor, 'ccor', ccor.Items);
+      RegistrarTiempo('catalogos');
 
-    // Carga de combos desde DataModule de forma limpia
-    dm.ncor.First;
-    while not dm.ncor.Eof do
-    begin
-      ncor.Items.Add(dm.ncor.FieldByName('ncor').AsString);
-      dm.ncor.Next;
+      RutaImagen := IncludeTrailingPathDelimiter(fmain.ruta) +
+        fmain.mmedia + 'legislatura.png';
+      if FImagenCargada <> RutaImagen then
+      begin
+        try
+          JvImage1.Picture.LoadFromFile(RutaImagen);
+          FImagenCargada := RutaImagen;
+        except
+          // El logotipo es opcional; reintentar en la proxima apertura.
+          JvImage1.Picture.Assign(nil);
+          FImagenCargada := '';
+        end;
+      end;
+      RegistrarTiempo('imagen');
+      lock(editar);
+      Edit1.Text := IncludeTrailingPathDelimiter(fmain.ruta) + myway + 'co.sql';
+    finally
+      // Restaurar el texto de los controles enlazados tras renovar sus listas.
+      dm.TCO.EnableControls;
     end;
-
-    dm.tcor.First;
-    while not dm.tcor.Eof do
-    begin
-      tcor.Items.Add(dm.tcor.FieldByName('tcor').AsString);
-      dm.tcor.Next;
-    end;
-
-    dm.ccor.First;
-    while not dm.ccor.Eof do
-    begin
-      ccor.Items.Add(dm.ccor.FieldByName('ccor').AsString);
-      dm.ccor.Next;
-    end;
+  finally
+    FPreparando := False;
   end;
-
-  editar := True;
-  lock(editar);
-  Edit1.Text := IncludeTrailingPathDelimiter(fmain.ruta) + myway + 'co.sql';
 end;
-
-
 
 procedure Tfscoalta.frecEnter(Sender: TObject);
 begin
