@@ -140,6 +140,12 @@ type
       mango:THintWindow;
       FPreparando: Boolean;
       FImagenCargada: string;
+      FTimerApertura: TTimer;
+      FPanelCarga: TPanel;
+      FAperturaPendiente: Boolean;
+      procedure MostrarAlta(Sender: TObject);
+      procedure OcultarAlta(Sender: TObject);
+      procedure EjecutarApertura(Sender: TObject);
   public
     dir: string;
     t, e, ins, edi, I_E  :bool;
@@ -153,6 +159,7 @@ type
     accion:char;
     { Public declarations }
     procedure PrepararApertura;
+    procedure SolicitarApertura;
     function ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
 
   end;
@@ -329,20 +336,14 @@ begin           close;        end;
 procedure Tfscoalta.BitBtn2MouseEnter(Sender: TObject);
 begin            mango:= fmain.RevealHint(BitBtn2);         end;
 procedure Tfscoalta.Button4Click(Sender: TObject);
-var
-   f: Tfsco_age_aux;
 begin
-   f:= Tfsco_age_aux.Create(Application);
-   try
-     f.ShowModal;
-   finally
-     f.Free;
-     tur_nom.Text:= fsco_age_aux.age_titulo +' '+fsco_age_aux.age_nombre+' '+fsco_age_aux.age_apaterno+ ' '+fsco_age_aux.age_amaterno;
-     tur_cargo.Text := fsco_age_aux.age_cargo;
-     tur_deporg.Text := fsco_age_aux.age_deporg;
-   end;
+  fsco_age_aux.ModalResult := mrNone;
+  if fsco_age_aux.ShowModal <> mrOk then Exit;
+  tur_nom.Text := fsco_age_aux.age_titulo + ' ' + fsco_age_aux.age_nombre + ' ' +
+    fsco_age_aux.age_apaterno + ' ' + fsco_age_aux.age_amaterno;
+  tur_cargo.Text := fsco_age_aux.age_cargo;
+  tur_deporg.Text := fsco_age_aux.age_deporg;
 end;
-
 
 procedure Tfscoalta.Button4Enter(Sender: TObject);
 begin           lockmsg;         end;
@@ -389,7 +390,6 @@ end;
 
 procedure Tfscoalta.BitBtn1Click(Sender: TObject);
 var
-  f: tF_aux_imp;
   RutaSql: string;
 begin
   if dm.MyConnection1.Connected then
@@ -402,16 +402,8 @@ begin
       dm.QImpresion.SQL.Add('AND id = ' + IntToStr(dm.TCO.FieldByName('id').AsInteger));
       dm.QImpresion.Open;
 
-      f := tF_aux_imp.Create(Application);
-      try
-        f.ShowModal;
-      finally
-        f.Free;
-      end;
+      F_aux_imp.ShowModal;
       dm.QImpresion.Close;
-      dm.QImpresion.SQL.Clear;
-      dm.QImpresion.SQL.LoadFromFile(RutaSql, TEncoding.UTF8);
-      dm.QImpresion.Open;
       dm.TCO.Edit;
       dm.TCO.FieldByName('estatus').AsBoolean := True;
       dm.TCO.Post;
@@ -434,41 +426,26 @@ end;
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 procedure Tfscoalta.BitBtn3Click(Sender: TObject);
 var
-  SqlPath: string;
   IdSeleccionado: Integer;
 begin
   if not dm.MyConnection1.Connected then
   begin
-    ShowMessage('No hay conexión con la base de datos.');
+    ShowMessage('No hay conexion con la base de datos.');
     Exit;
   end;
-
-  try
-    SqlPath := ValidarYObtenerRutaArchivo(myway + 'co.sql');
-    dm.QCO.Close;
-    dm.QCO.SQL.Clear;
-    dm.QCO.SQL.LoadFromFile(SqlPath, TEncoding.UTF8);
-    dm.QCO.Open;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('No se pudo abrir la consulta:' + sLineBreak + E.Message);
-      Exit;
-    end;
-  end;
-
-  Frg.Forma := 'Alta';
-  Frg.ShowModal;
-
+  Frg.PrepararApertura('Alta');
+  if Frg.ShowModal <> mrOk then
+    Exit;
   IdSeleccionado := Frg.clave;
-
-  if dm.TCO.Active then
-  begin
-    dm.TCO.Refresh;
-    if IdSeleccionado <> 0 then
-      dm.TCO.Locate('id', IdSeleccionado, []);
+  if (IdSeleccionado <= 0) or not dm.TCO.Active then
+    Exit;
+  dm.TCO.DisableControls;
+  try
+    // No volver a descargar TCO completo al regresar de la busqueda.
+    dm.TCO.Locate('id', IdSeleccionado, []);
+  finally
+    dm.TCO.EnableControls;
   end;
-
   Edit1.Text := IntToStr(IdSeleccionado);
   myhead;
 end;
@@ -476,21 +453,15 @@ end;
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 procedure Tfscoalta.Button5Click(Sender: TObject);
-var
-   f: Tfsco_age_aux;
 begin
-   f:= Tfsco_age_aux.Create(Application);
-   try
-     f.ShowModal;
-   finally
-     f.Free;
-     rem_nombre.Text:= fsco_age_aux.age_titulo +' '+fsco_age_aux.age_nombre+' '+fsco_age_aux.age_apaterno+ ' '+fsco_age_aux.age_amaterno;
-     rem_cargo.Text := fsco_age_aux.age_cargo;
-     rem_deporg.Text := fsco_age_aux.age_deporg;
-     dir := fsco_age_aux.age_dir;
-   end;
+  fsco_age_aux.ModalResult := mrNone;
+  if fsco_age_aux.ShowModal <> mrOk then Exit;
+  rem_nombre.Text := fsco_age_aux.age_titulo + ' ' + fsco_age_aux.age_nombre + ' ' +
+    fsco_age_aux.age_apaterno + ' ' + fsco_age_aux.age_amaterno;
+  rem_cargo.Text := fsco_age_aux.age_cargo;
+  rem_deporg.Text := fsco_age_aux.age_deporg;
+  dir := fsco_age_aux.age_dir;
 end;
-
 
 procedure Tfscoalta.Button5Enter(Sender: TObject);
 begin
@@ -701,6 +672,19 @@ end;
 procedure Tfscoalta.FormCreate(Sender: TObject);
 begin
   myway := 'sql\main\';
+  FPanelCarga := TPanel.Create(Self);
+  FPanelCarga.Parent := Self;
+  FPanelCarga.SetBounds(0, 0, ClientWidth, ClientHeight);
+  FPanelCarga.Anchors := [akLeft, akTop, akRight, akBottom];
+  FPanelCarga.Caption := 'Cargando oficios...';
+  FPanelCarga.Visible := False;
+  FPanelCarga.TabStop := True;
+  FTimerApertura := TTimer.Create(Self);
+  FTimerApertura.Enabled := False;
+  FTimerApertura.Interval := 1;
+  FTimerApertura.OnTimer := EjecutarApertura;
+  OnShow := MostrarAlta;
+  OnHide := OcultarAlta;
   Timer1.Enabled := False;
   Timer2.Enabled := False;
   BitBtn1.Hint := 'Impresion de reporte';
@@ -708,6 +692,51 @@ begin
   BitBtn3.Hint := 'Busqueda de registros';
   Button5.Hint := 'Buscar al remitente del oficio...';
   Button4.Hint := 'Buscar la persona a turnar...';
+end;
+
+procedure Tfscoalta.SolicitarApertura;
+begin
+  FAperturaPendiente := True;
+  FPanelCarga.Visible := True;
+  FPanelCarga.BringToFront;
+end;
+
+procedure Tfscoalta.MostrarAlta(Sender: TObject);
+begin
+  if FAperturaPendiente then
+  begin
+    ActiveControl := FPanelCarga;
+    FTimerApertura.Enabled := True;
+  end;
+end;
+
+procedure Tfscoalta.OcultarAlta(Sender: TObject);
+begin
+  FTimerApertura.Enabled := False;
+  Timer1.Enabled := False;
+  Timer2.Enabled := False;
+end;
+
+procedure Tfscoalta.EjecutarApertura(Sender: TObject);
+begin
+  FTimerApertura.Enabled := False;
+  FAperturaPendiente := False;
+  try
+    try
+      PrepararApertura;
+      Timer1.Enabled := True;
+      Timer2.Enabled := True;
+    except
+      on E: Exception do
+      begin
+        ShowMessage('No se pudieron abrir los oficios: ' + E.Message);
+        Close;
+      end;
+    end;
+  finally
+    if Visible then ActiveControl := BitBtn2;
+    FPanelCarga.Visible := False;
+  end;
 end;
 
 procedure Tfscoalta.PrepararApertura;
@@ -771,10 +800,10 @@ begin
     Label11.Visible := True;
     val.Checked := editar;
 
-    if not dm.TCO.Active then
-      dm.TCO.Open;
     dm.TCO.DisableControls;
     try
+      if not dm.TCO.Active then
+        dm.TCO.Open;
       dm.TCO.First;
       myhead;
       RegistrarTiempo('primer oficio');

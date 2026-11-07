@@ -14,7 +14,7 @@ uses
   ppParameter, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, jpeg, ppStrtch,
   ppMemo, Buttons, DBCtrls, JvComponentBase, JvgExportComponents,
    JvDBGridExport, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
-  IWControl, IWCompObject, IWCompFlash, Data.DB, ppDesignLayer;
+  IWControl, IWCompObject, IWCompFlash, Data.DB, ppDesignLayer, ConsultasUI, ImagenesReportes;
 
 type
   TFReportearchivar = class(TForm)
@@ -133,7 +133,11 @@ type
     Procedure Queryimp;
 
   private
-    { Private declarations }
+    FConsultaDiferida: TConsultaDiferida;
+    FPreparando, FConsultando: Boolean;
+    procedure ConsultarPendiente(Sender: TObject);
+    procedure MostrarReporte(Sender: TObject);
+    procedure OcultarReporte(Sender: TObject);
   public
     { Public declarations }
     clave:integer;
@@ -155,6 +159,7 @@ end;
 procedure TFReportearchivar.BitBtn2Click(Sender: TObject);
 begin
 query(true);
+ PrepararLogosImpresion(Self);
  Lista.Print;
 end;
 
@@ -208,6 +213,10 @@ end;
 
 procedure TFReportearchivar.ComboBox3Change(Sender: TObject);
 begin
+  if FPreparando or (csLoading in ComponentState) then Exit;
+  FPreparando := True;
+  try
+
 
   if (ComboBox3.ItemIndex = 0) then
      begin
@@ -247,7 +256,12 @@ begin
       ComboBox4.Items.Add('Solicitudes de información');
       ComboBox4.Items.Add('');
      end;
-query(true);
+
+
+  finally
+    FPreparando := False;
+  end;
+  Query(True);
 end;
 
 procedure TFReportearchivar.ComboBox4Change(Sender: TObject);
@@ -287,30 +301,38 @@ end;
 
 procedure TFReportearchivar.Edit1Change(Sender: TObject);
 begin
-query(true);
+if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFReportearchivar.Edit2Change(Sender: TObject);
 begin
 if CheckBox2.Checked then
-     query(true);
+     if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFReportearchivar.Edit3Change(Sender: TObject);
 begin
 if CheckBox2.Checked then
-     query(true);
+     if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFReportearchivar.Edit4Change(Sender: TObject);
 begin
-     query(true);
+     if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFReportearchivar.FormCreate(Sender: TObject);
 begin
- DateTimePicker1.Date :=  StrToDate(fmain.PutDate);
- DateTimePicker2.Date :=  StrToDate(fmain.PutDate);
+  FPreparando := True;
+  try
+    FConsultaDiferida := TConsultaDiferida.Create(Self, ConsultarPendiente);
+    OnShow := MostrarReporte;
+    OnHide := OcultarReporte;
+    DateTimePicker1.Date := Date;
+    DateTimePicker2.Date := Date;
+  finally
+    FPreparando := False;
+  end;
 end;
 
 Procedure TFReportearchivar.Querypriint;
@@ -467,7 +489,7 @@ if dm.MyConnection1.Connected then
          end;
         dm.QCO.SQL.add('ORDER BY  CO.id');
        dm.QCO.Open;
-       dm.QCO.Last;
+
    end; // fin de la validacion
 end;
 
@@ -488,6 +510,12 @@ var
     A,M,D : Word;
     va, vb,vc,vd : integer;
 begin
+  if FPreparando or FConsultando or (csLoading in ComponentState) then Exit;
+  if Assigned(FConsultaDiferida) then FConsultaDiferida.Cancelar;
+  FConsultando := True;
+  dm.QCO.DisableControls;
+  try
+
 if dm.MyConnection1.Connected then
    begin
        dm.QCO.Close;
@@ -639,10 +667,14 @@ if dm.MyConnection1.Connected then
         dm.QCO.SQL.add('ORDER BY  CO.id');
 //        Memo1.Text := dm.QCO.sQL.Text;
        dm.QCO.Open;
-       dm.QCO.Last;
-       Queryimp;       
+
        Memo1.Text := dm.QCO.SQL.Text;
    end; // fin de la validacion
+
+  finally
+    dm.QCO.EnableControls;
+    FConsultando := False;
+  end;
 end;
 
 
@@ -832,11 +864,26 @@ if dm.MyConnection1.Connected then
         dm.QImpresion.SQL.add('ORDER BY  CO.id');
 //        Memo1.Text := dm.QImpresion.sQL.Text;
        dm.QImpresion.Open;
-       dm.QImpresion.Last;
+
 //       Memo1.Text := dm.QImpresion.SQL.Text;
    end; // fin de la validacion
 end;
 
+
+procedure TFReportearchivar.ConsultarPendiente(Sender: TObject);
+begin
+  Query(True);
+end;
+
+procedure TFReportearchivar.MostrarReporte(Sender: TObject);
+begin
+  FConsultaDiferida.Solicitar(1);
+end;
+
+procedure TFReportearchivar.OcultarReporte(Sender: TObject);
+begin
+  FConsultaDiferida.Cancelar;
+end;
 
 end.
 

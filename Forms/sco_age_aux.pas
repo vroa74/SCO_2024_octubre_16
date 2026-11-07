@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, ExtCtrls, StdCtrls, Buttons, Data.DB, Vcl.DBCtrls;
+  Dialogs, Grids, DBGrids, ExtCtrls, StdCtrls, Buttons, Data.DB, Vcl.DBCtrls, ConsultasUI;
 
 type
   Tfsco_age_aux = class(TForm)
@@ -32,7 +32,10 @@ type
     procedure Edit5Change(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
   private
-    { Private declarations }
+    FConsultaDiferida: TConsultaDiferida;
+    procedure ConsultarPendiente(Sender: TObject);
+    procedure MostrarBusqueda(Sender: TObject);
+    procedure OcultarBusqueda(Sender: TObject);
   public
    age_titulo: string;
    age_nombre : string;
@@ -61,58 +64,10 @@ uses main, d_m ;
 
 
 procedure Tfsco_age_aux.Query;
-var cont :integer;
-begin// query
-   cont :=0;
-   if dm.MyConnection1.Connected then
-   begin
-       dm.QAGE.Close;
-       dm.QAGE.SQL.Clear;
-       dm.QAGE.SQL.Add('SELECT * From Age');
-       if ( (Edit1.Text<> '') or   (Edit2.Text> '') or   (Edit3.Text<> '') or   (Edit4.Text<> '') or   (Edit5.Text<> '')) then
-       begin
-       dm.QAGE.SQL.Add('WHERE');
-
-         if Edit1.Text <> '' then
-           begin
-             dm.QAGE.SQL.Add('nombre LIKE "%'+Edit1.Text+'%"');
-             cont := cont +1;
-           end;
-
-         if Edit2.Text <> '' then
-           begin
-             if cont>=1 then
-                dm.QAGE.SQL.Add('AND');
-
-             dm.QAGE.SQL.Add('apaterno LIKE "%'+Edit2.Text+'%"');
-             cont := cont +1;
-           end;
-
-         if Edit3.Text <> '' then
-           begin
-             if cont>=1 then  dm.QAGE.SQL.Add('AND');
-             dm.QAGE.SQL.Add('amaterno LIKE "%'+Edit3.Text+'%"');
-             cont := cont +1;
-           end;
-
-         if Edit4.Text <> '' then
-           begin
-             if cont>=1 then  dm.QAGE.SQL.Add('AND');
-             dm.QAGE.SQL.Add('cargo LIKE "%'+Edit4.Text+'%"');
-             cont := cont +1;
-           end;
-
-         if Edit5.Text <> '' then
-           begin
-             if cont>=1 then  dm.QAGE.SQL.Add('AND');
-             dm.QAGE.SQL.Add('deporg LIKE "%'+Edit5.Text+'%"');
-           end;
-       end;// fin validacion
-//       Memo1.Text := dm.QAGE.SQL.Text;
-       dm.QAGE.Open;
-   end;// validacion de conexion
+begin
+  if Assigned(FConsultaDiferida) then FConsultaDiferida.Cancelar;
+  dm.ConsultarAgenda(Edit1.Text, Edit2.Text, Edit3.Text, Edit4.Text, Edit5.Text);
 end;
-
 
 procedure Tfsco_age_aux.BitBtn1Click(Sender: TObject);
 begin
@@ -121,56 +76,64 @@ end;
 
 procedure Tfsco_age_aux.DBGrid1DblClick(Sender: TObject);
 begin
-if dm.MyConnection1.Connected then
-   begin
-       fsco_age_aux.age_titulo := dm.QAGE.FieldByName('titulo').AsString;
-       fsco_age_aux.age_nombre := dm.QAGE.FieldByName('nombre').AsString;
-       fsco_age_aux.age_apaterno := dm.QAGE.FieldByName('apaterno').AsString;
-       fsco_age_aux.age_amaterno := dm.QAGE.FieldByName('amaterno').AsString;
-       fsco_age_aux.age_cargo := dm.QAGE.FieldByName('cargo').AsString;
-       fsco_age_aux.age_deporg := dm.QAGE.FieldByName('deporg').AsString;
-       fsco_age_aux.age_dir := dm.QAGE.FieldByName('dir').AsString;
-    //------------------------------------------------------------------------------
-       age_titulo := fsco_age_aux.age_titulo;
-       age_nombre := fsco_age_aux.age_nombre;
-       age_nombre := fsco_age_aux.age_apaterno;
-       age_apaterno := fsco_age_aux.age_amaterno;
-       age_cargo :=  fsco_age_aux.age_cargo;
-       age_deporg := fsco_age_aux.age_deporg ;
-       age_dir := fsco_age_aux.age_dir ;
-       close;
-    //------------------------------------------------------------------------------
-   end;
-
+  if not dm.QAGE.Active or dm.QAGE.IsEmpty then Exit;
+  age_titulo := dm.QAGE.FieldByName('titulo').AsString;
+  age_nombre := dm.QAGE.FieldByName('nombre').AsString;
+  age_apaterno := dm.QAGE.FieldByName('apaterno').AsString;
+  age_amaterno := dm.QAGE.FieldByName('amaterno').AsString;
+  age_cargo := dm.QAGE.FieldByName('cargo').AsString;
+  age_deporg := dm.QAGE.FieldByName('deporg').AsString;
+  age_dir := dm.QAGE.FieldByName('dir').AsString;
+  ModalResult := mrOk;
 end;
 
 procedure Tfsco_age_aux.Edit1Change(Sender: TObject);
 begin
-Query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure Tfsco_age_aux.Edit2Change(Sender: TObject);
 begin
-Query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure Tfsco_age_aux.Edit3Change(Sender: TObject);
 begin
-Query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure Tfsco_age_aux.Edit4Change(Sender: TObject);
 begin
-Query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure Tfsco_age_aux.Edit5Change(Sender: TObject);
 begin
-Query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure Tfsco_age_aux.FormCreate(Sender: TObject);
 begin
+  FConsultaDiferida := TConsultaDiferida.Create(Self, ConsultarPendiente);
+  OnShow := MostrarBusqueda;
+  OnHide := OcultarBusqueda;
 //------------------------------------------------------------------------------
 end;
+procedure Tfsco_age_aux.ConsultarPendiente(Sender: TObject);
+begin
+  Query;
+end;
+
+procedure Tfsco_age_aux.MostrarBusqueda(Sender: TObject);
+begin
+  ModalResult := mrNone;
+  dm.QAGE.Close;
+  FConsultaDiferida.Solicitar(1);
+end;
+
+procedure Tfsco_age_aux.OcultarBusqueda(Sender: TObject);
+begin
+  FConsultaDiferida.Cancelar;
+end;
+
 end.

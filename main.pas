@@ -511,32 +511,14 @@ end;
 
 
   procedure TFmain.Alta1Click(Sender: TObject);
-  var
-    CursorAnterior: TCursor;
   begin
     if not dm.MyConnection1.Connected then
     begin
       ShowMessage('Inicie sesion antes de abrir los oficios.');
       Exit;
     end;
-
-    CursorAnterior := Screen.Cursor;
-    Screen.Cursor := crHourGlass;
-    try
-      // SGTD.dpr ya crea esta ventana: no construir una segunda instancia.
-      fscoalta.PrepararApertura;
-    finally
-      Screen.Cursor := CursorAnterior;
-    end;
-
-    fscoalta.Timer1.Enabled := True;
-    fscoalta.Timer2.Enabled := True;
-    try
-      fscoalta.ShowModal;
-    finally
-      fscoalta.Timer1.Enabled := False;
-      fscoalta.Timer2.Enabled := False;
-    end;
+    fscoalta.SolicitarApertura;
+    fscoalta.ShowModal;
   end;
   //----------------------------------------------------------------------------
   //
@@ -544,89 +526,64 @@ end;
   //
   //----------------------------------------------------------------------------
   procedure TFmain.Alta2Click(Sender: TObject);
-    var
-    f: tfscoage_alta;
+  var
+    Inicio: UInt64;
+    CursorAnterior: TCursor;
+  begin
+    if not dm.MyConnection1.Connected then
     begin
-     f:= tfscoage_alta.Create(Application);
-       if not dm.Tage.Active then
-          begin
-             dm.Tage.Open;
-          end;
-
-          try
-              f.clear;
-              f.ShowModal;
-          finally
-             f.Free
-          end;
+      ShowMessage('Inicie sesion antes de abrir la agenda.');
+      Exit;
     end;
+    Inicio := GetTickCount64;
+    CursorAnterior := Screen.Cursor;
+    Screen.Cursor := crHourGlass;
+    try
+      if not dm.Tage.Active then
+        dm.Tage.Open;
+      // El formulario y su reporte ya existen desde el inicio del programa.
+      fscoage_alta.clear;
+      OutputDebugString(PChar('Agenda - preparar apertura: ' +
+        IntToStr(Int64(GetTickCount64 - Inicio)) + ' ms'));
+    finally
+      Screen.Cursor := CursorAnterior;
+    end;
+    fscoage_alta.ShowModal;
+  end;
   {============================================================================}
   {============================================================================}
   procedure TFmain.Busqueda2Click(Sender: TObject);
-    VAR F : Tfscoage_bus;
-    begin
-        F:= Tfscoage_bus.Create(APPLICATION);
-        TRY
-          F.ShowModal;
-        FINALLY
-          F.Free;
-        END;
-    end;
+  begin
+    if not dm.MyConnection1.Connected then Exit;
+    Fscoage_bus.clave := 0;
+    Fscoage_bus.ShowModal;
+  end;
 
-  procedure TFmain.c1Click(Sender: TObject);
-    begin
-      fconfig.Show;
-    end;
   {============================================================================}
-  procedure TFmain.C2Click(Sender: TObject);
-    var
-      F: TFSCO_auxiliar_alta_edicion;
-      begin
-          if not dm.tcor.Active then
-               dm.tcor.Open;
-          if not dm.ncor.Active then
-               dm.ncor.Open;
-          if not dm.ccor.Active then
-               dm.ccor.Open;
-            f := TFSCO_auxiliar_alta_edicion.Create(application);
+  procedure TFmain.c1Click(Sender: TObject);
+  begin
+    FConfig.Show;
+  end;
 
-            try
-              f.ShowModal;
-            finally
-              f.free;
-            end;
-      end;
+  procedure TFmain.C2Click(Sender: TObject);
+  begin
+    if not dm.MyConnection1.Connected then Exit;
+    FSCO_auxiliar_alta_edicion.PrepararApertura;
+    FSCO_auxiliar_alta_edicion.ShowModal;
+  end;
+
   {============================================================================}
   procedure TFmain.consultas1Click(Sender: TObject);
-  var
-  ArchivoSQL: string;
 begin
-  try
-    ArchivoSQL := ValidarYObtenerRutaArchivo(fmain.ruta, MainPath + 'co.sql');
-    if dm.MyConnection1.Connected then
-    begin
-      // Carga QCO
-      dm.QCO.Close;
-      dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(ArchivoSQL, TEncoding.UTF8);
-      dm.QCO.SQL.Add('ORDER BY CO.id');
-      dm.QCO.Open;
-      dm.QCO.Last;
-
-      // Carga QCOH
-      dm.QCOH.Close;
-      dm.QCOH.SQL.Clear;
-      dm.QCOH.SQL.LoadFromFile(ArchivoSQL, TEncoding.UTF8);
-      dm.QCOH.SQL.Add('ORDER BY CO.id');
-      dm.QCOH.Open;
-      dm.QCOH.Last;
-    end;
-    Frg.ShowModal;
-  except
-    on E: Exception do
-      ShowMessage(E.Message);
+  if not dm.MyConnection1.Connected then
+  begin
+    ShowMessage('Inicie sesion antes de abrir los reportes.');
+    Exit;
   end;
+  Frg.PrepararApertura('');
+  Frg.ShowModal;
 end;
+
   {============================================================================}
   procedure TFmain.de1Click(Sender: TObject);
     var f:tfabout;
@@ -781,8 +738,6 @@ end;
     begin
      if dm.MyConnection1.Connected then
         begin
-          if  not dm.Qco_his.Active then
-               dm.Qco_his.Open;
           FRG_historico.Show;
         end;
     end;
@@ -819,53 +774,20 @@ end;
   end;
   {============================================================================}
   procedure TFmain.G1Click(Sender: TObject);
-      VAR F:Tfcat_gru;
-      begin
-        if dm.MyConnection1.Connected then
-             begin
-                 dm.QCAT_GRU.Close;
-                 dm.QCAT_GRU.SQL.Clear;
-                 dm.QCAT_GRU.SQL.Add('SELECT * FROM  cat_gru');
-                 dm.QCAT_GRU.SQL.Add('ORDER BY  cat_gru.id_grupo');
-                 dm.QCAT_GRU.Open;
-             end;
-                F:= Tfcat_gru.Create(aPPLICATION);
-             TRY
-                 F.ShowModal;
-             FINALLY
-                F.Free;
-             END;
-        end;
+  begin
+    if not dm.MyConnection1.Connected then Exit;
+    dm.QCAT_GRU.Close;
+    dm.QCAT_GRU.SQL.Text := 'SELECT * FROM cat_gru ORDER BY id_grupo';
+    dm.QCAT_GRU.Open;
+    Fcat_gru.ShowModal;
+  end;
+
   {============================================================================}
   {============================================================================}
   procedure TFmain.Loguin2Click(Sender: TObject);
-  var
-    ArchivoIco, ArchivoIcoh: string;
   begin
-    flogin.ShowModal;
-
-    if dm.MyConnection1.Connected then
-    begin
-      try
-        ArchivoIco := ValidarYObtenerRutaArchivo(fmain.ruta, MainPath + 'ico.sql');
-        ArchivoIcoh := ValidarYObtenerRutaArchivo(fmain.ruta, MainPath + 'icoh.sql');
-
-        dm.QCO.Close;
-        dm.QCO.SQL.Clear;
-        dm.QCO.SQL.LoadFromFile(ArchivoIco, TEncoding.UTF8);
-        dm.QCO.Open;
-        dm.QCO.Last;
-
-        dm.QCOH.Close;
-        dm.QCOH.SQL.Clear;
-        dm.QCOH.SQL.LoadFromFile(ArchivoIcoh, TEncoding.UTF8);
-        dm.QCOH.Open;
-        dm.QCOH.Last;
-      except
-        on E: Exception do
-          ShowMessage(E.Message);
-      end;
-    end;
+    // Las consultas de oficios se abren al entrar a su ventana.
+    Flogin.ShowModal;
   end;
 
   end.

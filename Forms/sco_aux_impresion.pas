@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, ppParameter, ppBands, ppMemo, ppStrtch, ppCtrls,
   jpeg, ppPrnabl, ppClass, ppCache, ppProd, ppReport, ppDB, ppComm, ppRelatv,
-  ppDBPipe, ppDesignLayer, Data.DB, System.IOUtils;
+  ppDBPipe, ppDesignLayer, Data.DB, System.IOUtils, ImagenesReportes;
 
 type
   TF_aux_imp = class(TForm)
@@ -220,6 +220,7 @@ begin
 
   LabelTitle.Caption := fmain.Ttitle;
   LabelCopy.Caption := fmain.CopyRight;
+  PrepararLogosImpresion(Self);
   Reporte.Print;
 
   if Assigned(dm) and Assigned(dm.QImpresion) and dm.MyConnection1.Connected then

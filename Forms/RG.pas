@@ -15,7 +15,7 @@ uses
   ppMemo, Buttons, DBCtrls, JvComponentBase, JvgExportComponents,
   JvDBGridExport, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWCompObject, IWCompFlash, Data.DB, ppDesignLayer, QExport4Dialog,
-  QExport4, QExport4XLS, CRGrid, JvExDBGrids, JvDBGrid, Clipbrd, System.UITypes, QExport4ASCII, QExport4SQL, QExport4XML, QExport4HTML;
+  QExport4, QExport4XLS, CRGrid, JvExDBGrids, JvDBGrid, Clipbrd, System.UITypes, QExport4ASCII, QExport4SQL, QExport4XML, QExport4HTML, ImagenesReportes;
 
 type
   TFrg = class(TForm)
@@ -151,6 +151,14 @@ type
     procedure CRDBGrid1DblClick(Sender: TObject);
 
   private
+    FTimerConsulta: TTimer;
+    FInicializando: Boolean;
+    FConsultando: Boolean;
+    FConsultaInicial: Boolean;
+    procedure MostrarReporte(Sender: TObject);
+    procedure AgendarConsulta;
+    procedure EjecutarConsultaPendiente(Sender: TObject);
+    procedure OcultarReporte(Sender: TObject);
     function ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
     procedure AplicarFiltrosSQL(SQLList: TStrings);
   public
@@ -158,6 +166,7 @@ type
     mango: THintWindow;
     myway: string;
     Forma: String;
+    procedure PrepararApertura(const AOrigem: string);
   end;
 
 var
@@ -387,6 +396,7 @@ begin
   Query(true);
   pplabel61.Caption := fmain.Ttitle;
   pplabel60.Caption := fmain.CopyRight;
+  PrepararLogosImpresion(Self);
   Lista.Print;
 end;
 
@@ -471,6 +481,10 @@ end;
 
 procedure TFrg.ComboBox3Change(Sender: TObject);
 begin
+  if FInicializando or (csLoading in ComponentState) then Exit;
+  FInicializando := True;
+  try
+
   if (ComboBox3.ItemIndex = 0) then
   begin
     ComboBox4.Items.Clear;
@@ -509,7 +523,12 @@ begin
     ComboBox4.Items.Add('Solicitudes de información');
     ComboBox4.Items.Add('');
   end;
-  Query(true);
+
+
+  finally
+    FInicializando := False;
+  end;
+  Query(True);
 end;
 
 procedure TFrg.ComboBox4Change(Sender: TObject);
@@ -543,10 +562,10 @@ end;
 
 procedure TFrg.CRDBGrid1DblClick(Sender: TObject);
 begin
-  if (Forma = 'Alta') or (Frg.Forma = 'Alta') then
+  if (Forma = 'Alta') and dm.QCO.Active and not dm.QCO.IsEmpty then
   begin
-    Frg.clave := DM.QCO.FieldByName('Folio').AsInteger;
-    Close;
+    clave := DM.QCO.FieldByName('Folio').AsInteger;
+    ModalResult := mrOk;
   end;
 end;
 
@@ -583,31 +602,32 @@ procedure TFrg.DBGrid1DblClick(Sender: TObject);
 begin
   if dm.MyConnection1.Connected then
   begin
-    Frg.clave := dm.QCO.FieldByName('Folio').AsInteger;
-    Close;
+    if not dm.QCO.Active or dm.QCO.IsEmpty then Exit;
+    clave := dm.QCO.FieldByName('Folio').AsInteger;
+    ModalResult := mrOk;
   end;
 end;
 
 procedure TFrg.Edit1Change(Sender: TObject);
 begin
-  Query(true);
+  AgendarConsulta;
 end;
 
 procedure TFrg.Edit2Change(Sender: TObject);
 begin
   if CheckBox2.Checked then
-    Query(true);
+    AgendarConsulta;
 end;
 
 procedure TFrg.Edit3Change(Sender: TObject);
 begin
   if CheckBox2.Checked then
-    Query(true);
+    AgendarConsulta;
 end;
 
 procedure TFrg.Edit4Change(Sender: TObject);
 begin
-  Query(true);
+  AgendarConsulta;
 end;
 
 procedure TFrg.ExportarUTF8(Sender: TQExport4);
@@ -622,10 +642,66 @@ end;
 
 procedure TFrg.FormCreate(Sender: TObject);
 begin
-  DateTimePicker1.Date := StrToDate(fmain.PutDate);
-  DateTimePicker2.Date := StrToDate(fmain.PutDate);
-  myway := 'sql\co\';
-  BitBtn2.Hint := 'Ver e imprimir el listado de reporte que están en el grid';
+  FInicializando := True;
+  try
+    Timer1.Enabled := False;
+    FTimerConsulta := TTimer.Create(Self);
+    FTimerConsulta.Enabled := False;
+    FTimerConsulta.Interval := 300;
+    FTimerConsulta.OnTimer := EjecutarConsultaPendiente;
+    OnHide := OcultarReporte;
+    OnShow := MostrarReporte;
+    DateTimePicker1.Date := Date;
+    DateTimePicker2.Date := Date;
+    myway := 'sql\co\';
+    BitBtn2.Hint := 'Ver e imprimir el listado de reporte que estan en el grid';
+  finally
+    FInicializando := False;
+  end;
+end;
+
+procedure TFrg.PrepararApertura(const AOrigem: string);
+begin
+  FTimerConsulta.Enabled := False;
+  Forma := AOrigem;
+  clave := 0;
+  ModalResult := mrNone;
+  FConsultaInicial := True;
+  dm.QCO.Close;
+end;
+
+procedure TFrg.MostrarReporte(Sender: TObject);
+begin
+  Timer1.Enabled := True;
+  if FConsultaInicial then
+  begin
+    // Un timer se despacha despues de los mensajes de pintura de la ventana.
+    FTimerConsulta.Interval := 1;
+    FTimerConsulta.Enabled := True;
+  end;
+end;
+
+procedure TFrg.AgendarConsulta;
+begin
+  if FInicializando or FConsultando or (csLoading in ComponentState) or
+     not Visible then
+    Exit;
+  FTimerConsulta.Enabled := False;
+  FTimerConsulta.Enabled := True;
+end;
+
+procedure TFrg.EjecutarConsultaPendiente(Sender: TObject);
+begin
+  FTimerConsulta.Enabled := False;
+  FTimerConsulta.Interval := 300;
+  if Visible then
+    Query(True);
+end;
+
+procedure TFrg.OcultarReporte(Sender: TObject);
+begin
+  Timer1.Enabled := False;
+  FTimerConsulta.Enabled := False;
 end;
 
 {------------------------------------------------------------------------------}
@@ -644,7 +720,6 @@ begin
       dm.QCO.SQL.LoadFromFile(ArchivoSql, TEncoding.UTF8);
       AplicarFiltrosSQL(dm.QCO.SQL);
       dm.QCO.Open;
-      dm.QCO.Last;
     except
       on E: Exception do
         ShowMessage(E.Message);
@@ -654,28 +729,40 @@ end;
 
 procedure TFrg.Query(axx: Boolean);
 var
-  ArchivoSql: string;
-  RutaRelativa: string;
+  ArchivoSql, RutaRelativa: string;
+  Inicio: UInt64;
+  ConsultaInicial: Boolean;
 begin
-  if dm.MyConnection1.Connected then
-  begin
+  if FInicializando or FConsultando or (csLoading in ComponentState) or
+     not dm.MyConnection1.Connected then
+    Exit;
+  FTimerConsulta.Enabled := False;
+  FConsultando := True;
+  ConsultaInicial := FConsultaInicial and axx;
+  Inicio := GetTickCount64;
+  try
     try
-      if axx then
+      if ConsultaInicial then
+        RutaRelativa := 'sql\main\co.sql'
+      else if axx then
         RutaRelativa := myway + 'co.sql'
       else
         RutaRelativa := myway + 'cox.sql';
-
       ArchivoSql := ValidarYObtenerRutaArchivo(RutaRelativa);
-
-      dm.QCO.Close;
-      dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(ArchivoSql, TEncoding.UTF8);
-      AplicarFiltrosSQL(dm.QCO.SQL);
-      dm.QCO.Open;
-      dm.QCO.Last;
-
-      Queryimp;
-
+      dm.QCO.DisableControls;
+      try
+        dm.QCO.Close;
+        dm.QCO.SQL.LoadFromFile(ArchivoSql, TEncoding.UTF8);
+        if ConsultaInicial then
+          dm.QCO.SQL.Add('ORDER BY CO.id')
+        else
+          AplicarFiltrosSQL(dm.QCO.SQL);
+        dm.QCO.Open;
+        FConsultaInicial := False;
+        // La impresion de Lista usa QCO, no QImpresion.
+      finally
+        dm.QCO.EnableControls;
+      end;
       Memo1.Text := dm.QCO.SQL.Text;
       Memo1.Lines.Add('');
       Memo1.Lines.Add(ArchivoSql);
@@ -683,6 +770,10 @@ begin
       on E: Exception do
         ShowMessage(E.Message);
     end;
+  finally
+    FConsultando := False;
+    OutputDebugString(PChar('Reportes - consulta de filtros: ' +
+      IntToStr(Int64(GetTickCount64 - Inicio)) + ' ms'));
   end;
 end;
 
@@ -699,7 +790,6 @@ begin
       dm.QImpresion.SQL.LoadFromFile(ArchivoSql, TEncoding.UTF8);
       AplicarFiltrosSQL(dm.QImpresion.SQL);
       dm.QImpresion.Open;
-      dm.QImpresion.Last;
     except
       on E: Exception do
         ShowMessage(E.Message);

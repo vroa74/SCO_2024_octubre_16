@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Grids, DBGrids, ppCtrls, ppBands, ppPrnabl, ppClass,
   ppCache, ppParameter, ppDB, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe,
-  jpeg, ppRichTx, ppStrtch, ppMemo, Buttons, ExtCtrls, Data.DB, ppDesignLayer;
+  jpeg, ppRichTx, ppStrtch, ppMemo, Buttons, ExtCtrls, Data.DB, ppDesignLayer, ConsultasUI, ImagenesReportes;
 
 type
   TFscoage_bus = class(TForm)
@@ -72,8 +72,11 @@ type
     procedure BitBtn5MouseEnter(Sender: TObject);
     procedure BitBtn2MouseLeave(Sender: TObject);
   private
-    { Private declarations }
-      mango:THintWindow;
+    FConsultaDiferida: TConsultaDiferida;
+    mango: THintWindow;
+    procedure ConsultarPendiente(Sender: TObject);
+    procedure MostrarBusqueda(Sender: TObject);
+    procedure OcultarBusqueda(Sender: TObject);
   public
     { Public declarations }
     clave:integer;
@@ -95,56 +98,9 @@ uses main, d_m;
 
 
 procedure TFscoage_bus.Query;
-var cont :integer;
-begin// query
-   cont :=0;
-   if dm.MyConnection1.Connected then
-   begin
-       dm.QAGE.Close;
-       dm.QAGE.SQL.Clear;
-       dm.QAGE.SQL.Add('SELECT * From Age');
-       if ( (Edit1.Text<> '') or   (Edit2.Text> '') or   (Edit3.Text<> '') or   (Edit4.Text<> '') or   (Edit5.Text<> '')) then
-       begin
-       dm.QAGE.SQL.Add('WHERE');
-
-         if Edit1.Text <> '' then
-           begin
-             dm.QAGE.SQL.Add('nombre LIKE "%'+Edit1.Text+'%"');
-             cont := cont +1;
-           end;
-
-         if Edit2.Text <> '' then
-           begin
-             if cont>=1 then
-                dm.QAGE.SQL.Add('AND');
-
-             dm.QAGE.SQL.Add('apaterno LIKE "%'+Edit2.Text+'%"');
-             cont := cont +1;
-           end;
-
-         if Edit3.Text <> '' then
-           begin
-             if cont>=1 then  dm.QAGE.SQL.Add('AND');
-             dm.QAGE.SQL.Add('amaterno LIKE "%'+Edit3.Text+'%"');
-             cont := cont +1;
-           end;
-
-         if Edit4.Text <> '' then
-           begin
-             if cont>=1 then  dm.QAGE.SQL.Add('AND');
-             dm.QAGE.SQL.Add('cargo LIKE "%'+Edit4.Text+'%"');
-             cont := cont +1;
-           end;
-
-         if Edit5.Text <> '' then
-           begin
-             if cont>=1 then  dm.QAGE.SQL.Add('AND');
-             dm.QAGE.SQL.Add('deporg LIKE "%'+Edit5.Text+'%"');
-           end;
-       end;// fin validacion
-       Memo1.Text := dm.QAGE.SQL.Text;
-       dm.QAGE.Open;
-   end;// validacion de conexion
+begin
+  if Assigned(FConsultaDiferida) then FConsultaDiferida.Cancelar;
+  dm.ConsultarAgenda(Edit1.Text, Edit2.Text, Edit3.Text, Edit4.Text, Edit5.Text);
 end;
 
 procedure TFscoage_bus.BitBtn1Click(Sender: TObject);
@@ -181,6 +137,7 @@ end;
 
 procedure TFscoage_bus.BitBtn3Click(Sender: TObject);
 begin
+PrepararLogosImpresion(Self);
 ppReport1.Print;
 end;
 
@@ -220,50 +177,65 @@ end;
 
 
 procedure TFscoage_bus.DBGrid1DblClick(Sender: TObject);
-var
-
-   id : integer;
 begin
-if dm.MyConnection1.Connected then
-    begin
-    Fscoage_bus.clave  := dm.QAGE.FieldByName('id_age').AsInteger;
-    Close;
- end;
+  if not dm.QAGE.Active or dm.QAGE.IsEmpty then Exit;
+  clave := dm.QAGE.FieldByName('id_age').AsInteger;
+  ModalResult := mrOk;
 end;
 
 procedure TFscoage_bus.Edit1Change(Sender: TObject);
 begin
-query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure TFscoage_bus.Edit2Change(Sender: TObject);
 begin
-query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure TFscoage_bus.Edit3Change(Sender: TObject);
 begin
-query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure TFscoage_bus.Edit4Change(Sender: TObject);
 begin
-query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure TFscoage_bus.Edit5Change(Sender: TObject);
 begin
-query;
+FConsultaDiferida.Solicitar;
 end;
 
 procedure TFscoage_bus.FormCreate(Sender: TObject);
-begin // create form...
+begin
+  FConsultaDiferida := TConsultaDiferida.Create(Self, ConsultarPendiente);
+  OnShow := MostrarBusqueda;
+  OnHide := OcultarBusqueda; // create form...
    BitBtn1.Hint := 'Limpiar filtros ...';
    BitBtn2.Hint := ' Actualizar ';
    BitBtn3.Hint := 'Imprimir linta de Reportes...';
    BitBtn5.Hint := 'Cerrar la ventana...';
 //   DBGrid1.Columns[1].Color := clSkyBlue;
 
+end;
+
+procedure TFscoage_bus.ConsultarPendiente(Sender: TObject);
+begin
+  Query;
+end;
+
+procedure TFscoage_bus.MostrarBusqueda(Sender: TObject);
+begin
+  ModalResult := mrNone;
+  dm.QAGE.Close;
+  FConsultaDiferida.Solicitar(1);
+end;
+
+procedure TFscoage_bus.OcultarBusqueda(Sender: TObject);
+begin
+  FConsultaDiferida.Cancelar;
 end;
 
 end.

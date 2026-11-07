@@ -24,7 +24,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
-    { Private declarations }
+    procedure MostrarConfiguracion(Sender: TObject);
+    procedure OcultarConfiguracion(Sender: TObject);
   public
     { Public declarations }
   end;
@@ -149,6 +150,9 @@ end;
 
 procedure TFConfig.FormCreate(Sender: TObject);
 begin //al crear la imagen
+  Timer1.Enabled := False;
+  OnShow := MostrarConfiguracion;
+  OnHide := OcultarConfiguracion;
 Image1.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+'ple.png');
 Image2.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+'legislatura.png');
 
@@ -159,6 +163,16 @@ begin
  StatusBar1.Panels[1].Text := fmain.PutDate;
  StatusBar1.Panels[2].Text := fmain.PutTime;
 
+end;
+
+procedure TFConfig.MostrarConfiguracion(Sender: TObject);
+begin
+  Timer1.Enabled := True;
+end;
+
+procedure TFConfig.OcultarConfiguracion(Sender: TObject);
+begin
+  Timer1.Enabled := False;
 end;
 
 end.

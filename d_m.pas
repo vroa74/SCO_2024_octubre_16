@@ -3,7 +3,7 @@
 interface
 
 uses
-  SysUtils, Classes, DB, MemDS, DBAccess, MyAccess, ppProd, ppClass, ppReport,
+  Windows, SysUtils, Classes, DB, MemDS, DBAccess, MyAccess, ppProd, ppClass, ppReport,
   ppComm, ppRelatv, ppDB, ppDBPipe, ppCtrls, ppPrnabl, ppBands, ppCache,
    MyBackup;
 
@@ -49,7 +49,8 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    procedure ConsultarAgenda(const ANombre, APaterno, AMaterno, ACargo,
+      ADependencia: string);
   end;
 
 var
@@ -58,5 +59,46 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TDM.ConsultarAgenda(const ANombre, APaterno, AMaterno, ACargo,
+  ADependencia: string);
+const
+  Campos: array[0..4] of string = ('nombre', 'apaterno', 'amaterno', 'cargo', 'deporg');
+var
+  Valores: array[0..4] of string;
+  I: Integer;
+  Inicio: UInt64;
+  TieneFiltro: Boolean;
+begin
+  if not MyConnection1.Connected then Exit;
+  Valores[0] := ANombre;
+  Valores[1] := APaterno;
+  Valores[2] := AMaterno;
+  Valores[3] := ACargo;
+  Valores[4] := ADependencia;
+  Inicio := GetTickCount64;
+  QAGE.DisableControls;
+  try
+    QAGE.Close;
+    QAGE.SQL.Text := 'SELECT * FROM age';
+    TieneFiltro := False;
+    for I := Low(Campos) to High(Campos) do
+      if Valores[I] <> '' then
+      begin
+        if TieneFiltro then QAGE.SQL.Add('AND')
+        else QAGE.SQL.Add('WHERE');
+        QAGE.SQL.Add(Campos[I] + ' LIKE :f' + IntToStr(I));
+        TieneFiltro := True;
+      end;
+    for I := Low(Campos) to High(Campos) do
+      if Valores[I] <> '' then
+        QAGE.ParamByName('f' + IntToStr(I)).AsString := '%' + Valores[I] + '%';
+    QAGE.Open;
+  finally
+    QAGE.EnableControls;
+    OutputDebugString(PChar('Agenda - consulta: ' +
+      IntToStr(Int64(GetTickCount64 - Inicio)) + ' ms'));
+  end;
+end;
 
 end.

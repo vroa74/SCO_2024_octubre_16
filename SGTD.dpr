@@ -2,6 +2,8 @@
 
 uses
   Forms,
+  ConsultasUI in 'ConsultasUI.pas',
+  ImagenesReportes in 'ImagenesReportes.pas',
   main in 'main.pas' {Fmain},
   d_m in 'd_m.pas' {DM: TDataModule},
   login in 'login.pas' {FLogin},
@@ -36,14 +38,12 @@ begin
   Application.CreateForm(TF_aux_imp, F_aux_imp);
   Application.CreateForm(TFrg_1, Frg_1);
   Application.CreateForm(TFscoage_bus, Fscoage_bus);
-  Application.CreateForm(TFscoage_bus, Fscoage_bus);
   Application.CreateForm(TFcat_gru, Fcat_gru);
   Application.CreateForm(TFConfig, FConfig);
   Application.CreateForm(TFReportearchivar, FReportearchivar);
   Application.CreateForm(TFRG_historico, FRG_historico);
   Application.CreateForm(TFSCO_auxiliar_alta_edicion, FSCO_auxiliar_alta_edicion);
   Application.CreateForm(Tfsco_age_aux, fsco_age_aux);
-  Application.CreateForm(TFSCOconsultas, FSCOconsultas);
   Application.CreateForm(TFSCOconsultas, FSCOconsultas);
   Application.Run;
 end.

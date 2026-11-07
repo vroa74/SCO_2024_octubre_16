@@ -31,9 +31,11 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
   private
-    { Private declarations }
+    FPreparando: Boolean;
+    procedure CargarListas;
   public
     ntcor:integer;
+    procedure PrepararApertura;
     { Public declarations }
   end;
 
@@ -107,38 +109,51 @@ uses main, d_m;
     end;
 
   procedure TFSCO_auxiliar_alta_edicion.FormCreate(Sender: TObject);
-    begin
-       JvImage1.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+ 'legislatura.png');
-        if dm.MyConnection1.Connected then
-          begin
-            dm.ncor.First;
-             repeat
-                 ncor.Items.Add(dm.ncor.FieldByName('ncor').AsString );
-                 dm.ncor.Next;
-             until dm.ncor.Eof;
-          end;
+  begin
+    JvImage1.Picture.LoadFromFile(fmain.ruta + fmain.mmedia + 'legislatura.png');
+  end;
 
-        if dm.MyConnection1.Connected then
-          begin
-            dm.tcor.First;
-             repeat
-                 tcor.Items.Add(dm.tcor.FieldByName('tcor').AsString );
-                 dm.tcor.Next;
-             until dm.tcor.Eof;
-          end;
-
-        if dm.MyConnection1.Connected then
-          begin
-            dm.ccor.First;
-             repeat
-                 ccor.Items.Add(dm.ccor.FieldByName('ccor').AsString );
-                 dm.ccor.Next;
-             until dm.ccor.Eof;
-          end;
+  procedure TFSCO_auxiliar_alta_edicion.PrepararApertura;
+  begin
+    FPreparando := True;
+    try
+      CargarListas;
+    finally
+      FPreparando := False;
     end;
+  end;
+
+  procedure TFSCO_auxiliar_alta_edicion.CargarListas;
+
+    procedure Cargar(Datos: TDataSet; const Campo: string; Lista: TStrings);
+    begin
+      if not Datos.Active then Datos.Open;
+      Datos.DisableControls;
+      Lista.BeginUpdate;
+      try
+        Lista.Clear;
+        Datos.First;
+        while not Datos.Eof do
+        begin
+          Lista.Add(Datos.FieldByName(Campo).AsString);
+          Datos.Next;
+        end;
+      finally
+        Lista.EndUpdate;
+        Datos.EnableControls;
+      end;
+    end;
+
+  begin
+    if not dm.MyConnection1.Connected then Exit;
+    Cargar(dm.ncor, 'ncor', ncor.Items);
+    Cargar(dm.tcor, 'tcor', tcor.Items);
+    Cargar(dm.ccor, 'ccor', ccor.Items);
+  end;
 
   procedure TFSCO_auxiliar_alta_edicion.tcorChange(Sender: TObject);
     begin
+      if FPreparando or (csLoading in ComponentState) then Exit;
       if dm.MyConnection1.Connected then
           begin
               ntcor   :=  tcor.ItemIndex+1;

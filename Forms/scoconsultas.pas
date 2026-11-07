@@ -7,7 +7,7 @@ uses
   Dialogs, Grids, DBGrids, ExtCtrls, JvExExtCtrls, JvBevel, StdCtrls, ComCtrls,
   ppBands, ppCtrls, ppPrnabl, ppClass, ppCache, ppComm, ppRelatv, ppProd,
   ppReport, ppDBBDE, ppDB, ppDBPipe, ppStrtch, ppMemo, ppParameter, jpeg,
-  Data.DB, ppDesignLayer;
+  Data.DB, ppDesignLayer, ImagenesReportes, ConsultasUI;
 
 type
   TFSCOconsultas = class(TForm)
@@ -173,7 +173,11 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
   private
-    { Private declarations }
+    FPreparando: Boolean;
+    FConsultaDiferida: TConsultaDiferida;
+    procedure ConsultarPendiente(Sender: TObject);
+    procedure MostrarReporte(Sender: TObject);
+    procedure OcultarReporte(Sender: TObject);
   public
     { Public declarations }
   end;
@@ -186,15 +190,31 @@ uses d_m, main, scoage_bus;
 
 {$R *.dfm}
 
-Procedure TFSCOconsultas.Query;
+procedure TFSCOconsultas.Query;
 begin
-if dm.MyConnection1.Connected then
-   begin
-     dm.QCO.Close;
-     dm.QCO.SQL.Clear;
-     dm.QCO.SQL.Add('SELECT * From co ');
-//     dm.QCO.SQL.Add('WHERE');
-   end;  // validacion myconecction.
+  if FPreparando or (csLoading in ComponentState) or not dm.MyConnection1.Connected then Exit;
+  FConsultaDiferida.Cancelar;
+  dm.QCO.DisableControls;
+  try
+    dm.QCO.Close;
+    dm.QCO.SQL.LoadFromFile(fmain.ruta + 'sql\co.sql', TEncoding.UTF8);
+    if Edit1.Text <> '' then
+      dm.QCO.SQL.Add('AND co.id LIKE :folio')
+    else if Edit2.Text <> '' then
+      dm.QCO.SQL.Add('AND co.rem_nombre LIKE :remitente')
+    else if CheckBox1.Checked then
+      dm.QCO.SQL.Add('AND co.fcap = :fecha');
+    dm.QCO.SQL.Add('ORDER BY co.id');
+    if Edit1.Text <> '' then
+      dm.QCO.ParamByName('folio').AsString := '%' + Edit1.Text + '%'
+    else if Edit2.Text <> '' then
+      dm.QCO.ParamByName('remitente').AsString := '%' + Edit2.Text + '%'
+    else if CheckBox1.Checked then
+      dm.QCO.ParamByName('fecha').AsDate := DateTimePicker1.Date;
+    dm.QCO.Open;
+  finally
+    dm.QCO.EnableControls;
+  end;
 end;
 
 procedure TFSCOconsultas.CheckBox1Click(Sender: TObject);
@@ -203,39 +223,16 @@ Query;
 end;
 
 procedure TFSCOconsultas.DateTimePicker1hange(Sender: TObject);
-var
-    FIni, FFin  :String;
-    A,M,D : Word;
 begin
-Edit1.Text := '';
-Edit2.Text := '';
-if checkbox1.Checked then
-begin
-   if dm.MyConnection1.Connected then
-   begin
-     dm.QCO.Close;
-     dm.QCO.SQL.Clear;
-     dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
-     dm.QCO.SQL.Add('and');
-     DecodeDate(DateTimePicker1.Date,A,M,D);
-     FIni := IntToStr(A) + '/' + IntToStr(M)+ '/' + IntToStr(D);
-     dm.QCO.SQL.Add('fcap = '+ QuotedStr(fini) +'');
-     dm.QCO.SQL.Add('ORDER BY');
-     dm.QCO.SQL.Add('co.id');
-     dm.QCO.Open;
-     dm.QCO.Last;
-   end;  // validacion myconecction.
- end else
- begin
-     dm.QCO.Close;
-     dm.QCO.SQL.Clear;
-     dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
-     dm.QCO.SQL.Add('ORDER BY');
-     dm.QCO.SQL.Add('co.id');
-     dm.QCO.Open;
-     dm.QCO.Last;
- end;
-
+  if FPreparando or (csLoading in ComponentState) then Exit;
+  FPreparando := True;
+  try
+    Edit1.Clear;
+    Edit2.Clear;
+  finally
+    FPreparando := False;
+  end;
+  if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 //------------------------------------------------------------------------------
@@ -259,6 +256,7 @@ begin
     ppImage1.Picture.LoadFromFile(fmain.ruta+'LXI.jpg');
     if RadioButton1.Checked then
        begin
+       PrepararLogosImpresion(Self);
        Rnormal.Print;
        dm.TCO.Edit;
        dm.TCO.FieldByName('tramite').AsBoolean := true;
@@ -269,6 +267,7 @@ begin
        end;
     if RadioButton2.Checked then
        begin
+       PrepararLogosImpresion(Self);
        Respecial.Print;
        dm.TCO.Edit;
        dm.TCO.FieldByName('tramite').AsBoolean := true;
@@ -279,6 +278,7 @@ begin
        end;
     if RadioButton3.Checked then
        begin
+       PrepararLogosImpresion(Self);
        Rpetsol.Print;
        dm.TCO.Edit;
        dm.TCO.FieldByName('tramite').AsBoolean := true;
@@ -297,7 +297,6 @@ begin
     dm.QCO.SQL.Add('ORDER BY');
     dm.QCO.SQL.Add('co.id');
     dm.QCO.Open;
-    dm.QCO.Last;
 //    dm.QCO.Last;
 end;
 
@@ -305,43 +304,54 @@ end;
 
 procedure TFSCOconsultas.Edit1Change(Sender: TObject);
 begin
-Edit2.Text := '';
-DateTimePicker1.Date  := StrToDate(fmain.PutDate);
-if dm.MyConnection1.Connected then
-   begin
-     dm.QCO.Close;
-     dm.QCO.SQL.Clear;
-     dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
-     dm.QCO.SQL.Add('and');
-     dm.QCO.SQL.Add('id LIKE "%'+Edit1.Text+'%"');
-     dm.QCO.SQL.add('ORDER BY  CO.id');
-     dm.QCO.Open;
-     dm.QCO.Last;
-   end;  // validacion myconecction.
-
+  if FPreparando or (csLoading in ComponentState) then Exit;
+  FPreparando := True;
+  try
+    Edit2.Clear;
+  finally
+    FPreparando := False;
+  end;
+  if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFSCOconsultas.Edit2Change(Sender: TObject);
 begin
-Edit1.Text := '';
-DateTimePicker1.Date  := StrToDate(fmain.PutDate);
-if dm.MyConnection1.Connected then
-   begin
-     dm.QCO.Close;
-     dm.QCO.SQL.Clear;
-     dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
-     dm.QCO.SQL.Add('and');
-     dm.QCO.SQL.Add('rem_nombre LIKE "%'+Edit2.Text+'%"');
-     dm.QCO.SQL.add('ORDER BY  CO.id');
-     dm.QCO.Open;
-     dm.QCO.Last;
-   end;  // validacion myconecction.
-
+  if FPreparando or (csLoading in ComponentState) then Exit;
+  FPreparando := True;
+  try
+    Edit1.Clear;
+  finally
+    FPreparando := False;
+  end;
+  if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFSCOconsultas.FormCreate(Sender: TObject);
-begin   //
-   DateTimePicker1.Date := StrToDate(fmain.PutDate);
+begin
+  FPreparando := True;
+  try
+    FConsultaDiferida := TConsultaDiferida.Create(Self, ConsultarPendiente);
+    DateTimePicker1.Date := Date;
+    OnShow := MostrarReporte;
+    OnHide := OcultarReporte;
+  finally
+    FPreparando := False;
+  end;
+end;
+
+procedure TFSCOconsultas.ConsultarPendiente(Sender: TObject);
+begin
+  Query;
+end;
+
+procedure TFSCOconsultas.MostrarReporte(Sender: TObject);
+begin
+  FConsultaDiferida.Solicitar(1);
+end;
+
+procedure TFSCOconsultas.OcultarReporte(Sender: TObject);
+begin
+  FConsultaDiferida.Cancelar;
 end;
 
 end.

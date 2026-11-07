@@ -152,19 +152,13 @@ end;
 
 procedure TFLogin.AbrirTablasDatos;
 begin
-  dm.Tage.Open;
-  dm.tco.Open;
+  // Solo los catalogos pequenos son comunes a las ventanas.
+  // Los datasets de oficios, agenda, busquedas e impresion se abren al usarlos.
   dm.TGrupo.Open;
   dm.TCAT_GRU.Open;
-  dm.QCO.Open;
-  dm.QCOH.Open;
-  dm.QAGE.Open;
-  dm.Qgrupo.Open;
   dm.QCAT_GRU.Open;
   dm.QGRUPO.Open;
   dm.QAUX.Open;
-  dm.QImpresion.Open;
-  dm.Qco_his.Open;
   dm.ncor.Open;
   dm.tcor.Open;
   dm.ccor.Open;

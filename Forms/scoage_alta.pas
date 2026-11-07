@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, Grids, DBGrids, Mask, DBCtrls, ExtCtrls, DBAdvNavigator,
   JvExExtCtrls, JvImage, DBAdvGlowNavigator, Buttons, ppStrtch, ppMemo, ppCtrls,
   ppBands, jpeg, ppPrnabl, ppClass, ppCache, ppParameter, ppDB, ppProd,
-  ppReport, ppComm, ppRelatv, ppDBPipe, ppDesignLayer;
+  ppReport, ppComm, ppRelatv, ppDBPipe, ppDesignLayer, ImagenesReportes;
 
 type
   Tfscoage_alta = class(TForm)
@@ -112,11 +112,9 @@ if dm.MyConnection1.Connected then
      dm.QAGE.SQL.Add('where');
      dm.QAGE.SQL.Add('id_age = '+IntToStr(aux)+'');
      DM.QAGE.Open;
+     PrepararLogosImpresion(Self);
      ppReport1.Print;
      dm.QAGE.Close;
-     dm.QAGE.SQL.Clear;
-     dm.QAGE.SQL.Add('SELECT * FROM AGE');
-     DM.QAGE.Open;
    end;
 end;
 
@@ -126,30 +124,16 @@ begin
 end;
 
 procedure Tfscoage_alta.BitBtn3Click(Sender: TObject);
-var f: TFscoage_bus;
-    id:integer;
-    reg:integer;
 begin
-   id:=0;
-   reg:=0;
-   f:= tFscoage_bus.Create(application);
-   try
-     f.ShowModal
-   finally
-      f.Free;
-      id := Fscoage_bus.clave;
-      dm.Tage.First;
-      repeat
-         if id = dm.Tage.FieldByName('id_age').AsInteger then
-            begin
-                reg:= dm.Tage.RecNo;
-                dm.Tage.Last;
-            end;
-        dm.Tage.Next;
-      until dm.Tage.Eof ;
-      dm.Tage.RecNo := reg;
-      dm.Tage.Refresh;
-   end;
+  Fscoage_bus.clave := 0;
+  if Fscoage_bus.ShowModal <> mrOk then Exit;
+  if (Fscoage_bus.clave <= 0) or not dm.Tage.Active then Exit;
+  dm.Tage.DisableControls;
+  try
+    dm.Tage.Locate('id_age', Fscoage_bus.clave, []);
+  finally
+    dm.Tage.EnableControls;
+  end;
 end;
 
 procedure Tfscoage_alta.clear;

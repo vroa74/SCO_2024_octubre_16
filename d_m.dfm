@@ -1,4 +1,4 @@
-object DM: TDM
+﻿object DM: TDM
   OldCreateOrder = False
   Height = 358
   Width = 606
@@ -12,6 +12,8 @@ object DM: TDM
     Top = 16
   end
   object QCO: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     SQL.Strings = (
       'SELECT'
@@ -54,6 +56,8 @@ object DM: TDM
     Top = 224
   end
   object QAGE: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     SQL.Strings = (
       'SELECT '
@@ -75,6 +79,8 @@ object DM: TDM
     Top = 224
   end
   object QCOH: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     SQL.Strings = (
       'SELECT'
@@ -233,6 +239,8 @@ object DM: TDM
     Top = 16
   end
   object QImpresion: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     SQL.Strings = (
       'SELECT'
@@ -253,6 +261,8 @@ object DM: TDM
     Top = 288
   end
   object TCO: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     SQL.Strings = (
       'SELECT *'
@@ -267,6 +277,8 @@ object DM: TDM
     Top = 8
   end
   object Tage: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     SQL.Strings = (
       'SELECT *'
@@ -278,6 +290,8 @@ object DM: TDM
     Top = 8
   end
   object TBitacora: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     SQL.Strings = (
       'SELECT '
@@ -300,6 +314,8 @@ object DM: TDM
     Top = 64
   end
   object QRCA: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     Left = 248
     Top = 8
@@ -310,6 +326,8 @@ object DM: TDM
     Top = 64
   end
   object Qco_his: TMyQuery
+    FetchAll = False
+    FetchRows = 50
     Connection = MyConnection1
     SQL.Strings = (
       'SELECT *'

@@ -15,7 +15,7 @@ uses
   ppMemo, Buttons, DBCtrls, JvComponentBase, JvgExportComponents,
    JvDBGridExport, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWCompObject, IWCompFlash, Data.DB, ppDesignLayer, QExport4Dialog,
-  CRGrid, Clipbrd, QExport4, QExport4ASCII, QExport4SQL, QExport4XML, QExport4HTML;
+  CRGrid, Clipbrd, QExport4, QExport4ASCII, QExport4SQL, QExport4XML, QExport4HTML, ConsultasUI, ImagenesReportes;
 
 type
   TFRG_historico = class(TForm)
@@ -143,7 +143,11 @@ type
     procedure BitBtn6Click(Sender: TObject);
 
   private
-    { Private declarations }
+    FConsultaDiferida: TConsultaDiferida;
+    FPreparando, FConsultando: Boolean;
+    procedure ConsultarPendiente(Sender: TObject);
+    procedure MostrarReporte(Sender: TObject);
+    procedure OcultarReporte(Sender: TObject);
   public
     { Public declarations }
     clave:integer;
@@ -217,6 +221,7 @@ begin
        pplabel61.Caption := Fmain.Ttitle;
        pplabel60.Caption := fmain.CopyRight;
    ppImage2.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+'ple.png');
+   PrepararLogosImpresion(Self);
    Lista.Print;
 end;
 
@@ -285,6 +290,10 @@ end;
 
 procedure TFRG_historico.ComboBox3Change(Sender: TObject);
 begin
+  if FPreparando or (csLoading in ComponentState) then Exit;
+  FPreparando := True;
+  try
+
   if (ComboBox3.ItemIndex = 0) then
      begin
        ComboBox4.Items.Clear;
@@ -323,7 +332,12 @@ begin
       ComboBox4.Items.Add('Solicitudes de información');
       ComboBox4.Items.Add('');
      end;
-    query(true);
+
+
+  finally
+    FPreparando := False;
+  end;
+  Query(True);
 end;
 
 procedure TFRG_historico.ComboBox4Change(Sender: TObject);
@@ -406,24 +420,24 @@ end;
 
 procedure TFRG_historico.Edit1Change(Sender: TObject);
 begin
-  query(true);
+  if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFRG_historico.Edit2Change(Sender: TObject);
 begin
   if CheckBox2.Checked then
-       query(true);
+       if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFRG_historico.Edit3Change(Sender: TObject);
 begin
   if CheckBox2.Checked then
-       query(true);
+       if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFRG_historico.Edit4Change(Sender: TObject);
 begin
-     query(true);
+     if Assigned(FConsultaDiferida) then FConsultaDiferida.Solicitar;
 end;
 
 procedure TFRG_historico.ExportarUTF8(Sender: TQExport4);
@@ -438,15 +452,16 @@ end;
 
 procedure TFRG_historico.FormCreate(Sender: TObject);
 begin
- DateTimePicker1.Date :=  StrToDate(fmain.PutDate);
- DateTimePicker2.Date :=  StrToDate(fmain.PutDate);
- if dm.MyConnection1.Connected then
-    begin
-      dm.QCO.Close;
-      dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
-      dm.qco.Open
-    end;
+  FPreparando := True;
+  try
+    FConsultaDiferida := TConsultaDiferida.Create(Self, ConsultarPendiente);
+    OnShow := MostrarReporte;
+    OnHide := OcultarReporte;
+    DateTimePicker1.Date := Date;
+    DateTimePicker2.Date := Date;
+  finally
+    FPreparando := False;
+  end;
 end;
 
 Procedure TFRG_historico.Querypriint;
@@ -603,7 +618,7 @@ if dm.MyConnection1.Connected then
          end;
         dm.Qco_his.SQL.add('ORDER BY  CO_hist.id');
        dm.Qco_his.Open;
-       dm.Qco_his.Last;
+
    end; // fin de la validacion
 end;
 
@@ -616,6 +631,12 @@ var
     A,M,D : Word;
     va, vb,vc,vd : integer;
 begin
+  if FPreparando or FConsultando or (csLoading in ComponentState) then Exit;
+  if Assigned(FConsultaDiferida) then FConsultaDiferida.Cancelar;
+  FConsultando := True;
+  dm.Qco_his.DisableControls;
+  try
+
 if dm.MyConnection1.Connected then
    begin
        dm.Qco_his.Close;
@@ -767,10 +788,14 @@ if dm.MyConnection1.Connected then
         dm.Qco_his.SQL.add('ORDER BY  CO_hist.id');
 //        Memo1.Text := dm.Qco_his.sQL.Text;
        dm.Qco_his.Open;
-       dm.Qco_his.Last;
-       Queryimp;
+
        Memo1.Text := dm.Qco_his.SQL.Text;
    end; // fin de la validacion
+
+  finally
+    dm.Qco_his.EnableControls;
+    FConsultando := False;
+  end;
 end;
 
 
@@ -959,9 +984,24 @@ if dm.MyConnection1.Connected then
          end;
        dm.QImpresion.SQL.add('ORDER BY  CO_hist.id');
        dm.QImpresion.Open;
-       dm.QImpresion.Last;
+
    end;
 end;
 
+
+procedure TFRG_historico.ConsultarPendiente(Sender: TObject);
+begin
+  Query(True);
+end;
+
+procedure TFRG_historico.MostrarReporte(Sender: TObject);
+begin
+  FConsultaDiferida.Solicitar(1);
+end;
+
+procedure TFRG_historico.OcultarReporte(Sender: TObject);
+begin
+  FConsultaDiferida.Cancelar;
+end;
 
 end.
