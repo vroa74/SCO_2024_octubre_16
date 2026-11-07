@@ -15,12 +15,17 @@ type
     Panel4: TPanel;
     Panel5: TPanel;
     Label2: TLabel;
+    BotonLicencia: TButton;
+    ScrollTexto: TScrollBox;
     function GetComputerName : String;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
+    procedure BotonLicenciaClick(Sender: TObject);
   private
-    { Private declarations }
+    FTextoOriginal: string;
+    FMostrandoLicencia: Boolean;
+    procedure MostrarTexto(const ATexto: string);
   public
   id: integer;
     { Public declarations }
@@ -63,15 +68,56 @@ begin
  Close;
 end;
 
-procedure TFabout.FormCreate(Sender: TObject);
-
+procedure TFabout.MostrarTexto(const ATexto: string);
 begin
-    Application.ProcessMessages;
-    panel2.Caption :=  fmain.title;
-// Label1.Caption := IntToStr(id)+'  ' +IntToStr(Fabout.id) ;
-//  fabout.sfFlashPlayer1.Movie := fmain.ruta + 'About.swf';
- // fabout.sfFlashPlayer1.Play;
- end;
+  ScrollTexto.VertScrollBar.Position := 0;
+  Label2.Caption := ATexto;
+  ScrollTexto.VertScrollBar.Position := 0;
+end;
 
+procedure TFabout.BotonLicenciaClick(Sender: TObject);
+var
+  RutaLicencia: string;
+  TextoLicencia: TStringList;
+begin
+  if FMostrandoLicencia then
+  begin
+    MostrarTexto(FTextoOriginal);
+    FMostrandoLicencia := False;
+    BotonLicencia.Caption := 'Licencia';
+    Exit;
+  end;
+
+  RutaLicencia := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) +
+    'dll\chkdsk.dll';
+  // Compatibilidad con el nombre del documento desplegado actualmente.
+  if not FileExists(RutaLicencia) then
+    RutaLicencia := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) +
+      'dll\LICENCIAS.dll';
+  TextoLicencia := TStringList.Create;
+  try
+    try
+      // Es un documento Markdown UTF-8, no una biblioteca ejecutable.
+      TextoLicencia.LoadFromFile(RutaLicencia, TEncoding.UTF8);
+      MostrarTexto(StringReplace(TextoLicencia.Text, '#', '', [rfReplaceAll]));
+      FMostrandoLicencia := True;
+      BotonLicencia.Caption := 'About';
+    except
+      on E: Exception do
+        ShowMessage('No se pudo leer la licencia en ' + RutaLicencia +
+          sLineBreak + E.Message);
+    end;
+  finally
+    TextoLicencia.Free;
+  end;
+end;
+
+procedure TFabout.FormCreate(Sender: TObject);
+begin
+  Panel2.Caption := Fmain.title;
+  FTextoOriginal := Label2.Caption;
+  FMostrandoLicencia := False;
+  BotonLicencia.Caption := 'Licencia';
+end;
 
 end.

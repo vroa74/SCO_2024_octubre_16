@@ -215,7 +215,7 @@ begin
    begin
      dm.QCO.Close;
      dm.QCO.SQL.Clear;
-     dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
+     dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
      dm.QCO.SQL.Add('and');
      DecodeDate(DateTimePicker1.Date,A,M,D);
      FIni := IntToStr(A) + '/' + IntToStr(M)+ '/' + IntToStr(D);
@@ -229,7 +229,7 @@ begin
  begin
      dm.QCO.Close;
      dm.QCO.SQL.Clear;
-     dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
+     dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
      dm.QCO.SQL.Add('ORDER BY');
      dm.QCO.SQL.Add('co.id');
      dm.QCO.Open;
@@ -293,7 +293,7 @@ begin
     dm.TCO.Refresh;
     dm.QCO.Close;
     dm.QCO.SQL.Clear;
-    dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
+    dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
     dm.QCO.SQL.Add('ORDER BY');
     dm.QCO.SQL.Add('co.id');
     dm.QCO.Open;
@@ -311,7 +311,7 @@ if dm.MyConnection1.Connected then
    begin
      dm.QCO.Close;
      dm.QCO.SQL.Clear;
-     dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
+     dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
      dm.QCO.SQL.Add('and');
      dm.QCO.SQL.Add('id LIKE "%'+Edit1.Text+'%"');
      dm.QCO.SQL.add('ORDER BY  CO.id');
@@ -329,7 +329,7 @@ if dm.MyConnection1.Connected then
    begin
      dm.QCO.Close;
      dm.QCO.SQL.Clear;
-     dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
+     dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
      dm.QCO.SQL.Add('and');
      dm.QCO.SQL.Add('rem_nombre LIKE "%'+Edit2.Text+'%"');
      dm.QCO.SQL.add('ORDER BY  CO.id');

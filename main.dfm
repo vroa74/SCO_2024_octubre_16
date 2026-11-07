@@ -77,7 +77,6 @@ object Fmain: TFmain
     Align = alClient
     Stretch = True
     TabOrder = 4
-    ExplicitHeight = 569
   end
   object Panel1: TPanel
     Left = 0
@@ -94,11 +93,8 @@ object Fmain: TFmain
       Height = 22
       Align = alRight
       Caption = 'Validar'
-      OnClick = Button1Click
       TabOrder = 0
-      ExplicitLeft = 631
-      ExplicitTop = 9
-      ExplicitHeight = 25
+      OnClick = Button1Click
     end
     object Edit1: TEdit
       Left = 1
@@ -108,9 +104,6 @@ object Fmain: TFmain
       Align = alClient
       Color = clSkyBlue
       TabOrder = 1
-      ExplicitLeft = 816
-      ExplicitTop = 16
-      ExplicitWidth = 121
       ExplicitHeight = 21
     end
   end

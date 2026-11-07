@@ -251,7 +251,7 @@ begin
     begin
       dm.QCO.Close;
       dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
+      dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
       dm.qco.Open
     end;
   if not dm.Qco_his.Active then
@@ -444,7 +444,7 @@ begin
     begin
       dm.QCO.Close;
       dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
+      dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8);
       dm.qco.Open
     end;
 end;
@@ -459,7 +459,7 @@ if dm.MyConnection1.Connected then
    begin
        dm.Qco_his.Close;
        dm.Qco_his.SQL.Clear;
-       dm.Qco_his.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohist_1.sql', TEncoding.UTF8);
+       dm.Qco_his.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohist1.sql', TEncoding.UTF8);
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
        begin

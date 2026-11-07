@@ -323,7 +323,7 @@ if dm.MyConnection1.Connected then
    begin
        dm.QCO.Close;
        dm.QCO.SQL.Clear;
-       dm.QCO.SQL.LoadFromFile(fmain.ruta+'coh1.sql', TEncoding.UTF8);
+       dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\coh1.sql', TEncoding.UTF8);
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
        begin
@@ -493,9 +493,9 @@ if dm.MyConnection1.Connected then
        dm.QCO.Close;
        dm.QCO.SQL.Clear;
       if axx then
-           dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8)
+           dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\co.sql', TEncoding.UTF8)
          else
-            dm.QCO.SQL.LoadFromFile(fmain.ruta+'cox.sql', TEncoding.UTF8);
+            dm.QCO.SQL.LoadFromFile(fmain.ruta+'sql\cox.sql', TEncoding.UTF8);
 
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
@@ -689,7 +689,7 @@ if dm.MyConnection1.Connected then
    begin
        dm.QImpresion.Close;
        dm.QImpresion.SQL.Clear;
-       dm.QImpresion.SQL.LoadFromFile(fmain.ruta+'coh1.sql', TEncoding.UTF8);
+       dm.QImpresion.SQL.LoadFromFile(fmain.ruta+'sql\coh1.sql', TEncoding.UTF8);
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
        begin
