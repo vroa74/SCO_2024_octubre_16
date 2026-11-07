@@ -15,6 +15,7 @@ object Fmain: TFmain
   Position = poMainFormCenter
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object StatusBar1: TStatusBar
@@ -72,10 +73,46 @@ object Fmain: TFmain
     Left = 0
     Top = 0
     Width = 1052
-    Height = 600
+    Height = 576
     Align = alClient
     Stretch = True
     TabOrder = 4
+    ExplicitHeight = 569
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 576
+    Width = 1052
+    Height = 24
+    Align = alBottom
+    BevelOuter = bvLowered
+    TabOrder = 5
+    object Button1: TButton
+      Left = 976
+      Top = 1
+      Width = 75
+      Height = 22
+      Align = alRight
+      Caption = 'Validar'
+      OnClick = Button1Click
+      TabOrder = 0
+      ExplicitLeft = 631
+      ExplicitTop = 9
+      ExplicitHeight = 25
+    end
+    object Edit1: TEdit
+      Left = 1
+      Top = 1
+      Width = 975
+      Height = 22
+      Align = alClient
+      Color = clSkyBlue
+      TabOrder = 1
+      ExplicitLeft = 816
+      ExplicitTop = 16
+      ExplicitWidth = 121
+      ExplicitHeight = 21
+    end
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

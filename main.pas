@@ -5,10 +5,22 @@
   uses
     Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
     Dialogs, Menus, ExtCtrls, ComCtrls, JvExExtCtrls, JvImage, StdCtrls, DateUtils,
-    Vcl.DBCtrls, CryptBase, HashObj;
+    Vcl.DBCtrls, CryptBase, HashObj, AESObj, MiscObj, System.JSON,
+    System.Generics.Collections, System.IOUtils;
 
 type
   // Declaración del record para configuraciones
+  TRestriccion = record
+    Linea: Integer;
+    Fecha: TDateTime;
+    Hash: string;
+  end;
+
+  TEstadoControl = record
+    Control: TControl;
+    Visible: Boolean;
+  end;
+
   TConfiguracion = record
     AnchoVentana: Integer;
     AltoVentana: Integer;
@@ -47,6 +59,9 @@ type
       N3: TMenuItem;
       N4: TMenuItem;
       SHA3Hash1: TSHA3Hash;
+    Panel1: TPanel;
+    Button1: TButton;
+    Edit1: TEdit;
 
       Procedure  endweek(fecha:TDateTimePicker);
       function PutDate : String;
@@ -69,7 +84,35 @@ type
       procedure Reportesgenerales1Click(Sender: TObject);
       procedure C2Click(Sender: TObject);
     procedure SeguimientoaTrmitedeRespuesta1Click(Sender: TObject);
+      procedure FormShow(Sender: TObject);
+      procedure Button1Click(Sender: TObject);
     private
+      FEstados: TArray<TEstadoControl>;
+      FMenuOriginal: TMainMenu;
+      FTimerOriginal: Boolean;
+      FLicencias: TList<TRestriccion>;
+      FLineas: TStringList;
+      FCopiaArchivo: TBytes;
+      FBloqueo: TFileStream;
+      FAES: TAESEncryption;
+      FRutaLicencias: string;
+      FActual, FIntentos: Integer;
+      FIniciado, FLiberado, FTerminando: Boolean;
+      procedure BloquearInterfaz;
+      procedure AdquirirBloqueoLicencias;
+      procedure CargarRestricciones;
+      function LeerRestriccion(const ALinea: string; AIndice: Integer): TRestriccion;
+      procedure ConfigurarCifrado(const AObjeto: TJSONObject);
+      function DescifrarFecha(const AObjeto: TJSONObject): TDateTime;
+      function BuscarRestriccionVencida: Integer;
+      procedure RestaurarInterfaz;
+      procedure RegistrarIntentoFallido;
+      procedure VerificarArchivoSinCambios;
+      procedure ActualizarIndices(AIndiceLinea: Integer);
+      procedure ContinuarValidacion;
+      procedure GuardarSinRegistro;
+      procedure TerminarValidacion(const ACodigo: string);
+      function CrearHashAcceso(const ATexto: string): string;
 
     public
        ruta: string;
@@ -83,6 +126,7 @@ type
        cambio:integer;
        contx:integer;
        archval:string;
+      destructor Destroy; override;
     end;
 
   var
@@ -109,6 +153,342 @@ implementation
     ----------------------------------------------------------------------------
     ----------------------------------------------------------------------------
 }
+
+
+const
+  MaxIntentosLicencia = 3;
+  ErrorCargaLicencias = 'SGTD-LIC-001';
+  ErrorGuardadoLicencias = 'SGTD-LIC-002';
+  ErrorIntentosLicencia = 'SGTD-LIC-003';
+  // Compatibilidad con los archivos existentes del generador EncriptacionX.
+  ClaveMaestraLicencias = 'BlackWolfMX';
+
+{ Validacion de licencias: no cargar este archivo como biblioteca de Windows. }
+procedure TFmain.BloquearInterfaz;
+var
+  I: Integer;
+begin
+  FActual := -1;
+  FMenuOriginal := Menu;
+  Menu := nil; // Desactiva tambien los atajos de este menu.
+  FTimerOriginal := Timer1.Enabled;
+  Timer1.Enabled := False;
+  SetLength(FEstados, ControlCount);
+  for I := 0 to ControlCount - 1 do
+  begin
+    FEstados[I].Control := Controls[I];
+    FEstados[I].Visible := Controls[I].Visible;
+    if (Controls[I] <> bg) and (Controls[I] <> Panel1) then
+      Controls[I].Visible := False;
+  end;
+  Panel1.Visible := True;
+  Panel1.BringToFront;
+  Edit1.Clear;
+  Edit1.PasswordChar := '*';
+  Edit1.Enabled := False;
+  Button1.Enabled := False;
+  Button1.Default := True;
+end;
+
+function TFmain.CrearHashAcceso(const ATexto: string): string;
+begin
+  SHA3Hash1.HashSizeBits := 256;
+  SHA3Hash1.OutputFormat := base64;
+  SHA3Hash1.Unicode := yesUni;
+  Result := SHA3Hash1.Hash(ATexto);
+end;
+
+function CampoLicencia(const AObjeto: TJSONObject; const ANombre: string): string;
+var
+  Valor: TJSONValue;
+begin
+  Valor := AObjeto.GetValue(ANombre);
+  if not (Valor is TJSONString) then
+    raise EConvertError.CreateFmt('Campo de licencia invalido: %s', [ANombre]);
+  Result := Valor.Value;
+  if Result = '' then
+    raise EConvertError.CreateFmt('Campo de licencia vacio: %s', [ANombre]);
+end;
+
+procedure TFmain.AdquirirBloqueoLicencias;
+var
+  HandleBloqueo: THandle;
+begin
+  // Crear sin truncar; la apertura exclusiva determina la instancia autorizada.
+  HandleBloqueo := CreateFile(PChar(FRutaLicencias + '.lock'),
+    GENERIC_READ or GENERIC_WRITE, FILE_SHARE_READ or FILE_SHARE_WRITE,
+    nil, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+  if HandleBloqueo = INVALID_HANDLE_VALUE then
+    RaiseLastOSError;
+  CloseHandle(HandleBloqueo);
+  FBloqueo := TFileStream.Create(FRutaLicencias + '.lock',
+    fmOpenReadWrite or fmShareExclusive);
+end;
+
+procedure TFmain.ConfigurarCifrado(const AObjeto: TJSONObject);
+var
+  Modo, Formato: string;
+begin
+  Modo := UpperCase(CampoLicencia(AObjeto, 'densidad'));
+  Formato := LowerCase(CampoLicencia(AObjeto, 'temperatura'));
+  if Modo = 'CBC' then
+    FAES.AType := atCBC
+  else if Modo = 'CTR' then
+    FAES.AType := atCTR
+  else
+    raise EConvertError.Create('Modo AES invalido');
+
+  if Formato = 'base64' then
+    FAES.OutputFormat := base64
+  else if Formato = 'hexa' then
+    FAES.OutputFormat := hexa
+  else
+    raise EConvertError.Create('Formato AES invalido');
+end;
+
+function TFmain.DescifrarFecha(const AObjeto: TJSONObject): TDateTime;
+var
+  Dia, Mes, Anio: Integer;
+begin
+  Dia := StrToInt(FAES.Decrypt(CampoLicencia(AObjeto, 't1')));
+  Anio := StrToInt(FAES.Decrypt(CampoLicencia(AObjeto, 't2')));
+  Mes := StrToInt(FAES.Decrypt(CampoLicencia(AObjeto, 't3')));
+  if (Dia < 1) or (Dia > 31) or (Mes < 1) or (Mes > 12) or
+     (Anio < 1) or (Anio > 9999) then
+    raise EConvertError.Create('Fecha fuera de rango');
+  Result := EncodeDate(Anio, Mes, Dia);
+end;
+
+function TFmain.LeerRestriccion(const ALinea: string;
+  AIndice: Integer): TRestriccion;
+var
+  Valor: TJSONValue;
+  Objeto: TJSONObject;
+begin
+  Valor := TJSONObject.ParseJSONValue(ALinea);
+  try
+    if not (Valor is TJSONObject) then
+      raise EConvertError.Create('Registro de licencia invalido');
+    Objeto := TJSONObject(Valor);
+    ConfigurarCifrado(Objeto);
+    Result.Linea := AIndice;
+    Result.Fecha := DescifrarFecha(Objeto);
+    Result.Hash := CampoLicencia(Objeto, 'pon');
+    if CrearHashAcceso(FAES.Decrypt(CampoLicencia(Objeto, 'pin'))) <> Result.Hash then
+      raise EConvertError.Create('Hash de licencia inconsistente');
+  finally
+    Valor.Free;
+  end;
+end;
+
+procedure TFmain.CargarRestricciones;
+var
+  I: Integer;
+  Contenido: string;
+begin
+  AdquirirBloqueoLicencias;
+  FCopiaArchivo := TFile.ReadAllBytes(FRutaLicencias);
+  FLineas := TStringList.Create;
+  FLineas.LoadFromFile(FRutaLicencias, TEncoding.UTF8);
+  FLicencias := TList<TRestriccion>.Create;
+  Contenido := Trim(FLineas.Text);
+  if (Contenido = '') or (Contenido = '[]') then
+    Exit;
+
+  FAES := TAESEncryption.Create(Self);
+  // La clave y las opciones comunes se calculan una sola vez por carga.
+  SHA3Hash1.HashSizeBits := 256;
+  SHA3Hash1.Unicode := yesUni;
+  SHA3Hash1.OutputFormat := raw;
+  FAES.KeyLength := kl256;
+  FAES.Key := SHA3Hash1.Hash(ClaveMaestraLicencias);
+  FAES.Unicode := yesUni;
+  FAES.PaddingMode := PKCS7;
+  FAES.IVMode := rand;
+  for I := 0 to FLineas.Count - 1 do
+    if Trim(FLineas[I]) <> '' then
+      FLicencias.Add(LeerRestriccion(FLineas[I], I));
+end;
+
+procedure TFmain.FormShow(Sender: TObject);
+begin
+  if FIniciado then
+    Exit;
+  FIniciado := True;
+  try
+    CargarRestricciones;
+    ContinuarValidacion;
+  except
+    on E: Exception do
+      TerminarValidacion(ErrorCargaLicencias);
+  end;
+end;
+
+function TFmain.BuscarRestriccionVencida: Integer;
+var
+  I: Integer;
+  Hoy: TDateTime;
+begin
+  Hoy := Date;
+  for I := 0 to FLicencias.Count - 1 do
+    if Hoy > FLicencias[I].Fecha then
+      Exit(I);
+  Result := -1;
+end;
+
+procedure TFmain.RestaurarInterfaz;
+var
+  I: Integer;
+begin
+  Panel1.Visible := False;
+  Edit1.Enabled := False;
+  Button1.Enabled := False;
+  for I := 0 to Length(FEstados) - 1 do
+    if FEstados[I].Control <> Panel1 then
+      FEstados[I].Control.Visible := FEstados[I].Visible;
+  Menu := FMenuOriginal;
+  Timer1.Enabled := FTimerOriginal;
+  FLiberado := True;
+  FreeAndNil(FBloqueo);
+end;
+
+procedure TFmain.ContinuarValidacion;
+begin
+  FActual := BuscarRestriccionVencida;
+  FIntentos := 0;
+  Edit1.Clear;
+  if FActual < 0 then
+  begin
+    RestaurarInterfaz;
+    Exit;
+  end;
+  Panel1.Visible := True;
+  Edit1.Enabled := True;
+  Button1.Enabled := True;
+  Edit1.SetFocus;
+end;
+
+procedure TFmain.VerificarArchivoSinCambios;
+var
+  Actual: TBytes;
+begin
+  Actual := TFile.ReadAllBytes(FRutaLicencias);
+  if Length(Actual) <> Length(FCopiaArchivo) then
+    raise EInOutError.Create('Archivo modificado externamente');
+  if Length(Actual) > 0 then
+    if not CompareMem(@Actual[0], @FCopiaArchivo[0], Length(Actual)) then
+      raise EInOutError.Create('Archivo modificado externamente');
+end;
+
+procedure TFmain.ActualizarIndices(AIndiceLinea: Integer);
+var
+  I: Integer;
+  Registro: TRestriccion;
+begin
+  for I := 0 to FLicencias.Count - 1 do
+  begin
+    Registro := FLicencias[I];
+    if Registro.Linea > AIndiceLinea then
+    begin
+      Dec(Registro.Linea);
+      FLicencias[I] := Registro;
+    end;
+  end;
+end;
+
+procedure TFmain.GuardarSinRegistro;
+var
+  Salida: TStringList;
+  LineaQuitada: Integer;
+  Temporal: string;
+begin
+  LineaQuitada := FLicencias[FActual].Linea;
+  Salida := TStringList.Create;
+  Temporal := FRutaLicencias + '.' + IntToHex(GetCurrentProcessId, 8) + '.tmp';
+  try
+    Salida.Assign(FLineas);
+    Salida.Delete(LineaQuitada);
+    if Trim(Salida.Text) = '' then
+      Salida.Text := '[]';
+    VerificarArchivoSinCambios;
+    Salida.SaveToFile(Temporal, TEncoding.UTF8);
+    // Reemplazo atomico: el original se conserva si falla la escritura previa.
+    if not MoveFileEx(PChar(Temporal), PChar(FRutaLicencias),
+      MOVEFILE_REPLACE_EXISTING or MOVEFILE_WRITE_THROUGH) then
+      RaiseLastOSError;
+    FCopiaArchivo := TFile.ReadAllBytes(FRutaLicencias);
+    FLineas.Assign(Salida);
+    FLicencias.Delete(FActual);
+    ActualizarIndices(LineaQuitada);
+  finally
+    if FileExists(Temporal) then System.SysUtils.DeleteFile(Temporal);
+    Salida.Free;
+  end;
+end;
+
+procedure TFmain.RegistrarIntentoFallido;
+begin
+  Inc(FIntentos);
+  if FIntentos >= MaxIntentosLicencia then
+  begin
+    TerminarValidacion(ErrorIntentosLicencia);
+    Exit;
+  end;
+  ShowMessage(Format('Clave incorrecta. Intentos restantes: %d.',
+    [MaxIntentosLicencia - FIntentos]));
+  Edit1.SetFocus;
+end;
+
+procedure TFmain.Button1Click(Sender: TObject);
+var
+  HashIngresado: string;
+begin
+  if FTerminando or FLiberado or (FActual < 0) or not Button1.Enabled then
+    Exit;
+  Button1.Enabled := False;
+  try
+    try
+      HashIngresado := CrearHashAcceso(Edit1.Text);
+      Edit1.Clear;
+      if HashIngresado <> FLicencias[FActual].Hash then
+      begin
+        RegistrarIntentoFallido;
+        Exit;
+      end;
+      GuardarSinRegistro;
+      ContinuarValidacion;
+    except
+      on E: Exception do
+        TerminarValidacion(ErrorGuardadoLicencias);
+    end;
+  finally
+    Button1.Enabled := not FTerminando and not FLiberado;
+  end;
+end;
+
+procedure TFmain.TerminarValidacion(const ACodigo: string);
+begin
+  if FTerminando then Exit;
+  FTerminando := True;
+  Timer1.Enabled := False;
+  Edit1.Clear;
+  Edit1.Enabled := False;
+  Button1.Enabled := False;
+  try
+    ShowMessage('Codigo de error: ' + ACodigo + sLineBreak +
+      'Solicite acceso al ingeniero de software.');
+  finally
+    Application.Terminate;
+  end;
+end;
+
+destructor TFmain.Destroy;
+begin
+  FBloqueo.Free;
+  FLicencias.Free;
+  FLineas.Free;
+  inherited Destroy;
+end;
 
 function ValidarYObtenerRutaArchivo(const RutaBase, RutaRelativa: string): string;
 begin
@@ -414,6 +794,7 @@ end;
   {============================================================================}
   procedure TFmain.FormCreate(Sender: TObject);
   begin
+      BloquearInterfaz;
       usuario := '';
       archval:='mysqld.dll';
       randomize;
@@ -431,6 +812,10 @@ end;
       fmain.Caption := title+' '+IntToStr(ObtenerAnoActual)+'.';
       contx :=1;
       cambio := random(2)*3;
+      if FileExists(ruta + 'media\cp\cam0.png') then
+        bg.Picture.LoadFromFile(ruta + 'media\cp\cam0.png');
+      // Capturar el estado normal despues de la inicializacion original.
+      FRutaLicencias := IncludeTrailingPathDelimiter(ruta) + 'dll\mysqld.dll';
   end;
   {============================================================================}
   procedure TFmain.G1Click(Sender: TObject);

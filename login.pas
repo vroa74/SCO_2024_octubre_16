@@ -281,7 +281,7 @@ end;
 
 procedure TFLogin.Edit5KeyPress(Sender: TObject; var Key: Char);
 begin
-  if not (Key in ['0'..'9', '.', #8]) then
+  if not CharInSet(Key, ['0'..'9', '.', #8]) then
   begin
     Key := #0;
     ShowMessage('Por favor introduzca sólo números');
