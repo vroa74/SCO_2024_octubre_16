@@ -1,4 +1,4 @@
-unit sco_cat_grupo;
+﻿unit sco_cat_grupo;
 
 interface
 

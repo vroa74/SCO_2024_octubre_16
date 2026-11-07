@@ -1,4 +1,4 @@
-unit SCO_auxiliar_alta_edicion;
+﻿unit SCO_auxiliar_alta_edicion;
 
 interface
 
@@ -145,7 +145,7 @@ uses main, d_m;
               dm.ccor.Close;
               dm.ccor.SQL.Clear;
               dm.ccor.SQL.Add('select * from ccor');
-              dm.ccor.SQL.Add('where tcor = ' +  QuotedStr( inttostr( ntcor) )+'' );  // Aqu� agrego un espacio antes del valor
+              dm.ccor.SQL.Add('where tcor = ' +  QuotedStr( inttostr( ntcor) )+'' );  // Aquí agrego un espacio antes del valor
               dm.ccor.Open;
              ccor.Items.Clear;
              dm.ccor.First;

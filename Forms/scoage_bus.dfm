@@ -618,7 +618,7 @@ object Fscoage_bus: TFscoage_bus
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
     PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.DigitalSignatureSettings.SignPDF = False
-    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.FontEncoding = feUnicode
     PDFSettings.ImageCompressionLevel = 25
     PDFSettings.PDFAFormat = pafNone
     PreviewFormSettings.PageBorder.mmPadding = 0

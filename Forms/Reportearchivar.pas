@@ -1,6 +1,6 @@
-//------------------------------------------------------------------------------
+Ôªø//------------------------------------------------------------------------------
 //
-// Este sistema fue dasarrollado por Victor Rom·n Ortiz Abreu.
+// Este sistema fue dasarrollado por Victor Rom√°n Ortiz Abreu.
 //
 //------------------------------------------------------------------------------
 unit Reportearchivar;
@@ -243,8 +243,8 @@ begin
      begin
       ComboBox4.Text:='';
       ComboBox4.Items.Clear;
-      ComboBox4.Items.Add('Peticiones para gestiÛn');
-      ComboBox4.Items.Add('Solicitudes de informaciÛn');
+      ComboBox4.Items.Add('Peticiones para gesti√≥n');
+      ComboBox4.Items.Add('Solicitudes de informaci√≥n');
       ComboBox4.Items.Add('');
      end;
 query(true);
@@ -257,7 +257,7 @@ end;
 
 //------------------------------------------------------------------------------
 //
-// Este sistema fue dasarrollado por Victor Rom·n Ortiz Abreu.
+// Este sistema fue dasarrollado por Victor Rom√°n Ortiz Abreu.
 //
 //------------------------------------------------------------------------------
 
@@ -323,7 +323,7 @@ if dm.MyConnection1.Connected then
    begin
        dm.QCO.Close;
        dm.QCO.SQL.Clear;
-       dm.QCO.SQL.LoadFromFile(fmain.ruta+'coh1.sql');
+       dm.QCO.SQL.LoadFromFile(fmain.ruta+'coh1.sql', TEncoding.UTF8);
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
        begin
@@ -424,7 +424,7 @@ if dm.MyConnection1.Connected then
            dm.QCO.SQL.Add('rem_cargo LIKE "%'+Edit1.Text+'%"');
          end;
 {------------------------------------------------------------------------------}
-         if ((Edit1.Text  <> '') and (Combobox1.Text = 'DescripciÛn'))then
+         if ((Edit1.Text  <> '') and (Combobox1.Text = 'Descripci√≥n'))then
          begin
            dm.QCO.SQL.Add('AND');
            dm.QCO.SQL.Add('des LIKE "%'+Edit1.Text+'%"');
@@ -493,9 +493,9 @@ if dm.MyConnection1.Connected then
        dm.QCO.Close;
        dm.QCO.SQL.Clear;
       if axx then
-           dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql')
+           dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8)
          else
-            dm.QCO.SQL.LoadFromFile(fmain.ruta+'cox.sql');
+            dm.QCO.SQL.LoadFromFile(fmain.ruta+'cox.sql', TEncoding.UTF8);
 
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
@@ -601,7 +601,7 @@ if dm.MyConnection1.Connected then
            dm.QCO.SQL.Add('rem_deporg LIKE "%'+Edit1.Text+'%"');
          end;
 {------------------------------------------------------------------------------}
-         if ((Edit1.Text  <> '') and (Combobox1.Text = 'DescripciÛn'))then
+         if ((Edit1.Text  <> '') and (Combobox1.Text = 'Descripci√≥n'))then
          begin
            dm.QCO.SQL.Add('AND');
            dm.QCO.SQL.Add('des LIKE "%'+Edit1.Text+'%"');
@@ -689,7 +689,7 @@ if dm.MyConnection1.Connected then
    begin
        dm.QImpresion.Close;
        dm.QImpresion.SQL.Clear;
-       dm.QImpresion.SQL.LoadFromFile(fmain.ruta+'coh1.sql');
+       dm.QImpresion.SQL.LoadFromFile(fmain.ruta+'coh1.sql', TEncoding.UTF8);
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
        begin
@@ -794,7 +794,7 @@ if dm.MyConnection1.Connected then
            dm.QImpresion.SQL.Add('rem_deporg LIKE "%'+Edit1.Text+'%"');
          end;
 {------------------------------------------------------------------------------}
-         if ((Edit1.Text  <> '') and (Combobox1.Text = 'DescripciÛn'))then
+         if ((Edit1.Text  <> '') and (Combobox1.Text = 'Descripci√≥n'))then
          begin
            dm.QImpresion.SQL.Add('AND');
            dm.QImpresion.SQL.Add('des LIKE "%'+Edit1.Text+'%"');

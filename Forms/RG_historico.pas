@@ -1,6 +1,6 @@
-//------------------------------------------------------------------------------
+Ôªø//------------------------------------------------------------------------------
 //
-// Este sistema fue dasarrollado por Victor Rom·n Ortiz Abreu.
+// Este sistema fue dasarrollado por Victor Rom√°n Ortiz Abreu.
 //
 //------------------------------------------------------------------------------
 unit RG_historico;
@@ -15,7 +15,7 @@ uses
   ppMemo, Buttons, DBCtrls, JvComponentBase, JvgExportComponents,
    JvDBGridExport, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWCompObject, IWCompFlash, Data.DB, ppDesignLayer, QExport4Dialog,
-  CRGrid, Clipbrd;
+  CRGrid, Clipbrd, QExport4, QExport4ASCII, QExport4SQL, QExport4XML, QExport4HTML;
 
 type
   TFRG_historico = class(TForm)
@@ -121,6 +121,7 @@ type
     procedure DateTimePicker2Change(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ExportarUTF8(Sender: TQExport4);
     procedure Edit1Change(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure ComboBox3Change(Sender: TObject);
@@ -163,12 +164,12 @@ begin
   dm.QCO_His.First; // Comienza desde el primer registro
   while not dm.QCO_His.Eof do
   begin
-    // Preparar la inserciÛn en la tabla co_hist
+    // Preparar la inserci√≥n en la tabla co_hist
      dm.QCO.Insert;
-    // Asignar valores a los par·metros de la consulta de inserciÛn
+    // Asignar valores a los par√°metros de la consulta de inserci√≥n
        dm.QCO.FieldByName('folio').AsInteger := dm.QCO_His.FieldByName('id').AsInteger;
        dm.QCO.FieldByName('Fecha de captura').AsDateTime := dm.QCO_His.FieldByName('fcap').AsDateTime;
-       dm.QCO.FieldByName('Fecha de recepciÛn').AsDateTime := dm.QCO_His.FieldByName('frec').AsDateTime;
+       dm.QCO.FieldByName('Fecha de recepci√≥n').AsDateTime := dm.QCO_His.FieldByName('frec').AsDateTime;
        dm.QCO.FieldByName('Nivel de correspondencia').AsString := dm.QCO_His.FieldByName('ncor').AsString;
        dm.QCO.FieldByName('Tipo de correspondencia').AsString := dm.QCO_His.FieldByName('tcor').AsString;
        dm.QCO.FieldByName('Tipo de correspondencia').AsString := dm.QCO_His.FieldByName('ccor').AsString;
@@ -178,7 +179,7 @@ begin
        dm.QCO.FieldByName('Nombre del remitente').AsString := dm.QCO_His.FieldByName('rem_nombre').AsString;
        dm.QCO.FieldByName('cargo del remitente').AsString := dm.QCO_His.FieldByName('rem_cargo').AsString;
        dm.QCO.FieldByName('Depto. U org. Del remitente').AsString := dm.QCO_His.FieldByName('rem_deporg').AsString;
-       dm.QCO.FieldByName('DirecciÛn del Remitente').AsString := dm.QCO_His.FieldByName('rem_dir').AsString;
+       dm.QCO.FieldByName('Direcci√≥n del Remitente').AsString := dm.QCO_His.FieldByName('rem_dir').AsString;
        dm.QCO.FieldByName('Descripcion de Oficio').AsString := dm.QCO_His.FieldByName('des').AsString;
        dm.QCO.FieldByName('Seguimiento').AsString := dm.QCO_His.FieldByName('seguimiento').AsString;
        dm.QCO.FieldByName('Nombre turnado').AsString := dm.QCO_His.FieldByName('tur_nom').AsString;
@@ -189,7 +190,7 @@ begin
        dm.QCO.FieldByName('Fecha Inicio tramite').AsDateTime := dm.QCO_His.FieldByName('FIAT').AsDateTime;
        dm.QCO.FieldByName('Quien inicio el tramite').AsString := dm.QCO_His.FieldByName('Q_TRA').AsString;
        dm.QCO.FieldByName('concluido').AsBoolean := dm.QCO_His.FieldByName('estatus').AsBoolean;
-       dm.QCO.FieldByName('fecha de conclusiÛn').AsDateTime := dm.QCO_His.FieldByName('FCAT').AsDateTime;
+       dm.QCO.FieldByName('fecha de conclusi√≥n').AsDateTime := dm.QCO_His.FieldByName('FCAT').AsDateTime;
        dm.QCO.FieldByName('Quien lo concluyo').AsString := dm.QCO_His.FieldByName('Q_EST').AsString;
        dm.QCO.FieldByName('Archivo').AsBoolean := dm.QCO_His.FieldByName('archivo').AsBoolean;
        dm.QCO.FieldByName('Fecha de archivo').AsDateTime := dm.QCO_His.FieldByName('FAAT').AsDateTime;
@@ -230,7 +231,7 @@ begin
       except
         on E: Exception do
         begin
-          ShowMessage('OcurriÛ un error: ' + E.Message);
+          ShowMessage('Ocurri√≥ un error: ' + E.Message);
         end;
       end;
      BitBtn1.Enabled := true;
@@ -250,19 +251,19 @@ begin
     begin
       dm.QCO.Close;
       dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql');
+      dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
       dm.qco.Open
     end;
   if not dm.Qco_his.Active then
       dm.Qco_his.Open;
-      respuesta := MessageDlg('Todo lo que est· a la vista pasar· a formar parte del histÛrico. øDesea continuar?',  mtWarning, [mbYes, mbNo], 0);  if respuesta = mrYes then
+      respuesta := MessageDlg('Todo lo que est√° a la vista pasar√° a formar parte del hist√≥rico. ¬øDesea continuar?',  mtWarning, [mbYes, mbNo], 0);  if respuesta = mrYes then
   begin
-    ShowMessage('AcciÛn confirmada. Continuando con el proceso...');
+    ShowMessage('Acci√≥n confirmada. Continuando con el proceso...');
     CopyAndDeleteRecords;
   end
   else
   begin
-    ShowMessage('AcciÛn cancelada.');
+    ShowMessage('Acci√≥n cancelada.');
   end;
 
 end;
@@ -318,8 +319,8 @@ begin
      begin
       ComboBox4.Text:='';
       ComboBox4.Items.Clear;
-      ComboBox4.Items.Add('Peticiones para gestiÛn');
-      ComboBox4.Items.Add('Solicitudes de informaciÛn');
+      ComboBox4.Items.Add('Peticiones para gesti√≥n');
+      ComboBox4.Items.Add('Solicitudes de informaci√≥n');
       ComboBox4.Items.Add('');
      end;
     query(true);
@@ -362,20 +363,20 @@ end;
 procedure TFRG_historico.CRDBGrid1DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if not (gdSelected in State) then  // Evita que el color de fondo cambie cuando la fila estÈ seleccionada
+  if not (gdSelected in State) then  // Evita que el color de fondo cambie cuando la fila est√© seleccionada
   begin
     CRDBGrid1.Canvas.Brush.Color := clSkyBlue;  // Cambia 'clYellow' por el color deseado
   end
   else
   begin
-    CRDBGrid1.Canvas.Brush.Color := clHighlight;  // El color cuando la celda est· seleccionada
+    CRDBGrid1.Canvas.Brush.Color := clHighlight;  // El color cuando la celda est√° seleccionada
   end;
 
 end;
 
 //------------------------------------------------------------------------------
 //
-// Este sistema fue dasarrollado por Victor Rom·n Ortiz Abreu.
+// Este sistema fue dasarrollado por Victor Rom√°n Ortiz Abreu.
 //
 //------------------------------------------------------------------------------
 
@@ -425,6 +426,16 @@ begin
      query(true);
 end;
 
+procedure TFRG_historico.ExportarUTF8(Sender: TQExport4);
+begin
+  // Solo los formatos de texto usan bytes UTF-8; XLS/PDF conservan su formato.
+  if (Sender is TQExport4ASCII) or (Sender is TQExport4SQL) or
+     (Sender is TQExport4XML) or (Sender is TQExport4HTML) then
+    Sender.CharsetType := ectUTF8;
+  if Sender is TQExport4XML then
+    TQExport4XML(Sender).Options.Encoding := 'UTF-8';
+end;
+
 procedure TFRG_historico.FormCreate(Sender: TObject);
 begin
  DateTimePicker1.Date :=  StrToDate(fmain.PutDate);
@@ -433,7 +444,7 @@ begin
     begin
       dm.QCO.Close;
       dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql');
+      dm.QCO.SQL.LoadFromFile(fmain.ruta+'co.sql', TEncoding.UTF8);
       dm.qco.Open
     end;
 end;
@@ -448,7 +459,7 @@ if dm.MyConnection1.Connected then
    begin
        dm.Qco_his.Close;
        dm.Qco_his.SQL.Clear;
-       dm.Qco_his.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohist_1.sql');
+       dm.Qco_his.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohist_1.sql', TEncoding.UTF8);
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
        begin
@@ -549,7 +560,7 @@ if dm.MyConnection1.Connected then
            dm.Qco_his.SQL.Add('rem_cargo LIKE "%'+Edit1.Text+'%"');
          end;
 {------------------------------------------------------------------------------}
-         if ((Edit1.Text  <> '') and (Combobox1.Text = 'DescripciÛn'))then
+         if ((Edit1.Text  <> '') and (Combobox1.Text = 'Descripci√≥n'))then
          begin
            dm.Qco_his.SQL.Add('AND');
            dm.Qco_his.SQL.Add('des LIKE "%'+Edit1.Text+'%"');
@@ -610,9 +621,9 @@ if dm.MyConnection1.Connected then
        dm.Qco_his.Close;
        dm.Qco_his.SQL.Clear;
       if axx then
-           dm.Qco_his.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohist.sql')
+           dm.Qco_his.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohist.sql', TEncoding.UTF8)
          else
-            dm.Qco_his.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohistx.sql');
+            dm.Qco_his.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohistx.sql', TEncoding.UTF8);
 
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
@@ -718,7 +729,7 @@ if dm.MyConnection1.Connected then
            dm.Qco_his.SQL.Add('rem_deporg LIKE "%'+Edit1.Text+'%"');
          end;
 {------------------------------------------------------------------------------}
-         if ((Edit1.Text  <> '') and (Combobox1.Text = 'DescripciÛn'))then
+         if ((Edit1.Text  <> '') and (Combobox1.Text = 'Descripci√≥n'))then
          begin
            dm.Qco_his.SQL.Add('AND');
            dm.Qco_his.SQL.Add('des LIKE "%'+Edit1.Text+'%"');
@@ -806,7 +817,7 @@ if dm.MyConnection1.Connected then
    begin
        dm.QImpresion.Close;
        dm.QImpresion.SQL.Clear;
-       dm.QImpresion.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohist1.sql');
+       dm.QImpresion.SQL.LoadFromFile(fmain.ruta+'sql\cohist\'+'cohist1.sql', TEncoding.UTF8);
 //------------------------------------------------------------------------------
        if CheckBox1.Checked then
        begin
@@ -911,7 +922,7 @@ if dm.MyConnection1.Connected then
            dm.QImpresion.SQL.Add('rem_deporg LIKE "%'+Edit1.Text+'%"');
          end;
 {------------------------------------------------------------------------------}
-         if ((Edit1.Text  <> '') and (Combobox1.Text = 'DescripciÛn'))then
+         if ((Edit1.Text  <> '') and (Combobox1.Text = 'Descripci√≥n'))then
          begin
            dm.QImpresion.SQL.Add('AND');
            dm.QImpresion.SQL.Add('des LIKE "%'+Edit1.Text+'%"');

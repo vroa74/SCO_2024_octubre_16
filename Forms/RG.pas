@@ -1,6 +1,6 @@
-//------------------------------------------------------------------------------
+ï»¿//------------------------------------------------------------------------------
 //
-// Este sistema fue desarrollado por Víctor Román Ortiz Abreu.
+// Este sistema fue desarrollado por VÃ­ctor RomÃ¡n Ortiz Abreu.
 //
 //------------------------------------------------------------------------------
 unit RG;
@@ -15,7 +15,7 @@ uses
   ppMemo, Buttons, DBCtrls, JvComponentBase, JvgExportComponents,
   JvDBGridExport, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWCompObject, IWCompFlash, Data.DB, ppDesignLayer, QExport4Dialog,
-  QExport4, QExport4XLS, CRGrid, JvExDBGrids, JvDBGrid, Clipbrd, System.UITypes;
+  QExport4, QExport4XLS, CRGrid, JvExDBGrids, JvDBGrid, Clipbrd, System.UITypes, QExport4ASCII, QExport4SQL, QExport4XML, QExport4HTML;
 
 type
   TFrg = class(TForm)
@@ -125,6 +125,7 @@ type
     procedure DateTimePicker2Change(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ExportarUTF8(Sender: TQExport4);
     procedure Edit1Change(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure ComboBox3Change(Sender: TObject);
@@ -169,7 +170,7 @@ uses main, d_m, login, rg_1;
 {$R *.dfm}
 
 {------------------------------------------------------------------------------}
-{ Función auxiliar privada para validar existencia de archivos externos       }
+{ FunciÃ³n auxiliar privada para validar existencia de archivos externos       }
 {------------------------------------------------------------------------------}
 function TFrg.ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
 begin
@@ -177,7 +178,7 @@ begin
   if not FileExists(Result) then
   begin
     raise EFOpenError.CreateFmt(
-      'Error crítico: El archivo externo requerido no existe.'#13#10 +
+      'Error crÃ­tico: El archivo externo requerido no existe.'#13#10 +
       'Nombre del archivo: %s'#13#10 +
       'Ruta completa esperada: %s',
       [ExtractFileName(Result), Result]
@@ -186,7 +187,7 @@ begin
 end;
 
 {------------------------------------------------------------------------------}
-{ Lógica centralizada para aplicar filtros comunes (Elimina duplicidad DRY)    }
+{ LÃ³gica centralizada para aplicar filtros comunes (Elimina duplicidad DRY)    }
 {------------------------------------------------------------------------------}
 procedure TFrg.AplicarFiltrosSQL(SQLList: TStrings);
 var
@@ -229,7 +230,7 @@ begin
     end;
   end;
 
-  // Filtros por RadioButtons de Trámite y Estatus
+  // Filtros por RadioButtons de TrÃ¡mite y Estatus
   if not RadioButton7.Checked then
   begin
     if RadioButton4.Checked then
@@ -255,14 +256,14 @@ begin
     end;
   end;
 
-  // Filtro por Número de Oficio
+  // Filtro por NÃºmero de Oficio
   if (Edit4.Text <> '') then
   begin
     SQLList.Add('AND');
     SQLList.Add('nofi LIKE "%' + Edit4.Text + '%"');
   end;
 
-  // Filtros dinámicos según Combo de Campos
+  // Filtros dinÃ¡micos segÃºn Combo de Campos
   if (Edit1.Text <> '') then
   begin
     if (ComboBox1.Text = 'Nombre - turno') or (ComboBox1.Text = 'Nombre - remite') then
@@ -290,7 +291,7 @@ begin
       SQLList.Add('AND');
       SQLList.Add('rem_cargo LIKE "%' + Edit1.Text + '%"');
     end
-    else if (ComboBox1.Text = 'Descripción') then
+    else if (ComboBox1.Text = 'DescripciÃ³n') then
     begin
       SQLList.Add('AND');
       SQLList.Add('des LIKE "%' + Edit1.Text + '%"');
@@ -331,7 +332,7 @@ begin
 end;
 
 {------------------------------------------------------------------------------}
-{ Procedimiento de copia a histórico                                           }
+{ Procedimiento de copia a histÃ³rico                                           }
 {------------------------------------------------------------------------------}
 procedure CopyAndDeleteRecords;
 begin
@@ -341,7 +342,7 @@ begin
     dm.Qco_his.Insert;
     dm.QCO_His.FieldByName('id').AsInteger := dm.QCO.FieldByName('folio').AsInteger;
     dm.QCO_His.FieldByName('fcap').AsDateTime := dm.QCO.FieldByName('Fecha de captura').AsDateTime;
-    dm.QCO_His.FieldByName('frec').AsDateTime := dm.QCO.FieldByName('Fecha de recepción').AsDateTime;
+    dm.QCO_His.FieldByName('frec').AsDateTime := dm.QCO.FieldByName('Fecha de recepciÃ³n').AsDateTime;
     dm.QCO_His.FieldByName('ncor').AsString := dm.QCO.FieldByName('Nivel de correspondencia').AsString;
     dm.QCO_His.FieldByName('tcor').AsString := dm.QCO.FieldByName('Tipo de correspondencia').AsString;
     dm.QCO_His.FieldByName('ccor').AsString := dm.QCO.FieldByName('Tipo de correspondencia').AsString;
@@ -351,7 +352,7 @@ begin
     dm.QCO_His.FieldByName('rem_nombre').AsString := dm.QCO.FieldByName('Nombre del remitente').AsString;
     dm.QCO_His.FieldByName('rem_cargo').AsString := dm.QCO.FieldByName('cargo del remitente').AsString;
     dm.QCO_His.FieldByName('rem_deporg').AsString := dm.QCO.FieldByName('Depto. U org. Del remitente').AsString;
-    dm.QCO_His.FieldByName('rem_dir').AsString := dm.QCO.FieldByName('Dirección del Remitente').AsString;
+    dm.QCO_His.FieldByName('rem_dir').AsString := dm.QCO.FieldByName('DirecciÃ³n del Remitente').AsString;
     dm.QCO_His.FieldByName('des').AsString := dm.QCO.FieldByName('Descripcion de Oficio').AsString;
     dm.QCO_His.FieldByName('seguimiento').AsString := dm.QCO.FieldByName('Seguimiento').AsString;
     dm.QCO_His.FieldByName('tur_nom').AsString := dm.QCO.FieldByName('Nombre turnado').AsString;
@@ -362,7 +363,7 @@ begin
     dm.QCO_His.FieldByName('FIAT').AsDateTime := dm.QCO.FieldByName('Fecha Inicio tramite').AsDateTime;
     dm.QCO_His.FieldByName('Q_TRA').AsString := dm.QCO.FieldByName('Quien inicio el tramite').AsString;
     dm.QCO_His.FieldByName('estatus').AsBoolean := dm.QCO.FieldByName('concluido').AsBoolean;
-    dm.QCO_His.FieldByName('FCAT').AsDateTime := dm.QCO.FieldByName('fecha de conclusión').AsDateTime;
+    dm.QCO_His.FieldByName('FCAT').AsDateTime := dm.QCO.FieldByName('fecha de conclusiÃ³n').AsDateTime;
     dm.QCO_His.FieldByName('Q_EST').AsString := dm.QCO.FieldByName('Quien lo concluyo').AsString;
     dm.QCO_His.FieldByName('archivo').AsBoolean := dm.QCO.FieldByName('Archivo').AsBoolean;
     dm.QCO_His.FieldByName('FAAT').AsDateTime := dm.QCO.FieldByName('Fecha de archivo').AsDateTime;
@@ -417,7 +418,7 @@ begin
         QExport4Dialog1.Execute;
       except
         on E: Exception do
-          ShowMessage('Ocurrió un error: ' + E.Message);
+          ShowMessage('OcurriÃ³ un error: ' + E.Message);
       end;
       BitBtn1.Enabled := true;
     end;
@@ -426,7 +427,7 @@ end;
 
 procedure TFrg.BitBtn4Click(Sender: TObject);
 begin
-  // Impresión de volantes (reservado)
+  // ImpresiÃ³n de volantes (reservado)
 end;
 
 procedure TFrg.BitBtn5Click(Sender: TObject);
@@ -441,15 +442,15 @@ begin
   if not dm.Qco_his.Active then
     dm.Qco_his.Open;
 
-  respuesta := MessageDlg('Todo lo que está a la vista pasará a formar parte del histórico. ¿Desea continuar?', mtWarning, [mbYes, mbNo], 0);
+  respuesta := MessageDlg('Todo lo que estÃ¡ a la vista pasarÃ¡ a formar parte del histÃ³rico. Â¿Desea continuar?', mtWarning, [mbYes, mbNo], 0);
   if respuesta = mrYes then
   begin
-    ShowMessage('Acción confirmada. Continuando con el proceso...');
+    ShowMessage('AcciÃ³n confirmada. Continuando con el proceso...');
     CopyAndDeleteRecords;
   end
   else
   begin
-    ShowMessage('Acción cancelada.');
+    ShowMessage('AcciÃ³n cancelada.');
   end;
 end;
 
@@ -504,8 +505,8 @@ begin
   begin
     ComboBox4.Text := '';
     ComboBox4.Items.Clear;
-    ComboBox4.Items.Add('Peticiones para gestión');
-    ComboBox4.Items.Add('Solicitudes de información');
+    ComboBox4.Items.Add('Peticiones para gestiÃ³n');
+    ComboBox4.Items.Add('Solicitudes de informaciÃ³n');
     ComboBox4.Items.Add('');
   end;
   Query(true);
@@ -609,16 +610,26 @@ begin
   Query(true);
 end;
 
+procedure TFrg.ExportarUTF8(Sender: TQExport4);
+begin
+  // Solo los formatos de texto usan bytes UTF-8; XLS/PDF conservan su formato.
+  if (Sender is TQExport4ASCII) or (Sender is TQExport4SQL) or
+     (Sender is TQExport4XML) or (Sender is TQExport4HTML) then
+    Sender.CharsetType := ectUTF8;
+  if Sender is TQExport4XML then
+    TQExport4XML(Sender).Options.Encoding := 'UTF-8';
+end;
+
 procedure TFrg.FormCreate(Sender: TObject);
 begin
   DateTimePicker1.Date := StrToDate(fmain.PutDate);
   DateTimePicker2.Date := StrToDate(fmain.PutDate);
   myway := 'sql\co\';
-  BitBtn2.Hint := 'Ver e imprimir el listado de reporte que están en el grid';
+  BitBtn2.Hint := 'Ver e imprimir el listado de reporte que estÃ¡n en el grid';
 end;
 
 {------------------------------------------------------------------------------}
-{ Métodos refactorizados de Consultas utilizando validación y método unificado }
+{ MÃ©todos refactorizados de Consultas utilizando validaciÃ³n y mÃ©todo unificado }
 {------------------------------------------------------------------------------}
 procedure TFrg.Querypriint;
 var
@@ -630,7 +641,7 @@ begin
       ArchivoSql := ValidarYObtenerRutaArchivo(myway + 'coh1.sql');
       dm.QCO.Close;
       dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(ArchivoSql);
+      dm.QCO.SQL.LoadFromFile(ArchivoSql, TEncoding.UTF8);
       AplicarFiltrosSQL(dm.QCO.SQL);
       dm.QCO.Open;
       dm.QCO.Last;
@@ -658,7 +669,7 @@ begin
 
       dm.QCO.Close;
       dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(ArchivoSql);
+      dm.QCO.SQL.LoadFromFile(ArchivoSql, TEncoding.UTF8);
       AplicarFiltrosSQL(dm.QCO.SQL);
       dm.QCO.Open;
       dm.QCO.Last;
@@ -685,7 +696,7 @@ begin
       ArchivoSql := ValidarYObtenerRutaArchivo(myway + 'coh1.sql');
       dm.QImpresion.Close;
       dm.QImpresion.SQL.Clear;
-      dm.QImpresion.SQL.LoadFromFile(ArchivoSql);
+      dm.QImpresion.SQL.LoadFromFile(ArchivoSql, TEncoding.UTF8);
       AplicarFiltrosSQL(dm.QImpresion.SQL);
       dm.QImpresion.Open;
       dm.QImpresion.Last;

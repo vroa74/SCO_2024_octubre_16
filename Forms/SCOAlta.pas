@@ -398,7 +398,7 @@ begin
       RutaSql := ValidarYObtenerRutaArchivo(myway + 'coh1.sql');
       dm.QImpresion.Close;
       dm.QImpresion.SQL.Clear;
-      dm.QImpresion.SQL.LoadFromFile(RutaSql);
+      dm.QImpresion.SQL.LoadFromFile(RutaSql, TEncoding.UTF8);
       dm.QImpresion.SQL.Add('AND id = ' + IntToStr(dm.TCO.FieldByName('id').AsInteger));
       dm.QImpresion.Open;
 
@@ -410,7 +410,7 @@ begin
       end;
       dm.QImpresion.Close;
       dm.QImpresion.SQL.Clear;
-      dm.QImpresion.SQL.LoadFromFile(RutaSql);
+      dm.QImpresion.SQL.LoadFromFile(RutaSql, TEncoding.UTF8);
       dm.QImpresion.Open;
       dm.TCO.Edit;
       dm.TCO.FieldByName('estatus').AsBoolean := True;
@@ -447,7 +447,7 @@ begin
     SqlPath := ValidarYObtenerRutaArchivo(myway + 'co.sql');
     dm.QCO.Close;
     dm.QCO.SQL.Clear;
-    dm.QCO.SQL.LoadFromFile(SqlPath);
+    dm.QCO.SQL.LoadFromFile(SqlPath, TEncoding.UTF8);
     dm.QCO.Open;
   except
     on E: Exception do

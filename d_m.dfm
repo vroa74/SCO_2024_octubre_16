@@ -7,6 +7,7 @@ object DM: TDM
     Username = 'root'
     Server = 'localhost'
     LoginPrompt = False
+    Options.UseUnicode = True
     Left = 64
     Top = 16
   end

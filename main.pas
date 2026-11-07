@@ -228,7 +228,7 @@ begin
       // Carga QCO
       dm.QCO.Close;
       dm.QCO.SQL.Clear;
-      dm.QCO.SQL.LoadFromFile(ArchivoSQL);
+      dm.QCO.SQL.LoadFromFile(ArchivoSQL, TEncoding.UTF8);
       dm.QCO.SQL.Add('ORDER BY CO.id');
       dm.QCO.Open;
       dm.QCO.Last;
@@ -236,7 +236,7 @@ begin
       // Carga QCOH
       dm.QCOH.Close;
       dm.QCOH.SQL.Clear;
-      dm.QCOH.SQL.LoadFromFile(ArchivoSQL);
+      dm.QCOH.SQL.LoadFromFile(ArchivoSQL, TEncoding.UTF8);
       dm.QCOH.SQL.Add('ORDER BY CO.id');
       dm.QCOH.Open;
       dm.QCOH.Last;
@@ -268,7 +268,7 @@ end;
 
     try
       ArchivoIni := ValidarYObtenerRutaArchivo(ruta, 'date.ini');
-      ListBox1.Items.LoadFromFile(ArchivoIni);
+      ListBox1.Items.LoadFromFile(ArchivoIni, TEncoding.UTF8);
     except
       on E: Exception do
       begin
@@ -467,13 +467,13 @@ end;
 
         dm.QCO.Close;
         dm.QCO.SQL.Clear;
-        dm.QCO.SQL.LoadFromFile(ArchivoIco);
+        dm.QCO.SQL.LoadFromFile(ArchivoIco, TEncoding.UTF8);
         dm.QCO.Open;
         dm.QCO.Last;
 
         dm.QCOH.Close;
         dm.QCOH.SQL.Clear;
-        dm.QCOH.SQL.LoadFromFile(ArchivoIcoh);
+        dm.QCOH.SQL.LoadFromFile(ArchivoIcoh, TEncoding.UTF8);
         dm.QCOH.Open;
         dm.QCOH.Last;
       except

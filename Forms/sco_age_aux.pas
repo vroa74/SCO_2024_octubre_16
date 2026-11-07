@@ -1,4 +1,4 @@
-unit sco_age_aux;
+﻿unit sco_age_aux;
 
 interface
 
@@ -55,7 +55,7 @@ uses main, d_m ;
 
 //------------------------------------------------------------------------------
 //
-// Este sistema fue dasarrollado por Victor Rom�n Ortiz Abreu.
+// Este sistema fue dasarrollado por Victor Román Ortiz Abreu.
 //
 //------------------------------------------------------------------------------
 

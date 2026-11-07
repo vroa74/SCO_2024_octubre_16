@@ -1,4 +1,4 @@
-unit sco_aux_impresion;
+锘縰nit sco_aux_impresion;
 
 interface
 
@@ -185,7 +185,7 @@ uses login, d_m, scoage_alta, scoalta, about, rg, main;
 {$R *.dfm}
 
 {------------------------------------------------------------------------------}
-{ Funci髇 privada para validar la existencia del archivo de imagen institucional}
+{ Funci贸n privada para validar la existencia del archivo de imagen institucional}
 {------------------------------------------------------------------------------}
 function TF_aux_imp.ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
 begin
@@ -193,7 +193,7 @@ begin
   if not FileExists(Result) then
   begin
     raise EFOpenError.CreateFmt(
-      'Error cr韙ico: El archivo de imagen requerido no existe.'#13#10 +
+      'Error cr铆tico: El archivo de imagen requerido no existe.'#13#10 +
       'Archivo: %s'#13#10 +
       'Ruta esperada: %s',
       [ExtractFileName(Result), Result]
@@ -202,7 +202,7 @@ begin
 end;
 
 {------------------------------------------------------------------------------}
-{ M閠odo unificado para la l骻ica de impresi髇 y actualizaci髇 de tr醡ite      }
+{ M茅todo unificado para la l贸gica de impresi贸n y actualizaci贸n de tr谩mite      }
 {------------------------------------------------------------------------------}
 procedure TF_aux_imp.ImprimirYActualizarTramite(Reporte: TppReport; LogoImage: TppImage; LabelTitle, LabelCopy: TppLabel);
 var
@@ -214,7 +214,7 @@ begin
   except
     on E: Exception do
     begin
-      // Si el logo no se encuentra, se contin鷄 la impresi髇 sin interrumpir al usuario
+      // Si el logo no se encuentra, se contin煤a la impresi贸n sin interrumpir al usuario
     end;
   end;
 

@@ -1,4 +1,4 @@
-program SGTD;
+﻿program SGTD;
 
 uses
   Forms,

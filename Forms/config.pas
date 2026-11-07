@@ -1,4 +1,4 @@
-unit config;
+ï»¿unit config;
 
 interface
 
@@ -66,8 +66,8 @@ var
   DateTimeStr: string;
 begin
   FileDir := ExtractFileDir(FilePath);
-  FileName := ChangeFileExt(ExtractFileName(FilePath), '');  // Nombre sin la extensión
-  FileExt := ExtractFileExt(FilePath);  // Extensión del archivo
+  FileName := ChangeFileExt(ExtractFileName(FilePath), '');  // Nombre sin la extensiÃ³n
+  FileExt := ExtractFileExt(FilePath);  // ExtensiÃ³n del archivo
   DateTimeStr := FormatDateTime('yyyymmdd_hhnnss', Now);
   NewFileName := FileDir + '\' + FileName + '_' + DateTimeStr + FileExt;
   Result := RenameFile(FilePath, NewFileName);

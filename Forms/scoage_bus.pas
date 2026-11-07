@@ -1,4 +1,4 @@
-unit scoage_bus;
+﻿unit scoage_bus;
 
 interface
 
@@ -214,7 +214,7 @@ end;
 
 //------------------------------------------------------------------------------
 //
-// Este sistema fue dasarrollado por Victor Rom�n Ortiz Abreu.
+// Este sistema fue dasarrollado por Victor Román Ortiz Abreu.
 //
 //------------------------------------------------------------------------------
 

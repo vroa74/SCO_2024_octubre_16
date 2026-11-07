@@ -1318,7 +1318,7 @@ object FRG_historico: TFRG_historico
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
     PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.DigitalSignatureSettings.SignPDF = False
-    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.FontEncoding = feUnicode
     PDFSettings.ImageCompressionLevel = 25
     PDFSettings.PDFAFormat = pafNone
     PreviewFormSettings.PageBorder.mmPadding = 0
@@ -10197,6 +10197,7 @@ object FRG_historico: TFRG_historico
     Top = 8
   end
   object QExport4Dialog1: TQExport4Dialog
+    OnBeginExport = ExportarUTF8
     HelpFile = 'AExportDialog.hlp'
     DataSet = DM.Qco_his
     Formats.DecimalSeparator = '.'

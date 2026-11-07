@@ -1,4 +1,4 @@
-unit login;
+锘縰nit login;
 
 interface
 
@@ -74,7 +74,7 @@ uses main, d_m;
 {$R *.dfm}
 
 {------------------------------------------------------------------------------}
-{ Funci髇 auxiliar privada para validar existencia de archivos externos       }
+{ Funci贸n auxiliar privada para validar existencia de archivos externos       }
 {------------------------------------------------------------------------------}
 function TFLogin.ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
 begin
@@ -82,7 +82,7 @@ begin
   if not FileExists(Result) then
   begin
     raise EFOpenError.CreateFmt(
-      'Error cr韙ico: El archivo externo requerido no existe.'#13#10 +
+      'Error cr铆tico: El archivo externo requerido no existe.'#13#10 +
       'Nombre del archivo: %s'#13#10 +
       'Ruta completa esperada: %s',
       [ExtractFileName(Result), Result]
@@ -91,14 +91,14 @@ begin
 end;
 
 {------------------------------------------------------------------------------}
-{ M閠odos auxiliares seguros para el manejo de Hints                            }
+{ M茅todos auxiliares seguros para el manejo de Hints                            }
 {------------------------------------------------------------------------------}
 procedure TFLogin.MostrarHintSeguro(Sender: TObject);
 begin
   if Assigned(fmain) and (Sender is TControl) then
   begin
     try
-      // Si ya exist韆 un hint previo, lo liberamos de forma segura antes de crear otro
+      // Si ya exist铆a un hint previo, lo liberamos de forma segura antes de crear otro
       OcultarHintSeguro;
       FHintActual := fmain.RevealHint(TControl(Sender));
     except
@@ -122,13 +122,13 @@ begin
 end;
 
 {------------------------------------------------------------------------------}
-{ Gesti髇 de Configuraci髇 INI                                                 }
+{ Gesti贸n de Configuraci贸n INI                                                 }
 {------------------------------------------------------------------------------}
 procedure CargarConfiguracion(const ArchivoINI: string; out AUser, APass, AServer: string; out APort: Integer);
 var
-  Ini: TIniFile;
+  Ini: TMemIniFile;
 begin
-  Ini := TIniFile.Create(ArchivoINI);
+  Ini := TMemIniFile.Create(ArchivoINI, TEncoding.UTF8);
   try
     AUser := Ini.ReadString('Configuracion', 'Usuario', 'DefaultUser');
     APass := Ini.ReadString('Configuracion', 'Password', 'DefaultPass');
@@ -139,7 +139,7 @@ begin
   end;
 end;
 
-{ M閠odos de la Clase TFLogin }
+{ M茅todos de la Clase TFLogin }
 
 procedure TFLogin.ViewEdit(const ban: boolean);
 begin
@@ -191,7 +191,7 @@ begin
   if DM.MyConnection1.Connected then
   begin
     DM.MyConnection1.Connected := False;
-    ShowMessage('La conexi髇 ya estaba activa. Reiniciando...');
+    ShowMessage('La conexi贸n ya estaba activa. Reiniciando...');
     AbrirTablasDatos;
     Close;
   end
@@ -227,7 +227,7 @@ begin
       ListBox1.Items[2] := dm.MyConnection1.Server;
       ListBox1.Items[3] := dm.MyConnection1.Database;
       ListBox1.Items[4] := IntToStr(dm.MyConnection1.Port);
-      ListBox1.Items.SaveToFile(RutaConfDll);
+      ListBox1.Items.SaveToFile(RutaConfDll, TEncoding.UTF8);
     except
       on E: Exception do
         ShowMessage(E.Message);
@@ -238,7 +238,7 @@ begin
 
   if FContadorIntentos >= 3 then
   begin
-    ShowMessage('N鷐ero m醲imo de intentos alcanzado. Datos incorrectos.');
+    ShowMessage('N煤mero m谩ximo de intentos alcanzado. Datos incorrectos.');
     Close;
   end;
 end;
@@ -276,7 +276,7 @@ end;
 
 procedure TFLogin.Edit1KeyPress(Sender: TObject; var Key: Char);
 begin
-  // Vac韔 intencional
+  // Vac铆o intencional
 end;
 
 procedure TFLogin.Edit5KeyPress(Sender: TObject; var Key: Char);
@@ -284,7 +284,7 @@ begin
   if not (Key in ['0'..'9', '.', #8]) then
   begin
     Key := #0;
-    ShowMessage('Por favor introduzca s髄o n鷐eros');
+    ShowMessage('Por favor introduzca s贸lo n煤meros');
   end;
 end;
 
@@ -333,7 +333,7 @@ begin
   try
     RutaConf := ValidarYObtenerRutaArchivo('dll\conf.dll');
     if FileExists(RutaConf) then
-      ListBox1.Items.LoadFromFile(RutaConf);
+      ListBox1.Items.LoadFromFile(RutaConf, TEncoding.UTF8);
   except
     // Si no existe conf.dll en el primer arranque, se ignora de forma silenciosa
   end;
@@ -350,10 +350,10 @@ begin
     Edit5.Text := ListBox1.Items[4];
   end;
   Edit1.Hint := 'Escriba el Nombre de Usuario...';
-  Edit2.Hint := 'Escriba la Contrase馻...';
-  Edit3.Hint := 'Escriba la direcci髇 IP o el Nombre del servidor';
+  Edit2.Hint := 'Escriba la Contrase帽a...';
+  Edit3.Hint := 'Escriba la direcci贸n IP o el Nombre del servidor';
   Edit4.Hint := 'Escriba el Nombre de la base de datos';
-  Edit5.Hint := 'Escriba el puerto de conexi髇 a la base de datos';
+  Edit5.Hint := 'Escriba el puerto de conexi贸n a la base de datos';
   BitBtn1.Hint := 'Presione para conectarse';
   BitBtn2.Hint := 'Presione para cancelar o Salir';
 
