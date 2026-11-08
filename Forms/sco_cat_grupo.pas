@@ -28,6 +28,8 @@ uses main, d_m;
 
 procedure TFcat_gru.FormCreate(Sender: TObject);
 begin
+  Fcat_gru.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD )';
+
 if dm.MyConnection1.Connected then
    begin
      dm.QCAT_GRU.Close;

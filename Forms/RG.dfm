@@ -2277,7 +2277,6 @@ object Frg: TFrg
     Top = 8
   end
   object QExport4Dialog1: TQExport4Dialog
-    OnBeginExport = ExportarUTF8
     HelpFile = 'AExportDialog.hlp'
     DataSet = DM.QCO
     Formats.DecimalSeparator = '.'
@@ -2457,6 +2456,7 @@ object Frg: TFrg
     DocxOptions.FooterStyle.Font.Name = 'Calibri'
     DocxOptions.FooterStyle.Font.Style = []
     AccessOptions.TableName = 'EXPORT_TABLE'
+    OnBeginExport = ExportarUTF8
     Left = 1032
     Top = 8
   end

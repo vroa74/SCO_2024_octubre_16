@@ -77,6 +77,8 @@ object Fmain: TFmain
     Align = alClient
     Stretch = True
     TabOrder = 4
+    ExplicitLeft = -8
+    ExplicitTop = -112
   end
   object Panel1: TPanel
     Left = 0
@@ -97,14 +99,42 @@ object Fmain: TFmain
       OnClick = Button1Click
     end
     object Edit1: TEdit
-      Left = 1
+      Left = 106
       Top = 1
-      Width = 975
+      Width = 788
       Height = 22
       Align = alClient
       Color = clSkyBlue
       TabOrder = 1
+      ExplicitWidth = 710
       ExplicitHeight = 21
+    end
+    object DateTimePicker3: TDateTimePicker
+      Left = 1
+      Top = 1
+      Width = 105
+      Height = 22
+      Align = alLeft
+      Date = 46333.000000000000000000
+      Format = 'dd/MM/yyyy'
+      Time = 0.739291030091408200
+      Color = clFuchsia
+      Enabled = False
+      TabOrder = 2
+      Visible = False
+    end
+    object MostrarClave: TCheckBox
+      Left = 894
+      Top = 1
+      Width = 82
+      Height = 22
+      Align = alRight
+      Caption = 'Mostrar clave'
+      Color = clMoneyGreen
+      Enabled = False
+      ParentColor = False
+      TabOrder = 3
+      OnClick = MostrarClaveClick
     end
   end
   object Timer1: TTimer

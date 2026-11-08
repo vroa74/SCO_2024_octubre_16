@@ -323,6 +323,7 @@ begin
   Edit4.Clear;
   Edit5.Clear;
   FContadorIntentos := 0;
+  Flogin.Caption := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Conectar)';
 
   try
     RutaConf := ValidarYObtenerRutaArchivo('dll\conf.dll');

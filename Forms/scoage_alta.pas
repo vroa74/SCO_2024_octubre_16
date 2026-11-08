@@ -233,6 +233,7 @@ end;
 procedure Tfscoage_alta.FormCreate(Sender: TObject);
 begin
 //ComboBox1.Items.LoadFromFile(fmain.ruta+'titulo.ini' );
+ fscoage_alta.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Agenda )';
  JvImage1.Picture.LoadFromFile(fmain.ruta+fmain.mmedia+ 'legislatura.png');
  clear;
  ins := false;

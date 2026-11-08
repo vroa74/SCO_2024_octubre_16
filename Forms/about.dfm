@@ -73,8 +73,6 @@ object Fabout: TFabout
     Height = 521
     Align = alClient
     TabOrder = 3
-    ExplicitLeft = 169
-    ExplicitWidth = 705
     object ScrollTexto: TScrollBox
       Left = 1
       Top = 1
@@ -86,12 +84,11 @@ object Fabout: TFabout
       BorderStyle = bsNone
       TabOrder = 0
       object Label2: TLabel
-        Left = 1
-        Top = 1
+        Left = 0
+        Top = 0
         Width = 841
-        Height = 519
+        Height = 368
         Align = alTop
-        AutoSize = True
         Caption =
           'El Sistema de Gesti'#243'n y Tr'#225'nsito Documental (SGTD) sustituye de ' +
           'manera formal al anterior Sistema de Control de Oficios. Ante la' +
@@ -117,8 +114,9 @@ object Fabout: TFabout
         ParentFont = False
         ShowAccelChar = False
         WordWrap = True
+        ExplicitLeft = 1
+        ExplicitTop = 1
         ExplicitWidth = 840
-        ExplicitHeight = 368
       end
     end
   end
@@ -129,6 +127,5 @@ object Fabout: TFabout
     Height = 521
     Align = alRight
     TabOrder = 4
-    ExplicitLeft = 874
   end
 end

@@ -150,6 +150,8 @@ end;
 
 procedure TFConfig.FormCreate(Sender: TObject);
 begin //al crear la imagen
+  FConfig.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Configuración )';
+
   Timer1.Enabled := False;
   OnShow := MostrarConfiguracion;
   OnHide := OcultarConfiguracion;

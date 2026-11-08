@@ -211,6 +211,7 @@ end;
 procedure TFscoage_bus.FormCreate(Sender: TObject);
 begin
   FConsultaDiferida := TConsultaDiferida.Create(Self, ConsultarPendiente);
+  Fscoage_bus.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Agenda )';
   OnShow := MostrarBusqueda;
   OnHide := OcultarBusqueda; // create form...
    BitBtn1.Hint := 'Limpiar filtros ...';

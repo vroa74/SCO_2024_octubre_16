@@ -323,6 +323,7 @@ end;
 
 procedure TFReportearchivar.FormCreate(Sender: TObject);
 begin
+  FReportearchivar.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Agenda )';
   FPreparando := True;
   try
     FConsultaDiferida := TConsultaDiferida.Create(Self, ConsultarPendiente);

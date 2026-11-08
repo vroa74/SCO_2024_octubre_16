@@ -6,7 +6,7 @@
     Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
     Dialogs, Menus, ExtCtrls, ComCtrls, JvExExtCtrls, JvImage, StdCtrls, DateUtils,
     Vcl.DBCtrls, CryptBase, HashObj, AESObj, MiscObj, System.JSON,
-    System.Generics.Collections, System.IOUtils;
+    System.Generics.Collections, System.IOUtils, System.UITypes;
 
 type
   // Declaración del record para configuraciones
@@ -62,6 +62,8 @@ type
     Panel1: TPanel;
     Button1: TButton;
     Edit1: TEdit;
+    DateTimePicker3: TDateTimePicker;
+    MostrarClave: TCheckBox;
 
       Procedure  endweek(fecha:TDateTimePicker);
       function PutDate : String;
@@ -86,6 +88,7 @@ type
     procedure SeguimientoaTrmitedeRespuesta1Click(Sender: TObject);
       procedure FormShow(Sender: TObject);
       procedure Button1Click(Sender: TObject);
+      procedure MostrarClaveClick(Sender: TObject);
     private
       FEstados: TArray<TEstadoControl>;
       FMenuOriginal: TMainMenu;
@@ -98,6 +101,8 @@ type
       FRutaLicencias: string;
       FActual, FIntentos: Integer;
       FIniciado, FLiberado, FTerminando: Boolean;
+      FTimerAdvertencia: TTimer;
+      procedure MostrarAdvertencia(Sender: TObject);
       procedure BloquearInterfaz;
       procedure AdquirirBloqueoLicencias;
       procedure CargarRestricciones;
@@ -184,6 +189,9 @@ begin
   Panel1.Visible := True;
   Panel1.BringToFront;
   Edit1.Clear;
+  MostrarClave.Checked := False;
+  MostrarClave.Enabled := False;
+  DateTimePicker3.Visible := False;
   Edit1.PasswordChar := '*';
   Edit1.Enabled := False;
   Button1.Enabled := False;
@@ -340,7 +348,12 @@ procedure TFmain.RestaurarInterfaz;
 var
   I: Integer;
 begin
+  FTimerAdvertencia.Enabled := False;
   Panel1.Visible := False;
+  MostrarClave.Checked := False;
+  MostrarClave.Enabled := False;
+  Edit1.PasswordChar := '*';
+  DateTimePicker3.Visible := False;
   Edit1.Enabled := False;
   Button1.Enabled := False;
   for I := 0 to Length(FEstados) - 1 do
@@ -357,15 +370,36 @@ begin
   FActual := BuscarRestriccionVencida;
   FIntentos := 0;
   Edit1.Clear;
+  MostrarClave.Checked := False;
+  Edit1.PasswordChar := '*';
   if FActual < 0 then
   begin
     RestaurarInterfaz;
     Exit;
   end;
+  DateTimePicker3.Date := FLicencias[FActual].Fecha;
+  DateTimePicker3.Visible := True;
+  MostrarClave.Enabled := True;
   Panel1.Visible := True;
   Edit1.Enabled := True;
   Button1.Enabled := True;
+  FTimerAdvertencia.Enabled := False;
+  FTimerAdvertencia.Enabled := True;
   Edit1.SetFocus;
+end;
+
+procedure TFmain.MostrarAdvertencia(Sender: TObject);
+begin
+  FTimerAdvertencia.Enabled := False;
+  if not Visible or FTerminando or FLiberado or (FActual < 0) then
+    Exit;
+  // Procesar el pintado pendiente antes de abrir el aviso modal.
+  Update;
+  Panel1.Update;
+  MessageDlg('El programa necesita un código de acceso para continuar.' + sLineBreak +
+    'Escriba el código en el cuadro de texto y presione el botón "Validar" para enviarlo.',
+    mtWarning, [mbOK], 0);
+  if Edit1.CanFocus then Edit1.SetFocus;
 end;
 
 procedure TFmain.VerificarArchivoSinCambios;
@@ -439,6 +473,14 @@ begin
   Edit1.SetFocus;
 end;
 
+procedure TFmain.MostrarClaveClick(Sender: TObject);
+begin
+  if MostrarClave.Checked then
+    Edit1.PasswordChar := #0
+  else
+    Edit1.PasswordChar := '*';
+end;
+
 procedure TFmain.Button1Click(Sender: TObject);
 var
   HashIngresado: string;
@@ -470,6 +512,10 @@ procedure TFmain.TerminarValidacion(const ACodigo: string);
 begin
   if FTerminando then Exit;
   FTerminando := True;
+  FTimerAdvertencia.Enabled := False;
+  MostrarClave.Checked := False;
+  MostrarClave.Enabled := False;
+  Edit1.PasswordChar := '*';
   Timer1.Enabled := False;
   Edit1.Clear;
   Edit1.Enabled := False;
@@ -714,7 +760,7 @@ end;
         cambio := Random(7) * 60;
       until cambio <> 0;
 
-      IndiceImagen := Random(8);
+      IndiceImagen := Random(14);
       RutaImagen := ValidarYObtenerRutaArchivo(fmain.ruta, 'media\cp\cam' + IntToStr(IndiceImagen) + '.png');
 
       if FileExists(RutaImagen) then
@@ -744,11 +790,16 @@ end;
   {============================================================================}
   procedure TFmain.FormClose(Sender: TObject; var Action: TCloseAction);
     begin
+        FTimerAdvertencia.Enabled := False;
         dm.MyConnection1.Disconnect;
     end;
   {============================================================================}
   procedure TFmain.FormCreate(Sender: TObject);
   begin
+      FTimerAdvertencia := TTimer.Create(Self);
+      FTimerAdvertencia.Enabled := False;
+      FTimerAdvertencia.Interval := 1;
+      FTimerAdvertencia.OnTimer := MostrarAdvertencia;
       BloquearInterfaz;
       usuario := '';
       archval:='mysqld.dll';
@@ -761,7 +812,7 @@ end;
       fmain.StatusBar1.Panels[2].Text := fmain.PutDate;
       fmain.StatusBar1.Panels[3].Text := fmain.PutTime;
       MainPath := 'sql\main\';
-      title := 'Sistema de Correspondencia del Congreso del Estado de Campeche';
+      title := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Main)';
       Ttitle := 'Expedido por: Sistema de Correspondencia del Congreso del Estado de Campeche';
       fmain.CopyRight := 'by vroa74 © '+IntToStr(ObtenerAnoActual)+'.';
       fmain.Caption := title+' '+IntToStr(ObtenerAnoActual)+'.';

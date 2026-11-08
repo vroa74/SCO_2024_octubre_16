@@ -110,6 +110,8 @@ uses main, d_m;
 
   procedure TFSCO_auxiliar_alta_edicion.FormCreate(Sender: TObject);
   begin
+   FSCO_auxiliar_alta_edicion.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Catalogos )';
+
     JvImage1.Picture.LoadFromFile(fmain.ruta + fmain.mmedia + 'legislatura.png');
   end;
 

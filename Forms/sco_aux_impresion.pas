@@ -169,6 +169,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     function ValidarYObtenerRutaArchivo(const RutaRelativa: string): string;
     procedure ImprimirYActualizarTramite(Reporte: TppReport; LogoImage: TppImage; LabelTitle, LabelCopy: TppLabel);
@@ -259,6 +260,12 @@ end;
 procedure TF_aux_imp.Button3Click(Sender: TObject);
 begin
   ImprimirYActualizarTramite(Respecial, ppImage2, pplabel63, pplabel62);
+end;
+
+procedure TF_aux_imp.FormCreate(Sender: TObject);
+begin
+  F_aux_imp.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Agenda )';
+
 end;
 
 end.

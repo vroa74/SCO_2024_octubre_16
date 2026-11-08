@@ -671,6 +671,7 @@ end;
 //------------------------------------------------------------------------------
 procedure Tfscoalta.FormCreate(Sender: TObject);
 begin
+  fscoalta.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Alta )';
   myway := 'sql\main\';
   FPanelCarga := TPanel.Create(Self);
   FPanelCarga.Parent := Self;

@@ -114,6 +114,8 @@ end;
 
 procedure TFabout.FormCreate(Sender: TObject);
 begin
+  Fabout.Caption  := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / About )';
+
   Panel2.Caption := Fmain.title;
   FTextoOriginal := Label2.Caption;
   FMostrandoLicencia := False;

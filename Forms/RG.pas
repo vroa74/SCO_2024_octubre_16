@@ -643,6 +643,7 @@ end;
 procedure TFrg.FormCreate(Sender: TObject);
 begin
   FInicializando := True;
+  Frg.Caption := 'SISTEMA DE GESTIÓN Y TRÁNSITO DOCUMENTAL (SGTD / Reporte General)';
   try
     Timer1.Enabled := False;
     FTimerConsulta := TTimer.Create(Self);
